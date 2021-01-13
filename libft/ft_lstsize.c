@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/09 17:19:51 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/09 17:19:54 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+int	ft_lstsize(t_list *lst)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	int size;
 
-}				t_data;
-
-#endif
+	size = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
+}

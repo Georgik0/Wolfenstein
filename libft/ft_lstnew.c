@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/09 16:29:17 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/09 16:29:19 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+t_list	*ft_lstnew(void *content)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	t_list *new_list;
 
-}				t_data;
-
-#endif
+	new_list = (t_list *)malloc(sizeof(t_list));
+	if (new_list == NULL)
+		return (NULL);
+	new_list->content = content;
+	new_list->next = NULL;
+	return (new_list);
+}

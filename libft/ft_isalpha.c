@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/02 12:51:22 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/02 12:51:23 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
-
-#include <stdio.h>
-
-typedef struct  s_data
+int	ft_isalpha(int c)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-
-}				t_data;
-
-#endif
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
+}

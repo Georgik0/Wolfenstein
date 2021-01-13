@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/02 12:39:36 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/02 12:39:42 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+void	*ft_memccpy(void *destination, const void *source, int c, size_t n)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	size_t i;
 
-}				t_data;
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)destination)[i] = ((unsigned char *)source)[i];
+		if (((unsigned char *)source)[i] == (unsigned char)c)
+			return (destination + i + 1);
+		i++;
+	}
+	return (NULL);
+}

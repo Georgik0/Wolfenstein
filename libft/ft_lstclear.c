@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/09 17:57:32 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/09 17:57:35 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	t_list *begin;
+	t_list *next_list;
 
-}				t_data;
-
-#endif
+	if (!lst || !del)
+		return ;
+	begin = *lst;
+	while (begin)
+	{
+		next_list = begin->next;
+		del(begin->content);
+		free(begin);
+		begin = next_list;
+	}
+	*lst = NULL;
+}

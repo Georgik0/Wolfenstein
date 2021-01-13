@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/04 17:26:40 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/04 17:26:42 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	char	*str;
+	int		i;
 
-}				t_data;
-
-#endif
+	if (s == NULL || f == NULL)
+		return (NULL);
+	else
+	{
+		i = 0;
+		str = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+		if (str == NULL)
+			return (NULL);
+		while (s[i] != '\0')
+		{
+			str[i] = f(i, s[i]);
+			i++;
+		}
+		str[i] = '\0';
+	}
+	return (str);
+}

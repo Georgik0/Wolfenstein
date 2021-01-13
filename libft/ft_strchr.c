@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/02 12:42:01 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/02 12:42:05 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
-
-#include <stdio.h>
-
-typedef struct  s_data
+char	*ft_strchr(const char *str, int ch)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	int i;
 
-}				t_data;
-
-#endif
+	i = 0;
+	while (str[i] != ch && str[i] != '\0')
+	{
+		i++;
+	}
+	if (str[i] == ch)
+		return (char*)(str + i);
+	return (0);
+}

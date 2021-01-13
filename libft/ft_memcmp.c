@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_type.h                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:13:22 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/08 18:14:39 by skitsch          ###   ########.fr       */
+/*   Created: 2020/11/02 12:40:40 by skitsch           #+#    #+#             */
+/*   Updated: 2020/11/02 12:40:43 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_TYPE_H
-# define MY_TYPE_H
-#include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-typedef struct  s_data
+int	ft_memcmp(const void *arr1, const void *arr2, size_t n)
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	size_t i;
 
-}				t_data;
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char*)arr1)[i] - ((unsigned char*)arr2)[i] != 0)
+			return ((unsigned char*)arr1)[i] - ((unsigned char*)arr2)[i];
+		i++;
+	}
+	return (0);
+}
