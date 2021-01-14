@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-OBJ = start_game.c
+OBJ = start_game.c draw_ray.c find_block_unique.c find_collision.c
 
 NAME = cub3D
 

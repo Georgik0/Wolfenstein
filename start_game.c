@@ -91,6 +91,7 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+	t_player	player;
 
 	char	map[10][10] = {
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
@@ -109,8 +110,8 @@ int	main(void)
 	int		size_cub = 32;
 // Для теста на двумерной карте
 	size_cub = 64;
-	int		playerX = 5 * size_cub;
-	int		playerY = 5 * size_cub;
+	player.x = 1 * size_cub;
+	player.y = 5 * size_cub;
 	float	pov = M_PI / 2;
 	int		map_len_x = 10;
 	int		map_len_y = 10;
@@ -121,8 +122,9 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	// Рисуем карту
 	print_map(map_len_x, map_len_y, size_cub, map, &img);
-	// Рисуем луч
-	print_line(228, 128, 100, 128, &img);
+	// Рисуем лучи
+	draw_ray(M_PI, player, map, &img);
+	// print_line(228, 128, 100, 128, &img);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);

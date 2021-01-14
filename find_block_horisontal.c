@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_block.c                                       :+:      :+:    :+:   */
+/*   find_block_horisontal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 19:14:38 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/13 19:14:40 by skitsch          ###   ########.fr       */
+/*   Created: 2021/01/14 13:14:29 by skitsch           #+#    #+#             */
+/*   Updated: 2021/01/14 13:14:32 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,27 @@ double		collision_width_vertical()
 
 }
 
-double		collision_width_horisontal(char map[][10], double dx, double dy, double Ax, double Ay)
+t_coord		collision_width_horisontal(char map[][10], double dx, double dy, double Ax, double Ay)
 {
-	while (map[][])
-	{
+	int		y;
+	int		x;
+	t_coord	coord;
 
+	y = (int)nearbyint(Ay) / 64;
+	x = (int)nearbyint(Ax) / 64;
+	while (map[y][x] != '1')
+	{
+		Ax += dx;
+		Ay += dy;
+		y = (int)nearbyint(Ay) / 64;
+		x = (int)nearbyint(Ax) / 64;
 	}
+	coord.wall_horis_x = (int)nearbyint(Ax);
+	coord.wall_horis_y = (int)nearbyint(Ay);
+	return (coord);
 }
 
-void	find_block(int player_x, int player_y, char map[][10], double phi)
+void	find_block_horisontal(int player_x, int player_y, char map[][10], double phi)
 {
 	int dy;
 	double dx;
