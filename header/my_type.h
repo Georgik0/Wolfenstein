@@ -61,9 +61,29 @@ typedef struct	s_coord_uniq
 
 }				t_coord_uniq;
 
+typedef struct	s_coord_horis
+{
+	float		Ax;
+	int			Ay;
+	float		dx;
+	int			dy;
+
+}				t_coord_horis;
+
+typedef struct	s_coord_vertic
+{
+	int			Bx;
+	float		By;
+	int			dx;
+	float		dy;
+
+}				t_coord_vertic;
+
 
 t_collis	find_collision(double phi, t_player player, char map[][10]);
 t_collis	find_block_unique(double phi, t_player player, char map[][10]);
+t_collis	find_block_horisontal(t_player player, char map[][10], double phi);
+t_collis	find_block_vertical(t_player player, char map[][10], double phi);
 void		print_line(int x0, int y0, int x1, int y1, t_data *img);
 void		draw_ray(double pov, t_player player, char map[][10], t_data *img);
 

@@ -110,9 +110,9 @@ int	main(void)
 	int		size_cub = 32;
 // Для теста на двумерной карте
 	size_cub = 64;
-	player.x = 1 * size_cub;
-	player.y = 5 * size_cub;
-	float	pov = M_PI / 2;
+	player.x = 4 * size_cub - 32;
+	player.y = 5 * size_cub - 32;
+	float	pov = 0;
 	int		map_len_x = 10;
 	int		map_len_y = 10;
 
@@ -123,7 +123,7 @@ int	main(void)
 	// Рисуем карту
 	print_map(map_len_x, map_len_y, size_cub, map, &img);
 	// Рисуем лучи
-	draw_ray(M_PI, player, map, &img);
+	draw_ray(M_PI / 2, player, map, &img);
 	// print_line(228, 128, 100, 128, &img);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
