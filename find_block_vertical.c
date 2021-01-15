@@ -20,19 +20,22 @@ t_collis	collision_width_vertical(char map[][10], t_coord_vertic vertic) //doubl
 
 	y = (int)nearbyint(vertic.By) / 64;
 	x = (int)nearbyint(vertic.Bx) / 64;
-	while (map[y][x] != '1')
+	// printf("vertic y = %d | x = %d\n", y, x);
+	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
 	{
 		vertic.Bx += vertic.dx;
 		vertic.By += vertic.dy;
 		y = (int)nearbyint(vertic.By) / 64;
 		x = (int)nearbyint(vertic.Bx) / 64;
 	}
+	// printf("vertic y = %d | x = %d\n", y, x);
 	collis.x = (int)nearbyint(vertic.Bx);
 	collis.y = (int)nearbyint(vertic.By);
+	// printf("vertic collis.x = %d   collis.y = %d\n", collis.x, collis.y);
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_player player, char map[][10], double phi)
+t_collis	find_block_vertical(t_player player, char map[][10], float phi)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;
@@ -49,6 +52,12 @@ t_collis	find_block_vertical(t_player player, char map[][10], double phi)
 	}
 	vertic.By = player.y + (player.x - vertic.Bx) * tan(phi);
 	vertic.dy = 64 * tan(phi);
+	// printf("player.y = %d\nplayer.x = = %d\nvertic.Bx = = %d\nvertic.By = = %f\nphi = %f\ndy = %f\ntan(phi) = %f\n", player.y, player.x, vertic.Bx, vertic.By , phi * 180 / M_PI, vertic.dy, tan(phi));
+	// printf("By = %f Bx = %d\n", vertic.By, vertic.Bx);
+	// if (vertic.dy > 0)
+	// {
+		printf("градусы phi = %f   M_PI/2 = %f   dy = %f   tan(phi) = %f\n", phi * 180 / M_PI, M_PI / 2, vertic.dy, tan(phi));
+	// }
 	collis = collision_width_vertical(map, vertic);
 	return (collis);
 }

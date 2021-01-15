@@ -20,19 +20,22 @@ t_collis	collision_width_horisontal(char map[][10], t_coord_horis horis) //doubl
 
 	y = (int)nearbyint(horis.Ay) / 64;
 	x = (int)nearbyint(horis.Ax) / 64;
-	while (map[y][x] != '1')
+	// printf("horis y = %d | x = %d\n", y, x);
+	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
 	{
 		horis.Ax += horis.dx;
 		horis.Ay += horis.dy;
 		y = (int)nearbyint(horis.Ay) / 64;
 		x = (int)nearbyint(horis.Ax) / 64;
 	}
+	// printf("horis y = %d | x = %d\n", y, x);
 	collis.x = (int)nearbyint(horis.Ax);
 	collis.y = (int)nearbyint(horis.Ay);
+	// printf("horis collis.x = %d   collis.y = %d\n", collis.x, collis.y);
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char map[][10], double phi)
+t_collis	find_block_horisontal(t_player player, char map[][10], float phi)
 {
 	t_coord_horis	horis;
 	t_collis		collis;
@@ -50,5 +53,9 @@ t_collis	find_block_horisontal(t_player player, char map[][10], double phi)
 	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi);
 	horis.dx = 64 / tan(phi);
 	collis = collision_width_horisontal(map, horis);
+	// if (horis.dx > 0)
+	// {
+		printf("градусы phi = %f   M_PI/2 = %f   dx = %f   tan(phi) = %f\n", phi * 180 / M_PI, M_PI / 2, horis.dx, tan(phi));
+	// }
 	return (collis);
 }
