@@ -79,6 +79,14 @@ typedef struct	s_coord_vertic
 
 }				t_coord_vertic;
 
+typedef struct  s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_player	*player;
+
+}				t_vars;
+
 
 t_collis	find_collision(double phi, t_player player, char map[][10]);
 t_collis	find_block_unique(double phi, t_player player, char map[][10]);

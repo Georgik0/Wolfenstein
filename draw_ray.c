@@ -18,9 +18,10 @@ void	draw_ray(double pov, t_player player, char map[][10], t_data *img)
 {
 	t_collis	collis;
 	float		phi;
-	double		d_phi;
+	float		new_phi;
+	float		d_phi;
 
-	pov = 90;
+	pov = 2;
 	phi = pov + 33;// * M_PI / 180;
 	d_phi = 66.0 / 1920.0;// * M_PI / 180;
 	// printf ("%f\n", phi);
@@ -29,7 +30,16 @@ void	draw_ray(double pov, t_player player, char map[][10], t_data *img)
 		// phi = phi + d_phi;
 		// printf("радиан phi = %f\n", phi);
 		// printf("градус phi = %f\n", phi * 180 / M_PI);
-		collis = find_collision(nearbyint(phi * M_PI / 180), player, map);
+		if (phi < 0)
+			new_phi = phi + 360;
+		else if (phi > 360)
+			new_phi = phi - 360;
+		else
+			new_phi = phi;
+
+
+
+		collis = find_collision(new_phi * M_PI / 180, player, map);
 		// printf("phi = %f x = %d  y = %d\n", phi, collis.x, collis.y);
 		print_line(player.x, player.y, collis.x, collis.y, img);
 		phi -= d_phi;

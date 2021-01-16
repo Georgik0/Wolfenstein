@@ -51,12 +51,16 @@ t_collis	find_block_vertical(t_player player, char map[][10], float phi)
 		vertic.dx = -64;
 	}
 	vertic.By = player.y + (player.x - vertic.Bx) * tan(phi);
-	vertic.dy = 64 * tan(phi);
+	if ((phi > 0 && phi < M_PI / 2) || phi > 3 * M_PI / 2)
+	{
+		vertic.dy = -64 * tan(phi);
+	}else
+		vertic.dy = 64 * tan(phi);
 	// printf("player.y = %d\nplayer.x = = %d\nvertic.Bx = = %d\nvertic.By = = %f\nphi = %f\ndy = %f\ntan(phi) = %f\n", player.y, player.x, vertic.Bx, vertic.By , phi * 180 / M_PI, vertic.dy, tan(phi));
 	// printf("By = %f Bx = %d\n", vertic.By, vertic.Bx);
 	// if (vertic.dy > 0)
 	// {
-		printf("градусы phi = %f   M_PI/2 = %f   dy = %f   tan(phi) = %f\n", phi * 180 / M_PI, M_PI / 2, vertic.dy, tan(phi));
+	// 	printf("градусы phi = %f   M_PI/2 = %f   dy = %f   tan(phi) = %f  радиан phi = %f\n", phi * 180 / M_PI, M_PI / 2, vertic.dy, tan(phi), phi);
 	// }
 	collis = collision_width_vertical(map, vertic);
 	return (collis);

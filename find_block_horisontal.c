@@ -51,11 +51,14 @@ t_collis	find_block_horisontal(t_player player, char map[][10], float phi)
 		horis.dy = 64;
 	}
 	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi);
-	horis.dx = 64 / tan(phi);
+	if (phi > M_PI)
+		horis.dx = -64 / tan(phi);
+	else
+		horis.dx = 64 / tan(phi);
 	collis = collision_width_horisontal(map, horis);
 	// if (horis.dx > 0)
 	// {
-		printf("градусы phi = %f   M_PI/2 = %f   dx = %f   tan(phi) = %f\n", phi * 180 / M_PI, M_PI / 2, horis.dx, tan(phi));
+		// printf("градусы phi = %f   M_PI/2 = %f   dx = %f   tan(phi) = %f\n", phi * 180 / M_PI, M_PI / 2, horis.dx, tan(phi));
 	// }
 	return (collis);
 }

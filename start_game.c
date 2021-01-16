@@ -21,9 +21,33 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// void	test_write(t_data **)
-// {
+int		key_hook(int keycode, t_vars *vars)
+{
+	// printf("Hello from key_hook!\n");
+	// mlx_clear_window(vars->mlx, vars->win);
+	if (keycode == 13)
+		vars->player->y -= 1;
+	if (keycode == 1)
+		vars->player->y += 1;
+	if (keycode == 0)
+		vars->player->x -= 1;
+	if (keycode == 2)
+		vars->player->x += 1;
+	return (0);
+}
 
+// int		cleek(int key, t_player player, t_vars vars)
+// {
+// 	mlx_clear_window(vars.mlx, vars.win);
+// 	if (key == 13)
+// 		player.y -= 1;
+// 	if (key == 1)
+// 		player.y += 1;
+// 	if (key == 0)
+// 		player.x -= 1;
+// 	if (key == 2)
+// 		player.x += 1;
+// 	return (0);
 // }
 
 void	print_map(int map_len_x, int map_len_y, int size_cub, char map[][10], t_data *img)
@@ -33,10 +57,10 @@ void	print_map(int map_len_x, int map_len_y, int size_cub, char map[][10], t_dat
 	int		max_X = map_len_x * size_cub;
 	int		max_Y = map_len_y * size_cub;
 
-	while (i < max_X)
+	while (i < max_Y)
 	{
 		j = 0;
-		while (j < max_Y)
+		while (j < max_X)
 		{
 			if (map[j / size_cub][i / size_cub] == '1')
 				my_mlx_pixel_put(img, i, j, 0xFF6347);
@@ -88,6 +112,7 @@ void	print_player(int playerX, int playerY, char map[][10], t_data *img)
 
 int	main(void)
 {
+	t_vars	vars;
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
@@ -116,9 +141,11 @@ int	main(void)
 	int		map_len_x = 10;
 	int		map_len_y = 10;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	vars.player = &player;
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello");
+	mlx_key_hook(vars.win, key_hook, &vars);
+	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	// Рисуем карту
 	print_map(map_len_x, map_len_y, size_cub, map, &img);
@@ -126,7 +153,8 @@ int	main(void)
 	draw_ray(M_PI / 2, player, map, &img);
 	// print_line(228, 128, 100, 128, &img);
 
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars);
+	mlx_loop(vars.mlx);
 	return (0);
 }
