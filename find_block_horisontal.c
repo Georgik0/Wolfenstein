@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-t_collis	collision_width_horisontal(char map[][10], t_coord_horis horis) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_horisontal(char (*map)[11], t_coord_horis horis) //double dx, double dy, double Ax, double Ay
 {
 	int			y;
 	int			x;
@@ -35,7 +35,7 @@ t_collis	collision_width_horisontal(char map[][10], t_coord_horis horis) //doubl
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char map[][10], float phi)
+t_collis	find_block_horisontal(t_player player, char (*map)[11], float phi)
 {
 	t_coord_horis	horis;
 	t_collis		collis;

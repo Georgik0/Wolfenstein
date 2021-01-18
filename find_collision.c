@@ -32,7 +32,7 @@ t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player
 	return (vertical);
 }
 
-t_collis	find_collision(double phi, t_player player, char map[][10])
+t_collis	find_collision(double phi, t_player player, char (*map)[11])
 {
 	t_collis		collis;
 	t_collis		horisont;

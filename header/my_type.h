@@ -42,6 +42,7 @@ typedef struct	s_player
 {
 	int			x;
 	int			y;
+	double		pov;
 
 }				t_player;
 
@@ -79,21 +80,47 @@ typedef struct	s_coord_vertic
 
 }				t_coord_vertic;
 
+typedef struct	s_data_map
+{
+	int			map_len_x;
+	int			map_len_y;
+	int			size_cub;
+	char		(*map)[11];
+
+}				t_data_map;
+
+// typedef struct	s_keyboard
+// {
+// 	int			A;
+// 	int			D;
+// 	int			W;
+// 	int			S;
+
+// }				t_keyboard;
+
+
 typedef struct  s_vars
 {
 	void		*mlx;
 	void		*win;
-	t_player	*player;
+	t_player	player;
+	t_data		*img;
+	t_data_map	data_map;
+	// int			A;
+	// int			W;
+	// int			D;
+	// int			S;
+	// t_keyboard	keyboard;
 
 }				t_vars;
 
 
-t_collis	find_collision(double phi, t_player player, char map[][10]);
-t_collis	find_block_unique(double phi, t_player player, char map[][10]);
-t_collis	find_block_horisontal(t_player player, char map[][10], float phi);
-t_collis	find_block_vertical(t_player player, char map[][10], float phi);
+t_collis	find_collision(double phi, t_player player, char (*map)[11]);
+t_collis	find_block_unique(double phi, t_player player, char (*map)[11]);
+t_collis	find_block_horisontal(t_player player, char (*map)[11], float phi);
+t_collis	find_block_vertical(t_player player, char (*map)[11], float phi);
 void		print_line(int x0, int y0, int x1, int y1, t_data *img);
-void		draw_ray(double pov, t_player player, char map[][10], t_data *img);
+void		draw_ray(double pov, t_player player, char (*map)[11], t_data *img);
 
 
 #endif

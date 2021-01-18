@@ -14,14 +14,13 @@
 #include "mlx/mlx.h"
 #include <stdio.h>
 
-void	draw_ray(double pov, t_player player, char map[][10], t_data *img)
+void	draw_ray(double pov, t_player player, char (*map)[11], t_data *img)
 {
 	t_collis	collis;
 	float		phi;
 	float		new_phi;
 	float		d_phi;
 
-	pov = 2;
 	phi = pov + 33;// * M_PI / 180;
 	d_phi = 66.0 / 1920.0;// * M_PI / 180;
 	// printf ("%f\n", phi);

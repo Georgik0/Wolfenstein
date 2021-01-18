@@ -64,7 +64,7 @@ int		get_Ay(t_player player, double phi)
 	return (Ay);
 }
 
-t_collis	get_collis(t_coord_uniq coord, char map[][10])
+t_collis	get_collis(t_coord_uniq coord, char (*map)[11])
 {
 	int			x;
 	int			y;
@@ -84,7 +84,7 @@ t_collis	get_collis(t_coord_uniq coord, char map[][10])
 	return (collis);
 }
 
-t_collis	find_block_unique(double phi, t_player player, char map[][10])
+t_collis	find_block_unique(double phi, t_player player, char (*map)[11])
 {
 	t_coord_uniq	coord;
 	t_collis		collis;
