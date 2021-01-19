@@ -14,7 +14,7 @@
 #include "mlx/mlx.h"
 #include <stdio.h>
 
-void	draw_ray(double pov, t_player player, char (*map)[11], t_data *img)
+void	draw_ray(double pov, t_player player, char (*map)[10], t_data *img)
 {
 	t_collis	collis;
 	float		phi;
