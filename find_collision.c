@@ -12,9 +12,9 @@
 
 #include "header/my_type.h"
 
-float		get_distance(int x0, int x1, double phi)
+double		get_distance(int x0, int x1, double phi)
 {
-	float	distance;
+	double	distance;
 
 	distance = (x0 - x1) / cos(phi);
 	return (distance);
@@ -22,8 +22,8 @@ float		get_distance(int x0, int x1, double phi)
 
 t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player, double phi)
 {
-	float	distance_h;
-	float	distance_v;
+	double	distance_h;
+	double	distance_v;
 
 	distance_h = get_distance(player.x, horisont.x, phi);
 	distance_v = get_distance(player.x, vertical.x, phi);

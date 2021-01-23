@@ -42,7 +42,7 @@ typedef struct	s_player
 {
 	int			x;
 	int			y;
-	double		pov;
+	int			pov;
 
 }				t_player;
 
@@ -64,9 +64,9 @@ typedef struct	s_coord_uniq
 
 typedef struct	s_coord_horis
 {
-	float		Ax;
+	double		Ax;
 	int			Ay;
-	float		dx;
+	double		dx;
 	int			dy;
 
 }				t_coord_horis;
@@ -74,9 +74,9 @@ typedef struct	s_coord_horis
 typedef struct	s_coord_vertic
 {
 	int			Bx;
-	float		By;
+	double		By;
 	int			dx;
-	float		dy;
+	double		dy;
 
 }				t_coord_vertic;
 
@@ -118,7 +118,7 @@ t_collis	find_block_unique(double phi, t_player player, char (*map)[10]);
 t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi);
 t_collis	find_block_vertical(t_player player, char (*map)[10], float phi);
 void		print_line(int x0, int y0, int x1, int y1, t_data *img);
-void		draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
+void		draw_ray(int pov, t_player player, char (*map)[10], t_data *img);
 
 
 #endif

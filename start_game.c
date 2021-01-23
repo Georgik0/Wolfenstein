@@ -57,7 +57,6 @@ int		press_keyboard(int keycode, t_vars *vars)
 		vars->keyboard.left = 1;
 	if (keycode == 124)
 		vars->keyboard.right = 1;
-	printf("key = %d\n", keycode);
 	return (0);
 }
 
@@ -171,7 +170,7 @@ int	main(void)
 	// vars = (t_vars *)malloc(sizeof(t_vars));
 
 	char	map[10][10] = {
-		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
+		'1', '1', '0', '1', '1', '1', '1', '1', '1', '1',
 		'1', '0', '1', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
 		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
@@ -201,9 +200,9 @@ int	main(void)
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
-	vars.player.x = 4 * size_cub - 32;
-	vars.player.y = 7 * size_cub - 32;
-	vars.player.pov = 2;
+	vars.player.x = 3 * size_cub - 32;
+	vars.player.y = 1 * size_cub - 32;
+	vars.player.pov = 0;
 	// vars.player = player;
 
 
