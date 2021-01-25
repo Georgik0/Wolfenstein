@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_ray.c                                         :+:      :+:    :+:   */
+/*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/25 20:00:24 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/25 20:00:27 by skitsch          ###   ########.fr       */
+/*   Created: 2021/01/25 19:59:18 by skitsch           #+#    #+#             */
+/*   Updated: 2021/01/25 19:59:20 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/my_type.h"
 #include "mlx/mlx.h"
 
-void	draw_ray(int pov, t_player player, char (*map)[10], t_data *img)
+void	draw_vertical_line(int length, t_data *img)
 {
-	t_collis	collis;
+
+}
+
+void	draw_3d(int pov, t_player player, char (*map)[10], t_data *img)
+{
+	int			length;
 	float		phi;
 	float		new_phi;
 	float		d_phi;
@@ -32,22 +37,8 @@ void	draw_ray(int pov, t_player player, char (*map)[10], t_data *img)
 			new_phi = phi;
 
 
-		collis = find_collision(new_phi * M_PI / 180, player, map);
-		print_line(player.x, player.y, collis.x, collis.y, img);
+		length = get_length(new_phi * M_PI / 180, player, map);
+
 		phi -= d_phi;
 	}
 }
-
-// void	draw_ray(int pov, t_player player, char (*map)[10], t_data *img)
-// {
-// 	t_collis	collis;
-// 	float		phi;
-// 	float		new_phi;
-// 	float		d_phi;
-
-// 	phi = pov + 33;
-// 	d_phi = 66.0 / 1920.0;
-// 	collis = find_collision(pov * M_PI / 180, player, map);
-// 	printf("pov = %d\n", pov);
-// 	print_line(player.x, player.y, collis.x, collis.y, img);
-// }

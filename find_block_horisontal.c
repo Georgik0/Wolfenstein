@@ -12,34 +12,110 @@
 
 #include "header/my_type.h"
 
-// t_collis	get_around_x_y(t_collis collis)
-// {
+int			get_around_Ax(float Ax, float phi)
+{
+	if (phi > M_PI && phi < 3 * M_PI / 2)
+	{
+		if (Ax - (int)Ax / 64 * 64 >= 63)
+			return ((int)Ax / 64 + 1);
+	}
+	if (phi > 3 * M_PI / 2 && phi < 2 * M_PI)
+	{
+		if (Ax - (int)Ax / 64 * 64 >= 63)
+			return ((int)Ax / 64);
+	}
+	if (phi > 0 && phi < M_PI / 2)
+	{
+		if (Ax - (int)Ax / 64 * 64 >= 63)
+			return ((int)Ax / 64);
+	}
+	if (phi > M_PI / 2 && phi < M_PI)
+	{
+		if (Ax - (int)Ax / 64 * 64 >= 63)
+			return ((int)Ax / 64 + 1);
+	}
+	return ((int)nearbyint(Ax) / 64);
+}
 
+// t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, float phi) //double dx, double dy, double Ax, double Ay
+// {
+// 	int			y;
+// 	int			x;
+// 	t_collis	collis;
+
+// 	y = (horis.Ay) / 64;
+// 	x = get_around_Ax(horis.Ax, phi);
+// 	// x = (horis.Ax) / 64;
+// 	// printf("horis y = %d | x = %d\n", y, x);
+// 	// printf("-----------horiz-----------\n");
+// 	// printf("Ax1 = %f   Ay1 = %d\n", horis.Ax, horis.Ay);
+// 	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
+// 	{
+// 		horis.Ax += horis.dx;
+// 		horis.Ay += horis.dy;
+// 		// printf("Ax = %f   Ay = %d\n", horis.Ax, horis.Ay);
+// 		y = (horis.Ay) / 64;
+// 		x = get_around_Ax(horis.Ax, phi);
+// 		// x = (horis.Ax) / 64;
+// 	}
+// 	// printf("horis y = %d | x = %d\n", y, x);
+// 	collis.x = (horis.Ax);
+// 	// collis.x = get_around_Ax(horis.Ax, phi);
+// 	collis.y = (horis.Ay);
+// 	// printf("horis collis.x = %d   collis.y = %d\n", collis.x, collis.y);
+// 	// printf("-----------horiz-----------\n");
+// 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis) //double dx, double dy, double Ax, double Ay
+// t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi)
+// {
+// 	t_coord_horis	horis;
+// 	t_collis		collis;
+
+// 	if (phi < M_PI)
+// 	{
+// 		horis.Ay = (player.y / 64) * 64 - 1;
+// 		horis.dy = -64;
+// 	}
+// 	else // phi > M_PI
+// 	{
+// 		horis.Ay = (player.y / 64) * 64 + 64;
+// 		horis.dy = 64;
+// 	}
+// 	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi) + 1;
+// 	if (phi > M_PI)
+// 		horis.dx = -64.0 / tan(phi);
+// 	else
+// 		horis.dx = 64.0 / tan(phi);
+// 	collis = collision_width_horisontal(map, horis, phi);
+// 	// printf("player:    x = %d   y = %d\n", player.x, player.y);
+// 	return (collis);
+// }
+
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, float phi) //double dx, double dy, double Ax, double Ay
 {
 	int			y;
 	int			x;
 	t_collis	collis;
 
-	y = (horis.Ay) / 64;
-	x = (horis.Ax) / 64;
-	// printf("horis y = %d | x = %d\n", y, x);
+	y = (int)nearbyint(horis.Ay) / 64;
+	x = get_around_Ax(horis.Ax, phi);
+	// x = (int)nearbyint(horis.Ax) / 64;
 	// printf("-----------horiz-----------\n");
-	// printf("Ax1 = %f   Ay1 = %d\n", horis.Ax, horis.Ay);
+	// printf("Ax1 = %f   Ay1 = %d          x = %d  y = %d\n", horis.Ax, horis.Ay, x, y);
 	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
 	{
 		horis.Ax += horis.dx;
 		horis.Ay += horis.dy;
 		// printf("Ax = %f   Ay = %d\n", horis.Ax, horis.Ay);
-		y = (horis.Ay) / 64;
-		x = (horis.Ax) / 64;
+		y = (int)nearbyint(horis.Ay) / 64;
+		// x = (int)nearbyint(horis.Ax) / 64;
+		x = get_around_Ax(horis.Ax, phi);
 	}
-	// printf("horis y = %d | x = %d\n", y, x);
-	collis.x = (horis.Ax);
-	collis.y = (horis.Ay);
-	// printf("horis collis.x = %d   collis.y = %d\n", collis.x, collis.y);
+	// printf("horis Ay = %d | Ax = %f\n", horis.Ay, horis.Ax);
+	collis.x = (int)nearbyint(horis.Ax);
+	// collis.x = get_around_Ax(horis.Ax, phi);
+	collis.y = (int)nearbyint(horis.Ay);
 	// printf("-----------horiz-----------\n");
 	return (collis);
 }
@@ -59,59 +135,11 @@ t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi)
 		horis.Ay = (player.y / 64) * 64 + 64;
 		horis.dy = 64;
 	}
-	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi) + 1;
+	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi);
 	if (phi > M_PI)
-		horis.dx = -64.0 / tan(phi);
+		horis.dx = -64 / tan(phi);
 	else
-		horis.dx = 64.0 / tan(phi);
-	collis = collision_width_horisontal(map, horis);
-	// printf("player:    x = %d   y = %d\n", player.x, player.y);
+		horis.dx = 64 / tan(phi);
+	collis = collision_width_horisontal(map, horis, phi);
 	return (collis);
 }
-
-// t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis) //double dx, double dy, double Ax, double Ay
-// {
-// 	int			y;
-// 	int			x;
-// 	t_collis	collis;
-
-// 	y = (int)nearbyint(horis.Ay) / 64;
-// 	x = (int)nearbyint(horis.Ax) / 64;
-// 	// printf("horis y = %d | x = %d\n", y, x);
-// 	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
-// 	{
-// 		horis.Ax += horis.dx;
-// 		horis.Ay += horis.dy;
-// 		y = (int)nearbyint(horis.Ay) / 64;
-// 		x = (int)nearbyint(horis.Ax) / 64;
-// 	}
-// 	// printf("horis y = %d | x = %d\n", y, x);
-// 	collis.x = (int)nearbyint(horis.Ax);
-// 	collis.y = (int)nearbyint(horis.Ay);
-// 	// printf("horis collis.x = %d   collis.y = %d\n", collis.x, collis.y);
-// 	return (collis);
-// }
-
-// t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi)
-// {
-// 	t_coord_horis	horis;
-// 	t_collis		collis;
-
-// 	if (phi < M_PI)
-// 	{
-// 		horis.Ay = (player.y / 64) * 64 - 1;
-// 		horis.dy = -64;
-// 	}
-// 	else // phi > M_PI
-// 	{
-// 		horis.Ay = (player.y / 64) * 64 + 64;
-// 		horis.dy = 64;
-// 	}
-// 	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi) - 0.1;
-// 	if (phi > M_PI)
-// 		horis.dx = -64 / tan(phi);
-// 	else
-// 		horis.dx = 64 / tan(phi);
-// 	collis = collision_width_horisontal(map, horis);
-// 	return (collis);
-// }

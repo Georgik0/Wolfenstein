@@ -119,6 +119,7 @@ t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi);
 t_collis	find_block_vertical(t_player player, char (*map)[10], float phi);
 void		print_line(int x0, int y0, int x1, int y1, t_data *img);
 void		draw_ray(int pov, t_player player, char (*map)[10], t_data *img);
+int			get_length(double phi, t_player player, char (*map)[10])
 
 
 #endif
