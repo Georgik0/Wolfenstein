@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-int			get_around_By(float By, float phi)
+int			get_around_By(double By, double phi)
 {
 	if (phi > M_PI && phi < 3 * M_PI / 2)
 	{
@@ -94,7 +94,7 @@ int			get_around_By(float By, float phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, float phi) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi) //double dx, double dy, double Ax, double Ay
 {
 	int			y;
 	int			x;
@@ -122,7 +122,7 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, float 
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_player player, char (*map)[10], float phi)
+t_collis	find_block_vertical(t_player player, char (*map)[10], double phi)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;

@@ -150,7 +150,8 @@ int		draw_game(t_vars *vars)
 	mlx_clear_window(vars->mlx, vars->win);
 	change_coord(vars);
 	print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
-	draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
 	return (0);
 }
@@ -193,23 +194,23 @@ int	main(void)
 	vars.keyboard.W = 0;
 	vars.keyboard.left = 0;
 	vars.keyboard.right = 0;
-	// vars.A = 0;
-	// vars.D = 0;
-	// vars.S = 0;
-	// vars.W = 0;
+
+	vars.data->width = 1920;
+	vars.data->height = 1080;
+	vars.data->d = vars.data->width / (2 * tan(33 * M_PI / 180));
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
-	vars.player.x = 3 * size_cub - 32;
-	vars.player.y = 1 * size_cub - 32;
-	vars.player.pov = 0;
+	vars.player.x = 5 * size_cub - 32;
+	vars.player.y = 5 * size_cub - 32;
+	vars.player.pov = 91;
 	// vars.player = player;
 
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello");
+	vars.win = mlx_new_window(vars.mlx, vars.data->width, vars.data->height, "Hello");
 	// mlx_key_hook(vars.win, key_hook, &vars);
-	vars.data->img = mlx_new_image(vars.mlx, 1920, 1080);
+	vars.data->img = mlx_new_image(vars.mlx, vars.data->width, vars.data->height);
 	vars.data->addr = mlx_get_data_addr(vars.data->img, &(vars.data->bits_per_pixel), &(vars.data->line_length), &(vars.data->endian));// &img.bits_per_pixel, &img.line_length, &img.endian);
 
 	// // Рисуем карту

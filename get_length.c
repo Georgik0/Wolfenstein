@@ -23,6 +23,14 @@ static double		get_distance(int x0, int x1, double phi)
 	return (distance);
 }
 
+static double		get_distance_unique(t_collis collis, t_player player)
+{
+	double	distance;
+
+	distance = ft_abs(collis.x - player.x) + ft_abs(collis.y - player.y);
+	return (distance);
+}
+
 static double		compare_distance(t_collis horisont, t_collis vertical, t_player player, double phi)
 {
 	double	distance_h;
@@ -45,7 +53,7 @@ int					get_length(double phi, t_player player, char (*map)[10])
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
 	{
 		collis = find_block_unique(phi, player, map);
-		length = (int)nearbyint(get_distance(player.x, collis.x, phi));
+		length = (int)nearbyint(get_distance_unique(collis, player));
 	}
 	else
 	{
@@ -54,29 +62,4 @@ int					get_length(double phi, t_player player, char (*map)[10])
 		length = (int)nearbyint(compare_distance(horisont, vertical, player, phi));
 	}
 	return (length);
-}
-
-void	draw_3d(int pov, t_player player, char (*map)[10], t_data *img)
-{
-	int			length;
-	float		phi;
-	float		new_phi;
-	float		d_phi;
-
-	phi = pov + 33;
-	d_phi = 66.0 / 1920.0;
-	while (phi > pov - 33)
-	{
-		if (phi < 0)
-			new_phi = phi + 360;
-		else if (phi > 360)
-			new_phi = phi - 360;
-		else
-			new_phi = phi;
-
-
-		length = get_length(new_phi * M_PI / 180, player, map);
-
-		phi -= d_phi;
-	}
 }

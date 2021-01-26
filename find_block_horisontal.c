@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-int			get_around_Ax(float Ax, float phi)
+int			get_around_Ax(double Ax, double phi)
 {
 	if (phi > M_PI && phi < 3 * M_PI / 2)
 	{
@@ -92,7 +92,7 @@ int			get_around_Ax(float Ax, float phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, float phi) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi) //double dx, double dy, double Ax, double Ay
 {
 	int			y;
 	int			x;
@@ -120,7 +120,7 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, float 
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char (*map)[10], float phi)
+t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi)
 {
 	t_coord_horis	horis;
 	t_collis		collis;

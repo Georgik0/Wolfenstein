@@ -45,7 +45,7 @@ void	draw_ray(int pov, t_player player, char (*map)[10], t_data *img)
 // 	float		new_phi;
 // 	float		d_phi;
 
-// 	phi = pov + 33;
+
 // 	d_phi = 66.0 / 1920.0;
 // 	collis = find_collision(pov * M_PI / 180, player, map);
 // 	printf("pov = %d\n", pov);
