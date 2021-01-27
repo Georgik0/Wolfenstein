@@ -98,10 +98,10 @@ int		change_coord(t_vars *vars)
 		vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 1.5);
 		vars->player.y += (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 1.5);
 	}
-	// if (vars->keyboard.A)
-	// 	vars->player.x -= 1;
-	// if (vars->keyboard.D)
-	// 	vars->player.x += 1;
+	if (vars->keyboard.A)
+		vars->player.x -= 1;
+	if (vars->keyboard.D)
+		vars->player.x += 1;
 	return (0);
 }
 
@@ -150,8 +150,8 @@ int		draw_game(t_vars *vars)
 	mlx_clear_window(vars->mlx, vars->win);
 	change_coord(vars);
 	print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
-	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
-	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	// draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
 	return (0);
 }
@@ -175,7 +175,7 @@ int	main(void)
 		'1', '0', '1', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
 		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
-		'1', '0', '0', '0', 'N', '0', '0', '0', '0', '1',
+		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '1', '0', '0', '0', '1', '0', '0', '1',
 		'1', '0', '0', '1', '1', '1', '0', '0', '0', '1',
@@ -201,9 +201,9 @@ int	main(void)
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
-	vars.player.x = 5 * size_cub - 32;
-	vars.player.y = 5 * size_cub - 32;
-	vars.player.pov = 91;
+	vars.player.x = 2 * size_cub - 32;
+	vars.player.y = 6 * size_cub - 32;
+	vars.player.pov = 270;
 	// vars.player = player;
 
 

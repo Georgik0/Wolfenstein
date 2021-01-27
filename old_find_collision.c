@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_collision.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/14 13:16:14 by skitsch           #+#    #+#             */
+/*   Updated: 2021/01/14 13:16:17 by skitsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "header/my_type.h"
+
+static double		get_distance(t_player player, int x1, int y1)
+{
+	double	distance;
+
+	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1));
+	if (isnan(distance))
+		distance = INFINITY;
+	// distance = sqrtl((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1));
+	return (distance);
+}
+
+// int			get_abs_distace(t_collis horisont, t_collis vertical, t_player player, double phi)
+// {
+// 	double	distance_h;
+// 	double	distance_v;
+
+// 	distance_h = get_distance(player.x, horisont.x, phi);
+// 	distance_v = get_distance(player.x, vertical.x, phi);
+// 	if (fabs(distance_v) > fabs(distance_h))
+// 		return (horisont);
+// 	return (vertical);
+// }
+
+t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player, double phi)
+{
+	double	distance_h;
+	double	distance_v;
+
+	distance_h = get_distance(player, horisont.x, horisont.y);
+	distance_v = get_distance(player, vertical.x, vertical.y);
+	if (distance_v > distance_h)
+		return (horisont);
+	return (vertical);
+}
+
+t_collis	find_collision(double phi, t_player player, char (*map)[10])
+{
+	t_collis		collis;
+	t_collis		horisont;
+	t_collis		vertical;
+
+	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
+	{
+		collis = find_block_unique(phi, player, map);
+	}
+	else
+	{
+		horisont = find_block_horisontal(player, map, phi);
+		vertical = find_block_vertical(player, map, phi);
+		collis = compare_collision(horisont, vertical, player, phi);
+		// collis = find_block_vertical(player, map, phi);
+	}
+	return (collis);
+}

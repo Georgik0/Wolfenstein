@@ -14,6 +14,7 @@
 # define MY_TYPE_H
 #include <math.h>
 #include "../libft/libft.h"
+#include "../mlx/mlx.h"
 
 #include <stdio.h>
 
@@ -68,17 +69,17 @@ typedef struct	s_coord_uniq
 typedef struct	s_coord_horis
 {
 	double		Ax;
-	int			Ay;
+	double		Ay;
 	double		dx;
-	int			dy;
+	double		dy;
 
 }				t_coord_horis;
 
 typedef struct	s_coord_vertic
 {
-	int			Bx;
+	double		Bx;
 	double		By;
-	int			dx;
+	double		dx;
 	double		dy;
 
 }				t_coord_vertic;
