@@ -27,7 +27,7 @@ typedef struct	s_data
 	int			endian;
 	int			width;
 	int			height;
-	int			d;
+	double		d;
 
 }				t_data;
 
@@ -46,14 +46,14 @@ typedef struct	s_player
 {
 	int			x;
 	int			y;
-	int			pov;
+	double		pov;
 
 }				t_player;
 
 typedef struct	s_collis
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 
 }				t_collis;
 
@@ -122,7 +122,7 @@ t_collis	find_block_unique(double phi, t_player player, char (*map)[10]);
 t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi);
 t_collis	find_block_vertical(t_player player, char (*map)[10], double phi);
 void		print_line(int x0, int y0, int x1, int y1, t_data *img);
-void		draw_ray(int pov, t_player player, char (*map)[10], t_data *img);
+void		draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
 int			get_length(double phi, t_player player, char (*map)[10]);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		draw_3d(int pov, t_player player, char (*map)[10], t_data *data);

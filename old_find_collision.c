@@ -12,14 +12,13 @@
 
 #include "header/my_type.h"
 
-static double		get_distance(t_player player, int x1, int y1)
+static double		get_distance(t_player player, double x1, double y1, double phi)
 {
 	double	distance;
 
-	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1));
+	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1)) * fabs(cos(phi));
 	if (isnan(distance))
 		distance = INFINITY;
-	// distance = sqrtl((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1));
 	return (distance);
 }
 
@@ -40,8 +39,9 @@ t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player
 	double	distance_h;
 	double	distance_v;
 
-	distance_h = get_distance(player, horisont.x, horisont.y);
-	distance_v = get_distance(player, vertical.x, vertical.y);
+	distance_h = get_distance(player, horisont.x, horisont.y, phi);
+	distance_v = get_distance(player, vertical.x, vertical.y, phi);
+	// printf("distance_h = %f    distance_v = %f    phi = %f\n", distance_h, distance_v, phi);
 	if (distance_v > distance_h)
 		return (horisont);
 	return (vertical);
@@ -62,7 +62,10 @@ t_collis	find_collision(double phi, t_player player, char (*map)[10])
 		horisont = find_block_horisontal(player, map, phi);
 		vertical = find_block_vertical(player, map, phi);
 		collis = compare_collision(horisont, vertical, player, phi);
-		// collis = find_block_vertical(player, map, phi);
+		if (collis.x > 640 || collis.x < 0 || collis.y > 640 || collis.y < 0)
+		{
+			printf("x = %f  y = %f  phi = %f\n", collis.x, collis.y, phi);
+		}
 	}
 	return (collis);
 }

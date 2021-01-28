@@ -150,8 +150,8 @@ int		draw_game(t_vars *vars)
 	mlx_clear_window(vars->mlx, vars->win);
 	change_coord(vars);
 	print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
-	draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
-	// draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
 	return (0);
 }
@@ -198,12 +198,13 @@ int	main(void)
 	vars.data->width = 1920;
 	vars.data->height = 1080;
 	vars.data->d = vars.data->width / (2 * tan(33 * M_PI / 180));
+	printf("d = %f\n", vars.data->d);
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
 	vars.player.x = 2 * size_cub - 32;
 	vars.player.y = 6 * size_cub - 32;
-	vars.player.pov = 270;
+	vars.player.pov = 269;// + 66.0 / 1920.0 * 3;
 	// vars.player = player;
 
 

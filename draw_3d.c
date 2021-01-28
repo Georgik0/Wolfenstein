@@ -15,36 +15,38 @@
 
 void	draw_vertical_line(int x_count, int length, t_data *data)
 {
-	int	y;
-	int	h;
+	int		y;
+	int		h;
 
-	h = data->d * 64 / length;
-	printf("h = %d\n", h);
+	h = (int)nearbyint(data->d * 64 / length);
+	// printf("h = %d\n", h);
 	y = 0;
 	if (x_count < data->width)
 	{
+		// printf("x_count = %d    y = %d\n", x_count, y);
 		// printf("data->height / 2 - h / 2  =  %d\n", data->height / 2 - h / 2);
 		while (y < data->height / 2 - h / 2)
 		{
 			my_mlx_pixel_put(data, x_count, y, 0x20B2AA);
-			if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
-				printf("x = %d   y = %d\n", x_count, y);
+			// if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
+				// printf("x = %d   y = %d\n", x_count, y);
 			y++;
 		}
-		while (y < data->height / 2 - h / 2 + h && y <= data->height)
-		{
-			my_mlx_pixel_put(data, x_count, y, 0xE9967A);
-			if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
-				printf("x = %d   y = %d\n", x_count, y);
-			y++;
-		}
-		while (y < data->height)
-		{
-			my_mlx_pixel_put(data, x_count, y, 0xD3D3D3);
-			if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
-				printf("x = %d   y = %d\n", x_count, y);
-			y++;
-		}
+		// printf("data->height / 2 - h / 2 + h = %d\n", data->height / 2 - h / 2 + h);
+		// while (y < data->height / 2 - h / 2 + h && y <= data->height)
+		// {
+		// 	my_mlx_pixel_put(data, x_count, y, 0xE9967A);
+		// 	// if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
+		// 		// printf("x = %d   y = %d\n", x_count, y);
+		// 	y++;
+		// }
+		// while (y < data->height)
+		// {
+		// 	my_mlx_pixel_put(data, x_count, y, 0xD3D3D3);
+		// 	// if (x_count < 0 || x_count > data->width || y < 0 || y > data->height)
+		// 		// printf("x = %d   y = %d\n", x_count, y);
+		// 	y++;
+		// }
 	}
 }
 
