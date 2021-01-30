@@ -77,6 +77,36 @@ int		dismiss_keyboard(int keycode, t_vars *vars)
 	return (0);
 }
 
+void	change_coord_W(t_vars *vars)
+{
+	if (vars->data_map.map[(vars->player.x + (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3)) / 64]
+	[(vars->player.y - (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3)) / 64] != '1')
+	{
+		vars->player.x += (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+		vars->player.y += -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+	}
+}
+
+void	change_coord_S(t_vars *vars)
+{
+	if (vars->data_map.map[(vars->player.x - (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3)) / 64]
+	[(vars->player.y + (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3)) / 64] != '1')
+	{
+		vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+		vars->player.y += +(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+	}
+}
+
+// void	change_coord_A(t_vars *vars)
+// {
+
+// }
+
+// void	change_coord_D(t_vars *vars)
+// {
+
+// }
+
 int		change_coord(t_vars *vars)
 {
 	if (vars->keyboard.left)
@@ -89,14 +119,15 @@ int		change_coord(t_vars *vars)
 		vars->player.pov += 360;
 	if (vars->keyboard.W)
 	{
-		vars->player.x += (int)floor(cos(vars->player.pov * M_PI / 180) * 3);
-		// printf("cos = %f\n", cos(vars->player.pov) * 5);
-		vars->player.y += -(int)floor(sin(vars->player.pov * M_PI / 180) * 3);
+		// vars->player.x += (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+		// vars->player.y += -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+		change_coord_W(vars);
 	}
 	if (vars->keyboard.S)
 	{
-		vars->player.x += -(int)floor(cos(vars->player.pov * M_PI / 180) * 3);
-		vars->player.y += (int)floor(sin(vars->player.pov * M_PI / 180) * 3);
+		// vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+		// vars->player.y += (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+		change_coord_S(vars);
 	}
 	if (vars->keyboard.A)
 		vars->player.x -= 1;
