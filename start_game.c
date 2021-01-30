@@ -89,14 +89,14 @@ int		change_coord(t_vars *vars)
 		vars->player.pov += 360;
 	if (vars->keyboard.W)
 	{
-		vars->player.x += (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 1.5);
+		vars->player.x += (int)floor(cos(vars->player.pov * M_PI / 180) * 3);
 		// printf("cos = %f\n", cos(vars->player.pov) * 5);
-		vars->player.y += -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 1.5);
+		vars->player.y += -(int)floor(sin(vars->player.pov * M_PI / 180) * 3);
 	}
 	if (vars->keyboard.S)
 	{
-		vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 1.5);
-		vars->player.y += (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 1.5);
+		vars->player.x += -(int)floor(cos(vars->player.pov * M_PI / 180) * 3);
+		vars->player.y += (int)floor(sin(vars->player.pov * M_PI / 180) * 3);
 	}
 	if (vars->keyboard.A)
 		vars->player.x -= 1;
@@ -171,15 +171,15 @@ int	main(void)
 	// vars = (t_vars *)malloc(sizeof(t_vars));
 
 	char	map[10][10] = {
-		'1', '1', '0', '1', '1', '1', '1', '1', '1', '1',
-		'1', '0', '1', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
-		'1', '0', '1', '1', '0', '1', '1', '0', '0', '1',
+		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
+		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '1', '0', '0', '0', '1', '0', '0', '1',
-		'1', '0', '0', '1', '1', '1', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'
 	};
 
@@ -198,7 +198,7 @@ int	main(void)
 	vars.data->width = 1920;
 	vars.data->height = 1080;
 	vars.data->d = vars.data->width / (2 * tan(33 * M_PI / 180));
-	printf("d = %f\n", vars.data->d);
+	// printf("d = %f\n", vars.data->d);
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
