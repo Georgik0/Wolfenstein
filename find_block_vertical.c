@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 18:33:56 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/14 18:33:57 by skitsch          ###   ########.fr       */
+/*   Created: 2021/02/01 17:30:03 by skitsch           #+#    #+#             */
+/*   Updated: 2021/02/01 17:30:05 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	// collis.y = (int)nearbyint(vertic.By);
 	collis.x = vertic.Bx;
 	collis.y = vertic.By;
+	collis.offset = (vertic.By - (int)(vertic.By / 64) * 64) / 64;
 	// collis.y = get_around_By(vertic.By, phi);
 	// if (collis.y < 63 || collis.y > 576)
 	// {

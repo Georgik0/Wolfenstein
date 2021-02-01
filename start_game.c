@@ -79,27 +79,53 @@ int		dismiss_keyboard(int keycode, t_vars *vars)
 
 void	change_coord_W(t_vars *vars)
 {
-	if (vars->data_map.map[(vars->player.x + (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3)) / 64]
-	[(vars->player.y - (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3)) / 64] != '1')
+	int	delta_x;
+	int	delta_y;
+
+	delta_x = (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+	delta_y = -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
 	{
-		vars->player.x += (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
-		vars->player.y += -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+		vars->player.x += delta_x;
+		vars->player.y += delta_y;
 	}
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y) / 64] != '1')
+		vars->player.x += delta_x;
+	if (vars->data_map.map[(vars->player.x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+		vars->player.y += delta_y;
 }
 
 void	change_coord_S(t_vars *vars)
 {
-	if (vars->data_map.map[(vars->player.x - (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3)) / 64]
-	[(vars->player.y + (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3)) / 64] != '1')
+	int	delta_x;
+	int	delta_y;
+
+	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
 	{
-		vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
-		vars->player.y += +(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
+		vars->player.x += delta_x;
+		vars->player.y += delta_y;
 	}
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y) / 64] != '1')
+		vars->player.x += delta_x;
+	if (vars->data_map.map[(vars->player.x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+		vars->player.y += delta_y;
 }
 
 // void	change_coord_A(t_vars *vars)
 // {
+// 	int	delta_x;
+// 	int	delta_y;
 
+// 	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
+// 	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
 // }
 
 // void	change_coord_D(t_vars *vars)
@@ -180,10 +206,11 @@ int		draw_game(t_vars *vars)
 {
 	mlx_clear_window(vars->mlx, vars->win);
 	change_coord(vars);
-	print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
+	// print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
 	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
 	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
+	// mlx_do_sync(vars->mlx);
 	return (0);
 }
 
@@ -194,6 +221,20 @@ int	main(void)
 	t_player	player;
 	t_data_map	data_map;
 	t_keyboard	keyboard;
+	t_data		data_wall_left;
+	t_data		data_wall_right;
+	t_data		data_wall_up;
+	t_data		data_wall_down;
+	char		*dir_wall_left = "./texture/WALL32.xpm";
+	char		*dir_wall_right = "./texture/WALL53.xpm";
+	char		*dir_wall_up = "./texture/WALL88.xpm";
+	char		*dir_wall_down = "./texture/WALL89.xpm";
+	// void		*wall_left;
+	// void		*wall_right;
+	// void		*wall_up;
+	// void		*wall_down;
+	int			img_width;
+	int			img_heigh;
 
 	vars.data = &data;
 	vars.data_map = data_map;
@@ -229,31 +270,36 @@ int	main(void)
 	vars.data->width = 1920;
 	vars.data->height = 1080;
 	vars.data->d = vars.data->width / (2 * tan(33 * M_PI / 180));
-	// printf("d = %f\n", vars.data->d);
+
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
 	vars.player.x = 2 * size_cub - 32;
 	vars.player.y = 6 * size_cub - 32;
-	vars.player.pov = 269;// + 66.0 / 1920.0 * 3;
-	// vars.player = player;
-
+	vars.player.pov = 269;
 
 	vars.mlx = mlx_init();
+
+	// Получаем текстуры
+	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_left, &img_width, &img_heigh);
+	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_right, &img_width, &img_heigh);
+	data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_up, &img_width, &img_heigh);
+	data_wall_down.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_down, &img_width, &img_heigh);
+
+	data_wall_left.addr = mlx_get_data_addr(data_wall_left.img, &(data_wall_left.bits_per_pixel), &(data_wall_left.line_length), &(data_wall_left.endian));
+	data_wall_right.addr = mlx_get_data_addr(data_wall_right.img, &(data_wall_right.bits_per_pixel), &(data_wall_right.line_length), &(data_wall_right.endian));
+	data_wall_up.addr = mlx_get_data_addr(data_wall_up.img, &(data_wall_up.bits_per_pixel), &(data_wall_up.line_length), &(data_wall_up.endian));
+	data_wall_down.addr = mlx_get_data_addr(data_wall_down.img, &(data_wall_down.bits_per_pixel), &(data_wall_down.line_length), &(data_wall_down.endian));
+
 	vars.win = mlx_new_window(vars.mlx, vars.data->width, vars.data->height, "Hello");
-	// mlx_key_hook(vars.win, key_hook, &vars);
+
 	vars.data->img = mlx_new_image(vars.mlx, vars.data->width, vars.data->height);
 	vars.data->addr = mlx_get_data_addr(vars.data->img, &(vars.data->bits_per_pixel), &(vars.data->line_length), &(vars.data->endian));// &img.bits_per_pixel, &img.line_length, &img.endian);
 
-	// // Рисуем карту
-	// // print_map(vars.data_map.map_len_x, vars.data_map.map_len_y, size_cub, map, vars.img);
-	// // Рисуем лучи
-	// // draw_ray(M_PI / 2, player, map, vars.img);
-
-	// // mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop_hook(vars.mlx, &draw_game, &vars);
 	mlx_hook(vars.win, 2, 0, &press_keyboard, &vars);
 	mlx_hook(vars.win, 3, 0, &dismiss_keyboard, &vars);
+	mlx_do_sync(vars.mlx);
 	mlx_loop(vars.mlx);
 	return (0);
 }

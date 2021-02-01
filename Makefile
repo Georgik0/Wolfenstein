@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-OBJ = start_game.c draw_ray.c old_find_block_unique.c old_find_collision.c \
-old_find_block_horisontal.c old_find_block_vertical.c draw_3d.c old_get_length.c
+OBJ = start_game.c draw_ray.c find_block_unique.c find_collision.c \
+find_block_horisontal.c find_block_vertical.c draw_3d.c get_length.c
 
 NAME = cub3D
 

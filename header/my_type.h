@@ -54,6 +54,7 @@ typedef struct	s_collis
 {
 	double		x;
 	double		y;
+	double		offset;
 
 }				t_collis;
 

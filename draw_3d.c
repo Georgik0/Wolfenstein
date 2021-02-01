@@ -81,7 +81,6 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data)
 			else
 				new_phi = phi;
 			data_draw = get_length(pov, new_phi * M_PI / 180, player, map);
-			// length = get_length(pov, new_phi * M_PI / 180, player, map);
 			draw_vertical_line(count, data_draw, data, new_phi * M_PI / 180);
 			// draw_vertical_line(count, length, data, new_phi * M_PI / 180);
 		// }

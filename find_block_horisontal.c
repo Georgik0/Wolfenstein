@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 13:14:29 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/14 13:14:32 by skitsch          ###   ########.fr       */
+/*   Created: 2021/02/01 17:28:54 by skitsch           #+#    #+#             */
+/*   Updated: 2021/02/01 17:28:58 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	// collis.y = (int)nearbyint(horis.Ay);
 	collis.x = horis.Ax;
 	collis.y = horis.Ay;
+	collis.offset = (horis.Ax - (int)(horis.Ax / 64) * 64) / 64;
+	// printf("x = %f    y = %f   offset = %f\n", collis.x, collis.y, collis.offset);
 	// printf("-----------horiz-----------\n");
 	return (collis);
 }

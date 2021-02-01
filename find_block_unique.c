@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 13:29:50 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/14 13:29:51 by skitsch          ###   ########.fr       */
+/*   Created: 2021/02/01 17:29:34 by skitsch           #+#    #+#             */
+/*   Updated: 2021/02/01 17:29:36 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ t_collis	find_block_unique(double phi, t_player player, char (*map)[10])
 	coord.dx = get_dx(phi);
 	coord.dy = get_dy(phi);
 	collis = get_collis(coord, map);
+	if (phi == 0 || phi == M_PI)
+		collis.offset = player.y % 64 / 64.0;
+	else
+		collis.offset = player.x % 64 / 64.0;
 	return (collis);
 }

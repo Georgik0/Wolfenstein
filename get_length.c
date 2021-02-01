@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/25 19:58:17 by skitsch           #+#    #+#             */
-/*   Updated: 2021/01/25 19:58:23 by skitsch          ###   ########.fr       */
+/*   Created: 2021/02/01 17:31:09 by skitsch           #+#    #+#             */
+/*   Updated: 2021/02/01 17:31:11 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static t_data_draw		compare_distance(t_collis horisont, t_collis vertical, t_pla
 t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10])
 {
 	t_data_draw		data_draw;
-	double			length;
 	t_collis		collis;
 	t_collis		horisont;
 	t_collis		vertical;
@@ -87,14 +86,12 @@ t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10])
 	{
 		collis = find_block_unique(phi, player, map);
 		data_draw = get_distance_unique(collis, player, phi);
-		// length = get_distance_unique(collis, player, phi);
 	}
 	else
 	{
 		horisont = find_block_horisontal(player, map, phi);
 		vertical = find_block_vertical(player, map, phi);
 		data_draw = compare_distance(horisont, vertical, player, phi, pov * M_PI / 180);
-		// length = compare_distance(horisont, vertical, player, phi, pov * M_PI / 180);
 	}
 	return (data_draw);
 	// return (length);
