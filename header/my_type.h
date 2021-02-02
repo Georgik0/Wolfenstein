@@ -50,6 +50,14 @@ typedef struct	s_player
 
 }				t_player;
 
+typedef struct	s_list_sprite
+{
+	double		x;
+	double		y;
+	double
+}				t_list_sprite;
+
+
 typedef struct	s_collis
 {
 	double		x;
@@ -96,8 +104,9 @@ typedef struct	s_data_map
 
 typedef struct	s_data_draw
 {
-	int			color;
+	char		side;
 	double		length;
+	double		offset;
 
 }				t_data_draw;
 
@@ -122,19 +131,20 @@ typedef struct  s_vars
 	t_data		*data;
 	t_data_map	data_map;
 	t_keyboard	keyboard;
+	t_data		**data_array;
 
 }				t_vars;
 
 
-t_collis	find_collision(double phi, t_player player, char (*map)[10]);
-t_collis	find_block_unique(double phi, t_player player, char (*map)[10]);
-t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi);
-t_collis	find_block_vertical(t_player player, char (*map)[10], double phi);
-void		print_line(int x0, int y0, int x1, int y1, t_data *img);
-void		draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
-t_data_draw	get_length(int pov, double phi, t_player player, char (*map)[10]);
-// double		get_length(int pov, double phi, t_player player, char (*map)[10]);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		draw_3d(int pov, t_player player, char (*map)[10], t_data *data);
+t_collis		find_collision(double phi, t_player player, char (*map)[10]);
+t_collis		find_block_unique(double phi, t_player player, char (*map)[10]);
+t_collis		find_block_horisontal(t_player player, char (*map)[10], double phi);
+t_collis		find_block_vertical(t_player player, char (*map)[10], double phi);
+void			print_line(int x0, int y0, int x1, int y1, t_data *img);
+void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
+t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10]);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array);
+unsigned int	get_color(t_data data, int y, double offset, int h);
 
 #endif

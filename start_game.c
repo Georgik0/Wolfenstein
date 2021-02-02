@@ -136,9 +136,9 @@ void	change_coord_S(t_vars *vars)
 int		change_coord(t_vars *vars)
 {
 	if (vars->keyboard.left)
-		vars->player.pov += 1;
+		vars->player.pov += 2;
 	if (vars->keyboard.right)
-		vars->player.pov -= 1;
+		vars->player.pov -= 2;
 	if (vars->player.pov >= 360)
 		vars->player.pov -= 360;
 	if (vars->player.pov < 0)
@@ -208,7 +208,7 @@ int		draw_game(t_vars *vars)
 	change_coord(vars);
 	// print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
 	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
-	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data);
+	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data, vars->data_array);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
 	// mlx_do_sync(vars->mlx);
 	return (0);
@@ -225,14 +225,11 @@ int	main(void)
 	t_data		data_wall_right;
 	t_data		data_wall_up;
 	t_data		data_wall_down;
+	t_data		**data_array;
 	char		*dir_wall_left = "./texture/WALL32.xpm";
 	char		*dir_wall_right = "./texture/WALL53.xpm";
 	char		*dir_wall_up = "./texture/WALL88.xpm";
 	char		*dir_wall_down = "./texture/WALL89.xpm";
-	// void		*wall_left;
-	// void		*wall_right;
-	// void		*wall_up;
-	// void		*wall_down;
 	int			img_width;
 	int			img_heigh;
 
@@ -281,6 +278,13 @@ int	main(void)
 	vars.mlx = mlx_init();
 
 	// Получаем текстуры
+	if (!(data_array = (t_data**)malloc(5 * sizeof(t_data*))))
+		exit(0);
+	data_array[0] = &data;
+	data_array[1] = &data_wall_left;
+	data_array[2] = &data_wall_right;
+	data_array[3] = &data_wall_up;
+	data_array[4] = &data_wall_down;
 	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_left, &img_width, &img_heigh);
 	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_right, &img_width, &img_heigh);
 	data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_up, &img_width, &img_heigh);
@@ -290,6 +294,8 @@ int	main(void)
 	data_wall_right.addr = mlx_get_data_addr(data_wall_right.img, &(data_wall_right.bits_per_pixel), &(data_wall_right.line_length), &(data_wall_right.endian));
 	data_wall_up.addr = mlx_get_data_addr(data_wall_up.img, &(data_wall_up.bits_per_pixel), &(data_wall_up.line_length), &(data_wall_up.endian));
 	data_wall_down.addr = mlx_get_data_addr(data_wall_down.img, &(data_wall_down.bits_per_pixel), &(data_wall_down.line_length), &(data_wall_down.endian));
+
+	vars.data_array = data_array; // передали массив со всеми t_data
 
 	vars.win = mlx_new_window(vars.mlx, vars.data->width, vars.data->height, "Hello");
 

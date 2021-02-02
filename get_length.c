@@ -36,14 +36,15 @@ static t_data_draw		get_distance_unique(t_collis collis, t_player player, double
 	t_data_draw	data_draw;
 
 	data_draw.length = ft_abs(collis.x - player.x) + ft_abs(collis.y - player.y);
+	data_draw.offset = collis.offset;
 	if (phi == 0)
-		data_draw.color = 0xFF8C00;
+		data_draw.side = 'r';//0xFF8C00;
 	else if (phi == M_PI / 2)
-		data_draw.color = 0xEE82EE;
+		data_draw.side = 'u';//0xEE82EE;
 	else if (phi == M_PI)
-		data_draw.color = 0x9ACD32;
+		data_draw.side = 'l';//0x9ACD32;
 	else
-		data_draw.color = 0xFFEFD5;
+		data_draw.side = 'd';//0xFFEFD5;
 	return (data_draw);
 	// return (data_draw.length);
 }
@@ -59,20 +60,21 @@ static t_data_draw		compare_distance(t_collis horisont, t_collis vertical, t_pla
 	if (distance_v > distance_h)
 	{
 		if (phi < M_PI)
-			data_draw.color = 0xEE82EE;
+			data_draw.side = 'u';//0xEE82EE;
 		else
-			data_draw.color = 0xFFEFD5;
+			data_draw.side = 'd';//0xFFEFD5;
 		data_draw.length = distance_h;
+		data_draw.offset = horisont.offset;
 		return (data_draw);
 		// return (distance_h);
 	}
 	if (phi < M_PI / 2 || phi > 3 * M_PI / 2)
-		data_draw.color = 0xFF8C00;
+		data_draw.side = 'r';//0xFF8C00;
 	else
-		data_draw.color = 0x9ACD32;
+		data_draw.side = 'l';//0x9ACD32;
 	data_draw.length = distance_v;
+	data_draw.offset = vertical.offset;
 	return (data_draw);
-	// return (distance_v);
 }
 
 t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10])
