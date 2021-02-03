@@ -96,5 +96,4 @@ t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10])
 		data_draw = compare_distance(horisont, vertical, player, phi, pov * M_PI / 180);
 	}
 	return (data_draw);
-	// return (length);
 }

@@ -91,7 +91,7 @@ int			get_around_Ax(double Ax, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_sprite *sprite) //double dx, double dy, double Ax, double Ay
 {
 	int			y;
 	int			x;
@@ -104,6 +104,10 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	// printf("Ax1 = %f   Ay1 = %d          x = %d  y = %d\n", horis.Ax, horis.Ay, x, y);
 	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
 	{
+		if (map[y][x] == '2')
+		{
+
+		}
 		horis.Ax += horis.dx;
 		horis.Ay += horis.dy;
 		// printf("Ax = %f   Ay = %d\n", horis.Ax, horis.Ay);
@@ -122,7 +126,7 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi)
+t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite *sprite)
 {
 	t_coord_horis	horis;
 	t_collis		collis;
@@ -142,6 +146,6 @@ t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi)
 		horis.dx = -64.0 / tan(phi);
 	else
 		horis.dx = 64.0 / tan(phi);
-	collis = collision_width_horisontal(map, horis, phi);
+	collis = collision_width_horisontal(map, horis, phi, sprite);
 	return (collis);
 }
