@@ -35,6 +35,7 @@ t_sprite	*get_sprite(t_sprite *sprite, double x, double y)
 			return(NULL);
 		sprite->next = NULL;
 		sprite->prev = NULL;
+		sprite->length =
 	}
 	else
 	{

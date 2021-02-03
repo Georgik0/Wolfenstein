@@ -84,7 +84,7 @@ t_collis	get_collis(t_coord_uniq coord, char (*map)[10])
 	return (collis);
 }
 
-t_collis	find_block_unique(double phi, t_player player, char (*map)[10])
+t_collis	find_block_unique(double phi, t_player player, char (*map)[10], t_sprite *sprite)
 {
 	t_coord_uniq	coord;
 	t_collis		collis;

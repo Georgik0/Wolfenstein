@@ -130,7 +130,7 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_player player, char (*map)[10], double phi)
+t_collis	find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite *sprite)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;

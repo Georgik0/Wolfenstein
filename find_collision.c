@@ -52,15 +52,16 @@ t_collis	find_collision(double phi, t_player player, char (*map)[10])
 	t_collis		collis;
 	t_collis		horisont;
 	t_collis		vertical;
+	t_sprite		*sprite;
 
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
 	{
-		collis = find_block_unique(phi, player, map);
+		collis = find_block_unique(phi, player, map, sprite);
 	}
 	else
 	{
-		horisont = find_block_horisontal(player, map, phi);
-		vertical = find_block_vertical(player, map, phi);
+		horisont = find_block_horisontal(player, map, phi, sprite);
+		vertical = find_block_vertical(player, map, phi, sprite);
 		collis = compare_collision(horisont, vertical, player, phi);
 		if (collis.x > 640 || collis.x < 0 || collis.y > 640 || collis.y < 0)
 		{
