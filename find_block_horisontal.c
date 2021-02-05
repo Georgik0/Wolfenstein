@@ -91,7 +91,7 @@ int			get_around_Ax(double Ax, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_sprite *sprite) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_sprite *sprite)
 {
 	int			y;
 	int			x;

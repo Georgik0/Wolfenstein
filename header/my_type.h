@@ -61,6 +61,28 @@ typedef struct	s_sprite
 
 }				t_sprite;
 
+typedef struct	s_sprite_data
+{
+	double		length;
+	int			x;
+	int			y;
+
+}				t_sprite_data;
+
+
+typedef struct	s_sprite_calculation
+{
+	double		dx;
+	double		dy;
+	double		distance;
+	double		theta;
+	double		gamma;
+	int			ray_center;
+	int			delta_rays;
+
+}				t_sprite_calculation;
+
+
 typedef struct	s_collis
 {
 	double		x;
@@ -161,6 +183,6 @@ t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10]);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array);
 unsigned int	get_color(t_data data, int y, double offset, int h);
-t_sprite		*get_sprite(t_sprite *sprite, double x, double y);
+t_sprite		*get_sprite(t_sprite *sprite, double x, double y, t_player player);
 
 #endif
