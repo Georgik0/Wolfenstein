@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "header/my_type.h"
-#include "mlx/mlx.h"
 
 void	draw_sky(int *y, t_data_draw data_draw, t_data **data_array)
 {
@@ -74,6 +73,7 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **d
 {
 	t_data_draw		data_draw;
 	t_data_angle	angle;
+	t_sprite		*sprite = NULL;
 	int			count;
 
 	angle.phi = pov + 33;
@@ -88,10 +88,11 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **d
 			angle.new_phi = angle.phi - 360;
 		else
 			angle.new_phi = angle.phi;
-		data_draw = get_length(pov, angle.new_phi * M_PI / 180, player, map);
+		data_draw = get_length(pov, angle.new_phi * M_PI / 180, player, map, &sprite);
 		data_draw.x_count = count;
 		draw_vertical_line(data_draw, data, angle.new_phi * M_PI / 180, data_array);
 		angle.phi -= angle.d_phi;
 		count++;
 	}
+	clear_sprite(&sprite);
 }

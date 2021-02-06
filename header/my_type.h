@@ -88,6 +88,7 @@ typedef struct	s_collis
 	double		x;
 	double		y;
 	double		offset;
+	int			err;
 	t_sprite	*sprite;
 
 }				t_collis;
@@ -175,14 +176,15 @@ typedef struct  s_vars
 
 t_collis		find_collision(double phi, t_player player, char (*map)[10]);
 t_collis		find_block_unique(double phi, t_player player, char (*map)[10], t_sprite *sprite);
-t_collis		find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite *sprite);
+t_collis		find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite **sprite);
 t_collis		find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite *sprite);
 void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
-t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10]);
+t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10], t_sprite **sprite);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array);
 unsigned int	get_color(t_data data, int y, double offset, int h);
-t_sprite		*get_sprite(t_sprite *sprite, double x, double y, t_player player);
+int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
+void			clear_sprite(t_sprite **sprite_start);
 
 #endif

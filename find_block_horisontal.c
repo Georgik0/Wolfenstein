@@ -91,7 +91,7 @@ int			get_around_Ax(double Ax, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_sprite *sprite)
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_player player, t_sprite **sprite)
 {
 	int			y;
 	int			x;
@@ -106,7 +106,11 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	{
 		if (map[y][x] == '2')
 		{
-
+			if (add_sprite(sprite, x * 64 - 32, y * 64 - 32, player) == 0)
+			{
+				collis.err = 1;
+				return (collis);
+			}
 		}
 		horis.Ax += horis.dx;
 		horis.Ay += horis.dy;
@@ -126,7 +130,7 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite *sprite)
+t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite **sprite)
 {
 	t_coord_horis	horis;
 	t_collis		collis;
@@ -146,6 +150,6 @@ t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi, t_s
 		horis.dx = -64.0 / tan(phi);
 	else
 		horis.dx = 64.0 / tan(phi);
-	collis = collision_width_horisontal(map, horis, phi, sprite);
+	collis = collision_width_horisontal(map, horis, phi, player, sprite);
 	return (collis);
 }
