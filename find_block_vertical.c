@@ -93,7 +93,7 @@ int			get_around_By(double By, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi) //double dx, double dy, double Ax, double Ay
+t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi, t_player player, t_sprite **sprite)
 {
 	int			y;
 	int			x;
@@ -106,6 +106,14 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	// printf("Bx1 = %d   By1 = %f          x = %d  y = %d\n", vertic.Bx, vertic.By, x, y);
 	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
 	{
+		if (map[y][x] == '2')
+		{
+			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, player) == 0)
+			{
+				collis.err = 1;
+				return (collis);
+			}
+		}
 		vertic.Bx += vertic.dx;
 		vertic.By += vertic.dy;
 		// printf("Bx = %d   By = %f\n", vertic.Bx, vertic.By);
@@ -130,7 +138,7 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite *sprite)
+t_collis	find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite **sprite)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;
@@ -151,6 +159,6 @@ t_collis	find_block_vertical(t_player player, char (*map)[10], double phi, t_spr
 		vertic.dy = -64.0 * tan(phi);
 	}else
 		vertic.dy = 64.0 * tan(phi);
-	collis = collision_width_vertical(map, vertic, phi);
+	collis = collision_width_vertical(map, vertic, phi, player, sprite);
 	return (collis);
 }

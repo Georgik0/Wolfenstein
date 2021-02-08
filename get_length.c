@@ -86,13 +86,13 @@ t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10], 
 
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
 	{
-		collis = find_block_unique(phi, player, map, *sprite);
+		collis = find_block_unique(phi, player, map, sprite);
 		data_draw = get_distance_unique(collis, player, phi);
 	}
 	else
 	{
 		horisont = find_block_horisontal(player, map, phi, sprite);
-		vertical = find_block_vertical(player, map, phi, *sprite);
+		vertical = find_block_vertical(player, map, phi, sprite);
 		data_draw = compare_distance(horisont, vertical, player, phi, pov * M_PI / 180);
 	}
 	return (data_draw);

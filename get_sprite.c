@@ -12,32 +12,87 @@
 
 #include "header/my_type.h"
 
+// int			add_sprite2(t_sprite **sprite_start, double length, double x, double y)
+// {
+// 	t_sprite	*new;
+
+// 	while (!((*sprite_start)->x == x && (*sprite_start)->y == y) && (*sprite_start)->next != NULL)
+// 	{
+
+// 	}
+// 	if ((*sprite_start)->x == x && (*sprite_start)->y == y)
+// 		return (1);
+// 	if (!(new = (t_sprite *)malloc(sizeof(t_sprite))))
+// 		return (0);
+// 	new->length = length;
+// 	new->x = x;
+// 	new->y = y;
+// 	if ((*sprite_start)->length < length)
+// 	{
+// 		new->next = *sprite_start;
+// 		*sprite_start = new;
+// 		return (1);
+// 	}
+// 	else if ((*sprite_start)->next == NULL)
+// 		new->next = NULL;
+// 	else if ((*sprite_start)->next->length > length)
+// 		new->next = (*sprite_start)->next;
+// 	(*sprite_start)->next = new;
+// 	return (1);
+// }
+
 int			add_sprite1(t_sprite **sprite_start, double length, double x, double y)
 {
 	t_sprite	*new;
+	t_sprite	*iter;
 
-	while ((*sprite_start)->length <= length && (*sprite_start)->next != NULL && (*sprite_start)->next->length <= length)
+	// if (x == 96 && y == 160)
+	// 	printf("test1\n");
+	// if (x == 160 && y == 96)
+	// 	printf("test\n");
+	// if (x == 160 && y == 160)
+	// 	printf("test\n");
+	// if (x == 224 && y == 160)
+	// 	printf("test\n");
+	// if (x == 224 && y == 96)
+	// 	printf("test\n");
+	iter = *sprite_start;
+	if ((iter)->x == x && (iter)->y == y)
+		return (1);
+	if ((*sprite_start)->length > length)
 	{
-		if ((*sprite_start)->x == x && (*sprite_start)->y == y)
-			return (1);
-		*sprite_start = (*sprite_start)->next;
+		while (iter->next != NULL && (iter)->next->length > length)
+		{
+			if ((iter)->x == x && (iter)->y == y)
+				return (1);
+			iter = (iter)->next;
+		}
 	}
+	if ((iter)->x == x && (iter)->y == y)
+		return (1);
 	if (!(new = (t_sprite *)malloc(sizeof(t_sprite))))
 		return (0);
 	new->length = length;
 	new->x = x;
 	new->y = y;
-	if ((*sprite_start)->length > length)
+	if ((*sprite_start)->length <= length)
 	{
 		new->next = *sprite_start;
 		*sprite_start = new;
 		return (1);
 	}
-	else if ((*sprite_start)->next == NULL)
+	else if ((iter)->next == NULL)
 		new->next = NULL;
-	else if ((*sprite_start)->next->length > length)
-		new->next = (*sprite_start)->next;
-	(*sprite_start)->next = new;
+	else if ((iter)->next->length <= length)
+	{
+		if ((iter)->next->x == x && (iter)->next->y == y)
+		{
+			free(new);
+			return (1);
+		}
+		new->next = (iter)->next;
+	}
+	iter->next = new;
 	return (1);
 }
 

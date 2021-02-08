@@ -175,9 +175,9 @@ typedef struct  s_vars
 
 
 t_collis		find_collision(double phi, t_player player, char (*map)[10]);
-t_collis		find_block_unique(double phi, t_player player, char (*map)[10], t_sprite *sprite);
+t_collis		find_block_unique(double phi, t_player player, char (*map)[10], t_sprite **sprite);
 t_collis		find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite **sprite);
-t_collis		find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite *sprite);
+t_collis		find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite **sprite);
 void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
 t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10], t_sprite **sprite);

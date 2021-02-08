@@ -106,7 +106,7 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	{
 		if (map[y][x] == '2')
 		{
-			if (add_sprite(sprite, x * 64 - 32, y * 64 - 32, player) == 0)
+			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, player) == 0)
 			{
 				collis.err = 1;
 				return (collis);
