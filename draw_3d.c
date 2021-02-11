@@ -94,5 +94,10 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **d
 		angle.phi -= angle.d_phi;
 		count++;
 	}
+	if (sprite != NULL)
+	{
+		get_sprite_ray(player, sprite->x, sprite->y, angle.d_phi, sprite, 64, data_array[0], data_array);
+	}
+
 	clear_sprite(&sprite);
 }

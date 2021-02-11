@@ -46,6 +46,7 @@ typedef struct	s_player
 {
 	int			x;
 	int			y;
+	// int			pov_ray;
 	double		pov;
 
 }				t_player;
@@ -56,6 +57,8 @@ typedef struct	s_sprite
 	double			y;
 	double			length;
 	double			h;
+	// double			left_pov;
+	// double			right_pov;
 	struct s_sprite	*next;
 	struct s_sprite	*prev;
 
@@ -77,6 +80,12 @@ typedef struct	s_sprite_calculation
 	double		distance;
 	double		theta;
 	double		gamma;
+	double		x0_sprite;
+	double		y0_sprite;
+	int			h;
+	int			step_y;
+	int			middle_sprite;
+	int			ray_pov;
 	int			ray_center;
 	int			delta_rays;
 
@@ -186,5 +195,7 @@ void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data *
 unsigned int	get_color(t_data data, int y, double offset, int h);
 int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
 void			clear_sprite(t_sprite **sprite_start);
+unsigned int	get_color_sprite(t_data data, int y, int x);
+void			get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d_phi, t_sprite *sprite, int width_sprite, t_data *data, t_data **data_array);
 
 #endif

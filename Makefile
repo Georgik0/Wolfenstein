@@ -25,6 +25,6 @@ CC = gcc
 
 ${NAME}: 	${OBJ}
 			make -C ./mlx
-			${CC} -g -Lmlx -lmlx -framework OpenGL -framework AppKit ${OBJ} libmlx.a ./libft/libft.a -o ${NAME}
+			${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit ${OBJ} libmlx.a ./libft/libft.a -o ${NAME}
 
 all: ${NAME}
