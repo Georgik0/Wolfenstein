@@ -82,8 +82,9 @@ typedef struct	s_sprite_calculation
 	double		gamma;
 	double		x0_sprite;
 	double		y0_sprite;
+	double		length;
 	int			h;
-	int			step_y;
+	double		step_y;
 	int			middle_sprite;
 	int			ray_pov;
 	int			ray_center;

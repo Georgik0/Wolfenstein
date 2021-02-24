@@ -140,29 +140,30 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 {
 	t_sprite_calculation	calc;
 	int						color;
-	int						i_sp;
-	int						j_sp;
+	double					y;
+	double					x_xmp;
 
 	calc.dx = sprite_x - player.x;
-	calc.dy = sprite_y - player.y;
-	calc.distance = sqrt(calc.dx * calc.dx + calc.dy * calc.dy);
+	calc.dy = player.y - sprite_y;
+	calc.distance = sprite->length; //sqrt(calc.dx * calc.dx + calc.dy * calc.dy);
 	calc.theta = atan2(calc.dy, calc.dx);
 
-	if (calc.theta < M_PI)
+	if (calc.theta < 0)
 		calc.theta += 2 * M_PI;
 
-	calc.h = calc.distance * cos(player.pov - calc.theta);
+	calc.length = calc.distance * fabs(cos(player.pov - calc.theta));
 
-	calc.step_y = calc.h / width_sprite;
+	calc.h = (int)floor(data_array[0]->d * 64 / calc.length);
+	calc.step_y = 64.0 / calc.h; //width_sprite / calc.h;
 
-	calc.gamma = calc.theta - player.pov;
+	calc.gamma = player.pov - calc.theta; //если gamma > 0, значит спрайт правее
 
 	// if (calc.dx > 0 && player.pov >= M_PI && player.pov <= 2 * M_PI || calc.dx < 0 && calc.dy < 0)
 	// 	calc.gamma += 2 * M_PI;
 
 	if (player.pov >= 0 && player.pov < 33)
 	{
-		if (calc.theta >= 330)
+		if (calc.theta >= 327)
 		{
 			calc.gamma = player.pov + (2 * M_PI - calc.theta);
 		}
@@ -172,7 +173,7 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 		}
 
 	}
-	else if (player.pov >= 330 && player.pov < 360)
+	else if (player.pov >= 327 && player.pov < 360)
 	{
 		if (calc.theta <= 33)
 		{
@@ -194,33 +195,65 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 	calc.delta_rays = (int)(calc.gamma / d_phi); // столько лучей между pov и углом, указывающем на середину спрайта
 	calc.ray_pov = data_array[0]->width / 2; // луч, идущий по середине экрана (угол направления взгляда игрока)
 	calc.middle_sprite = calc.ray_pov + calc.delta_rays; // номер луча, который попал в середину спрайта
-	calc.x0_sprite = calc.middle_sprite - calc.h / 2 * calc.step_y; // первый луч спрайта (может оказаться за границей экрана)
+	x_xmp = 64.0 / 2.0; //x - координата середины спрайта
+	// calc.x0_sprite = calc.middle_sprite - calc.h / 2 * calc.step_y; // первый луч спрайта (может оказаться за границей экрана)
+
+	// нарисуем левую часть спрайта
+	int mid_sp_ray = calc.middle_sprite;
+	double y_xmp;
+
+	while (mid_sp_ray >= 0 && x_xmp >= 0)
+	{
+		if (calc.h > data_array[0]->height)
+			y_xmp = (calc.h - data_array[0]->height) / 2;
+		else
+			y_xmp = 0;
+		y = (data_array[0]->height - calc.h) / 2; // с какой высоты начинать рисовать спрайт
+		if (y < 0)
+			y = 0;
+		while (y < data_array[0]->height && y_xmp < 64)
+		{
+			if (mid_sp_ray < data_array[0]->width)
+				break ;
+			if (x_xmp < 64)
+			{
+				color = get_color_sprite(*data_array[1], (int)floor(y_xmp), (int)floor(x_xmp));
+				my_mlx_pixel_put(data_array[0], mid_sp_ray, y, color);
+			}
+
+			y_xmp += calc.step_y;
+			y++;
+		}
+		x_xmp -= calc.step_y;
+		mid_sp_ray--;
+	}
+
 
 	// printf("calc.x0_sprite = %f     calc.delta_rays = %d\n", calc.x0_sprite, calc.delta_rays);
 // Рисуем спрайт
-	j_sp = 0;
-	i_sp = data_array[0]->height / 2 - calc.h / 2; // с какой высоты начинать рисовать спрайт
-	if (calc.h > data_array[0]->height)
-		calc.y0_sprite = (calc.h - data_array[0]->height) / 2;
-	else
-		calc.y0_sprite = 0;
-	while (calc.x0_sprite < 1920 && j_sp < width_sprite)
-	{
-		while (i_sp < data_array[0]->height && calc.y0_sprite < data_array[0]->height)
-		{
-			// printf("calc.x0_sprite = %f\n", calc.x0_sprite);
-			if (calc.x0_sprite >= 0)
-			{
-				color = get_color_sprite(*data_array[1], i_sp, j_sp);
-				// printf("color = %d\n", color);
-				my_mlx_pixel_put(data_array[0], calc.x0_sprite, calc.y0_sprite, color);
-			}
-			i_sp += calc.step_y;
-			calc.y0_sprite++;
-		}
-		j_sp += calc.step_y;
-		calc.x0_sprite++;
-	}
+	// x_xmp = 0;
+	// y = data_array[0]->height / 2 - calc.h / 2; // с какой высоты начинать рисовать спрайт
+	// if (calc.h > data_array[0]->height)
+	// 	calc.y0_sprite = (calc.h - data_array[0]->height) / 2;
+	// else
+	// 	calc.y0_sprite = 0;
+	// while (calc.x0_sprite < 1920 && x_xmp < width_sprite)
+	// {
+	// 	while (y < data_array[0]->height && calc.y0_sprite < data_array[0]->height)
+	// 	{
+	// 		// printf("calc.x0_sprite = %f\n", calc.x0_sprite);
+	// 		if (calc.x0_sprite >= 0)
+	// 		{
+	// 			color = get_color_sprite(*data_array[1], y, x_xmp);
+	// 			// printf("color = %d\n", color);
+	// 			my_mlx_pixel_put(data_array[0], calc.x0_sprite, calc.y0_sprite, color);
+	// 		}
+	// 		y += calc.step_y;
+	// 		calc.y0_sprite++;
+	// 	}
+	// 	x_xmp += calc.step_y;
+	// 	calc.x0_sprite++;
+	// }
 
 
 }
