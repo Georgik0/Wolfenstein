@@ -102,6 +102,8 @@ int			add_sprite(t_sprite **sprite_start, double x, double y, t_player player)
 	int			out;
 
 	length = sqrt((player.x - x) * (player.x - x) + (player.y - y) * (player.y - y));
+	// if (length <= 32)
+	// 	return (1);
 	if (*sprite_start == NULL)
 	{
 		if (!(*sprite_start = (t_sprite *)malloc(sizeof(t_sprite))))
@@ -155,7 +157,10 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 
 	calc.h = (int)floor(data_array[0]->d * 64.0 / calc.length);
 	calc.step_y = 64.0 / calc.h; //width_sprite / calc.h;
-
+	// if (calc.h > data_array[0]->height)
+	// 	calc.step_x = 64.0 / data_array[0]->height;
+	// else
+		calc.step_x = 64.0 / calc.h;//calc.step_y;
 	calc.gamma = player.pov - calc.theta; //если gamma > 0, значит спрайт правее
 
 	// if (calc.dx > 0 && player.pov >= M_PI && player.pov <= 2 * M_PI || calc.dx < 0 && calc.dy < 0)
@@ -199,10 +204,10 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 	// calc.x0_sprite = calc.middle_sprite - calc.h / 2 * calc.step_y; // первый луч спрайта (может оказаться за границей экрана)
 
 	// нарисуем левую часть спрайта
-	int mid_sp_ray = calc.middle_sprite;
+	int x = calc.middle_sprite;
 	double y_xmp;
 
-	while (mid_sp_ray >= 0 && x_xmp >= 0)
+	while (x >= 0 && x_xmp >= 0)
 	{
 		if (calc.h > data_array[0]->height)
 			y_xmp = (calc.h - data_array[0]->height) / 2;
@@ -211,21 +216,20 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 		y = (data_array[0]->height - calc.h) / 2; // с какой высоты начинать рисовать спрайт
 		if (y < 0)
 			y = 0;
-		while (y < data_array[0]->height && y_xmp < 64)
+		while (y < data_array[0]->height && y < (calc.h + data_array[0]->height) / 2)
 		{
-			if (mid_sp_ray >= data_array[0]->width)
+			if (x >= data_array[0]->width)
 				break ;
 			if (x_xmp < 64)
 			{
-				color = get_color_sprite(*data_array[1], (int)floor(y_xmp), (int)floor(x_xmp));
-				my_mlx_pixel_put(data_array[0], mid_sp_ray, y, color);
+				color = get_color_sprite(*data_array[1], (int)floor(y_xmp * calc.step_y), (int)floor(x_xmp));
+				my_mlx_pixel_put(data_array[0], x, y, color);
 			}
-
-			y_xmp += calc.step_y;
+			y_xmp++;
 			y++;
 		}
-		x_xmp -= calc.step_y;
-		mid_sp_ray--;
+		x_xmp -= calc.step_x;
+		x--;
 	}
 
 

@@ -17,7 +17,7 @@ void	draw_sky(int *y, t_data_draw data_draw, t_data **data_array)
 	while (*y < data_array[0]->height / 2 - data_draw.h / 2)
 	{
 		my_mlx_pixel_put(data_array[0], data_draw.x_count, *y, 0x00CED1);
-		*y = *y + 1;
+		(*y)++;
 	}
 }
 
@@ -40,7 +40,7 @@ void	draw_wall(int *y, t_data_draw data_draw, t_data **data_array)
 		else
 			data_draw.color = get_color(*data_array[4], y_xmp, data_draw.offset, data_draw.h);
 		my_mlx_pixel_put(data_array[0], data_draw.x_count, *y, data_draw.color);
-		*y = *y + 1;
+		(*y)++;
 		y_xmp++;
 	}
 }
@@ -50,7 +50,7 @@ void	draw_ground(int *y, t_data_draw data_draw, t_data **data_array)
 	while (*y < data_array[0]->height)
 	{
 		my_mlx_pixel_put(data_array[0], data_draw.x_count, *y, 0x808080);
-		*y = *y + 1;
+		(*y)++;
 	}
 }
 
