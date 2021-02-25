@@ -29,7 +29,7 @@ void	draw_wall(int *y, t_data_draw data_draw, t_data **data_array)
 		y_xmp = (data_draw.h - data_array[0]->height) / 2;
 	else
 		y_xmp = 0;
-	while (*y < data_array[0]->height / 2 + data_draw.h / 2 && *y <= data_array[0]->height)
+	while (*y < data_array[0]->height / 2 + data_draw.h / 2 && *y < data_array[0]->height)
 	{
 		if (data_draw.side == 'l')
 			data_draw.color = get_color(*data_array[1], y_xmp, data_draw.offset, data_draw.h);
@@ -98,6 +98,7 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **d
 	{
 		get_sprite_ray(player, sprite->x, sprite->y, angle.d_phi, sprite, 64, data_array[0], data_array);
 	}
+
 
 	clear_sprite(&sprite);
 }

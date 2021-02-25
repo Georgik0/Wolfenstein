@@ -146,14 +146,14 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 	calc.dx = sprite_x - player.x;
 	calc.dy = player.y - sprite_y;
 	calc.distance = sprite->length; //sqrt(calc.dx * calc.dx + calc.dy * calc.dy);
-	calc.theta = atan2(calc.dy, calc.dx);
+	calc.theta = atan2(calc.dy, calc.dx); // радианы
 
 	if (calc.theta < 0)
 		calc.theta += 2 * M_PI;
+	calc.theta = calc.theta * 180 / M_PI; // перевели calc.theta в градусы
+	calc.length = calc.distance * fabs(cos((player.pov - calc.theta) * M_PI / 180));
 
-	calc.length = calc.distance * fabs(cos(player.pov - calc.theta));
-
-	calc.h = (int)floor(data_array[0]->d * 64 / calc.length);
+	calc.h = (int)floor(data_array[0]->d * 64.0 / calc.length);
 	calc.step_y = 64.0 / calc.h; //width_sprite / calc.h;
 
 	calc.gamma = player.pov - calc.theta; //если gamma > 0, значит спрайт правее
@@ -165,7 +165,7 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 	{
 		if (calc.theta >= 327)
 		{
-			calc.gamma = player.pov + (2 * M_PI - calc.theta);
+			calc.gamma = player.pov + (360 - calc.theta);
 		}
 		else
 		{
@@ -177,7 +177,7 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 	{
 		if (calc.theta <= 33)
 		{
-			calc.gamma = -(2 * M_PI - player.pov + calc.theta);
+			calc.gamma = -(360 - player.pov + calc.theta);
 		}
 		else
 		{
@@ -191,7 +191,7 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 
 
 // неправильно считает calc.delta_rays  !!!!!!!!!!!!!!!!
-
+	// calc.gamma и d_phi в градусах
 	calc.delta_rays = (int)(calc.gamma / d_phi); // столько лучей между pov и углом, указывающем на середину спрайта
 	calc.ray_pov = data_array[0]->width / 2; // луч, идущий по середине экрана (угол направления взгляда игрока)
 	calc.middle_sprite = calc.ray_pov + calc.delta_rays; // номер луча, который попал в середину спрайта
@@ -213,7 +213,7 @@ void		get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d
 			y = 0;
 		while (y < data_array[0]->height && y_xmp < 64)
 		{
-			if (mid_sp_ray < data_array[0]->width)
+			if (mid_sp_ray >= data_array[0]->width)
 				break ;
 			if (x_xmp < 64)
 			{

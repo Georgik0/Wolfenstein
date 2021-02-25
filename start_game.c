@@ -272,7 +272,7 @@ int	main(void)
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
 	vars.player.x = 1 * size_cub + 32;
-	vars.player.y = 5 * size_cub + 32;
+	vars.player.y = 6 * size_cub + 32;
 	vars.player.pov = 90;
 
 	vars.mlx = mlx_init();
