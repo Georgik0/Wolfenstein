@@ -12,7 +12,7 @@
 
 OBJ = start_game.c draw_ray.c find_block_unique.c find_collision.c \
 find_block_horisontal.c find_block_vertical.c draw_3d.c get_length.c \
-put_pixel_texture.c get_sprite.c
+put_pixel_texture.c get_sprite.c draw_sprite.c get_calc.c
 
 NAME = cub3D
 

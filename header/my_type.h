@@ -83,6 +83,9 @@ typedef struct	s_sprite_calculation
 	double		x0_sprite;
 	double		y0_sprite;
 	double		length;
+	double		d_phi;
+	int			sp_width;
+	int			sp_heigh;
 	int			h;
 	double		step_y;
 	double		step_x;
@@ -171,6 +174,16 @@ typedef struct	s_keyboard
 
 }				t_keyboard;
 
+typedef struct	s_draw_sprite
+{
+	int		x;
+	int		y;
+	int		color;
+	double	y_xmp;
+	double	x_xmp;
+
+}				t_draw_sprite;
+
 
 typedef struct  s_vars
 {
@@ -198,6 +211,8 @@ unsigned int	get_color(t_data data, int y, double offset, int h);
 int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
 void			clear_sprite(t_sprite **sprite_start);
 unsigned int	get_color_sprite(t_data data, int y, int x);
-void			get_sprite_ray(t_player player, double sprite_x, double sprite_y, double d_phi, t_sprite *sprite, int width_sprite, t_data *data, t_data **data_array);
+void			get_sprite_ray(t_player *player, double d_phi, t_sprite *sprite, t_data **data_array);
+void			get_calc(t_sprite *sprite, t_sprite_calculation *calc, t_player *player, t_data **data_array);
+void			draw_sprite(t_sprite_calculation *calc, t_data **data_array);
 
 #endif
