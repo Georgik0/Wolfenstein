@@ -136,14 +136,18 @@ void		clear_sprite(t_sprite **sprite_start)
 	*sprite_start = NULL;
 }
 
-void		get_sprite_ray(t_player *player, double d_phi, t_sprite *sprite, t_data **data_array)
+void		get_sprite_ray(t_player *player, t_data_angle *angle, t_sprite *sprite, t_data **data_array)
 {
 	t_sprite_calculation	calc;
 	double					d_gamma;
 
-	calc.d_phi = d_phi;
-	calc.sp_width = 64;
+	calc.d_phi = angle->d_phi;
+	calc.sp_width = 16;
 	calc.sp_heigh = 32;
-	get_calc(sprite, &calc, player, data_array);
-	draw_sprite(&calc, data_array);
+	while (sprite != NULL)
+	{
+		get_calc(sprite, &calc, player, data_array);
+		draw_sprite(&calc, data_array, angle);
+		sprite = sprite->next;
+	}
 }

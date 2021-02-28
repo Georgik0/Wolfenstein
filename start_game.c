@@ -119,19 +119,47 @@ void	change_coord_S(t_vars *vars)
 		vars->player.y += delta_y;
 }
 
-// void	change_coord_A(t_vars *vars)
-// {
-// 	int	delta_x;
-// 	int	delta_y;
+void	change_coord_A(t_vars *vars)
+{
+	int	delta_x;
+	int	delta_y;
 
-// 	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
-// 	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
-// }
+	delta_x = -(int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
+	delta_y = (int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+	{
+		vars->player.x += delta_x;
+		vars->player.y += delta_y;
+	}
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y) / 64] != '1')
+		vars->player.x += delta_x;
+	if (vars->data_map.map[(vars->player.x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+		vars->player.y += delta_y;
+}
 
-// void	change_coord_D(t_vars *vars)
-// {
+void	change_coord_D(t_vars *vars)
+{
+	int	delta_x;
+	int	delta_y;
 
-// }
+	delta_x = (int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
+	delta_y = -(int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+	{
+		vars->player.x += delta_x;
+		vars->player.y += delta_y;
+	}
+	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
+	[(vars->player.y) / 64] != '1')
+		vars->player.x += delta_x;
+	if (vars->data_map.map[(vars->player.x) / 64]
+	[(vars->player.y + delta_y) / 64] != '1')
+		vars->player.y += delta_y;
+}
 
 int		change_coord(t_vars *vars)
 {
@@ -156,9 +184,11 @@ int		change_coord(t_vars *vars)
 		change_coord_S(vars);
 	}
 	if (vars->keyboard.A)
-		vars->player.x -= 1;
+		change_coord_A(vars);
+		// vars->player.x -= 1;
 	if (vars->keyboard.D)
-		vars->player.x += 1;
+		change_coord_D(vars);
+		// vars->player.x += 1;
 	return (0);
 }
 
@@ -244,9 +274,9 @@ int	main(void)
 	char	map[10][10] = {
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
 		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
-		'1', '0', '2', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '0', '0', '1', '1', '1', '1', '1', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',

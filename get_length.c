@@ -77,13 +77,15 @@ static t_data_draw		compare_distance(t_collis horisont, t_collis vertical, t_pla
 	return (data_draw);
 }
 
-t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10], t_sprite **sprite)
+t_data_draw			get_length(int pov, t_data_angle *angle, t_player player, char (*map)[10], t_sprite **sprite)
 {
 	t_data_draw		data_draw;
 	t_collis		collis;
 	t_collis		horisont;
 	t_collis		vertical;
+	double			phi;
 
+	phi = angle->new_phi;
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
 	{
 		collis = find_block_unique(phi, player, map, sprite);
@@ -95,5 +97,6 @@ t_data_draw			get_length(int pov, double phi, t_player player, char (*map)[10], 
 		vertical = find_block_vertical(player, map, phi, sprite);
 		data_draw = compare_distance(horisont, vertical, player, phi, pov * M_PI / 180);
 	}
+	angle->arr_length[angle->count] = data_draw.length;
 	return (data_draw);
 }

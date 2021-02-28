@@ -84,9 +84,11 @@ typedef struct	s_sprite_calculation
 	double		y0_sprite;
 	double		length;
 	double		d_phi;
+	double		wall_length;
 	int			sp_width;
 	int			sp_heigh;
 	int			h;
+	int			real_h;
 	double		step_y;
 	double		step_x;
 	int			middle_sprite;
@@ -159,6 +161,8 @@ typedef struct	s_data_angle
 	double		phi;
 	double		new_phi;
 	double		d_phi;
+	int			count;
+	int			*arr_length;
 
 }				t_data_angle;
 
@@ -204,15 +208,15 @@ t_collis		find_block_horisontal(t_player player, char (*map)[10], double phi, t_
 t_collis		find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite **sprite);
 void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
-t_data_draw		get_length(int pov, double phi, t_player player, char (*map)[10], t_sprite **sprite);
+t_data_draw		get_length(int pov, t_data_angle *angle, t_player player, char (*map)[10], t_sprite **sprite);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array);
 unsigned int	get_color(t_data data, int y, double offset, int h);
 int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
 void			clear_sprite(t_sprite **sprite_start);
 unsigned int	get_color_sprite(t_data data, int y, int x);
-void			get_sprite_ray(t_player *player, double d_phi, t_sprite *sprite, t_data **data_array);
+void			get_sprite_ray(t_player *player, t_data_angle *angle, t_sprite *sprite, t_data **data_array);
 void			get_calc(t_sprite *sprite, t_sprite_calculation *calc, t_player *player, t_data **data_array);
-void			draw_sprite(t_sprite_calculation *calc, t_data **data_array);
+void			draw_sprite(t_sprite_calculation *calc, t_data **data_array, t_data_angle *angle);
 
 #endif

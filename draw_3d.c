@@ -69,36 +69,54 @@ void	draw_vertical_line(t_data_draw data_draw, t_data *data, double phi, t_data 
 	}
 }
 
+int		get_data_angle(t_data_angle *angle, int pov, int width)
+{
+	angle->phi = pov + 33;
+	angle->d_phi = 66.0 / 1920.0;
+	angle->count = 0;
+	if (!(angle->arr_length = (int *)malloc(width * sizeof(int) + 1)))
+	{
+		angle->arr_length = NULL;
+		return (-1);
+	}
+	return (0);
+}
+
 void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array)
 {
 	t_data_draw		data_draw;
 	t_data_angle	angle;
-	t_sprite		*sprite = NULL;
-	int			count;
+	t_sprite		*sprite;
+	int				count;
 
-	angle.phi = pov + 33;
-	angle.d_phi = 66.0 / 1920.0;
-	count = 0;
-	// count = 960;
+	sprite = NULL;
+	// if (get_data_angle(&angle, pov, data_array[0]->width) == -1)
+	// 	return ; // вернуть ошибку
+
+	if (get_data_angle(&angle, pov, data_array[0]->width) == -1)
+		printf("error\n");
+	// angle.phi = pov + 33;
+	// angle.d_phi = 66.0 / 1920.0;
+	// angle.count = 0;
+	data_draw.x_count = 0;
 	while (data_draw.x_count < 1920)
 	{
 		if (angle.phi < 0)
-			angle.new_phi = angle.phi + 360;
+			angle.new_phi = (angle.phi + 360) * M_PI / 180;
 		else if (angle.phi > 360)
-			angle.new_phi = angle.phi - 360;
+			angle.new_phi = (angle.phi - 360) * M_PI / 180;
 		else
-			angle.new_phi = angle.phi;
-		data_draw = get_length(pov, angle.new_phi * M_PI / 180, player, map, &sprite);
-		data_draw.x_count = count;
+			angle.new_phi = angle.phi * M_PI / 180;
+		data_draw = get_length(pov, &angle, player, map, &sprite);
+		data_draw.x_count = angle.count;
 		draw_vertical_line(data_draw, data, angle.new_phi * M_PI / 180, data_array);
 		angle.phi -= angle.d_phi;
-		count++;
+		(angle.count)++;
 	}
 	if (sprite != NULL)
 	{
-		get_sprite_ray(&player, angle.d_phi, sprite, data_array);
+		get_sprite_ray(&player, &angle, sprite, data_array);
 	}
-
-
+	free(angle.arr_length);
 	clear_sprite(&sprite);
 }
