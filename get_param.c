@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/06 17:57:24 by skitsch           #+#    #+#             */
-/*   Updated: 2020/11/06 17:57:25 by skitsch          ###   ########.fr       */
+/*   Created: 2021/03/01 20:37:38 by skitsch           #+#    #+#             */
+/*   Updated: 2021/03/01 20:37:41 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header/my_type.h"
 
-char	*ft_strdup(const char *s1)
+int	check_line(char *line)
 {
-	char	*out;
-	int		len;
+	while (*line == ' ' || *line == '\t' || *line == '\f'
+	|| *line == '\v' || *line == '\r')
+		line++;
+	if (!(*line))
+		return(0);
+}
 
-	len = ft_strlen(s1);
-	len++;
-	out = (char *)malloc(len * sizeof(char));
-	if (out == NULL)
-		return (NULL);
-	ft_strlcpy(out, s1, len);
-	return (out);
+int	get_param(t_vars *vars, t_data_input *input_lst)
+{
+	// t_data_input *iter;
+
+	// iter =
+	while (input_lst)
+	{
+
+		input_lst = input_lst->next;
+	}
+
 }

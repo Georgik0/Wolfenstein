@@ -84,18 +84,18 @@ void	change_coord_W(t_vars *vars)
 
 	delta_x = (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 	}
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y) / 64] != '1')
-		vars->player.x += delta_x;
-	if (vars->data_map.map[(vars->player.x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x) / 64] != '1')
 		vars->player.y += delta_y;
+	if (vars->data_map.map[(vars->player.y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
+		vars->player.x += delta_x;
 }
 
 void	change_coord_S(t_vars *vars)
@@ -105,18 +105,18 @@ void	change_coord_S(t_vars *vars)
 
 	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 	}
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y) / 64] != '1')
-		vars->player.x += delta_x;
-	if (vars->data_map.map[(vars->player.x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x) / 64] != '1')
 		vars->player.y += delta_y;
+	if (vars->data_map.map[(vars->player.y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
+		vars->player.x += delta_x;
 }
 
 void	change_coord_A(t_vars *vars)
@@ -126,18 +126,18 @@ void	change_coord_A(t_vars *vars)
 
 	delta_x = -(int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 	}
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y) / 64] != '1')
-		vars->player.x += delta_x;
-	if (vars->data_map.map[(vars->player.x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x) / 64] != '1')
 		vars->player.y += delta_y;
+	if (vars->data_map.map[(vars->player.y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
+		vars->player.x += delta_x;
 }
 
 void	change_coord_D(t_vars *vars)
@@ -147,18 +147,18 @@ void	change_coord_D(t_vars *vars)
 
 	delta_x = (int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 	}
-	if (vars->data_map.map[(vars->player.x + delta_x) / 64]
-	[(vars->player.y) / 64] != '1')
-		vars->player.x += delta_x;
-	if (vars->data_map.map[(vars->player.x) / 64]
-	[(vars->player.y + delta_y) / 64] != '1')
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[(vars->player.x) / 64] != '1')
 		vars->player.y += delta_y;
+	if (vars->data_map.map[(vars->player.y) / 64]
+	[(vars->player.x + delta_x) / 64] != '1')
+		vars->player.x += delta_x;
 }
 
 int		change_coord(t_vars *vars)
@@ -172,23 +172,13 @@ int		change_coord(t_vars *vars)
 	if (vars->player.pov < 0)
 		vars->player.pov += 360;
 	if (vars->keyboard.W)
-	{
-		// vars->player.x += (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
-		// vars->player.y += -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
 		change_coord_W(vars);
-	}
 	if (vars->keyboard.S)
-	{
-		// vars->player.x += -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
-		// vars->player.y += (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
 		change_coord_S(vars);
-	}
 	if (vars->keyboard.A)
 		change_coord_A(vars);
-		// vars->player.x -= 1;
 	if (vars->keyboard.D)
 		change_coord_D(vars);
-		// vars->player.x += 1;
 	return (0);
 }
 
@@ -244,7 +234,7 @@ int		draw_game(t_vars *vars)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vars		vars;
 	t_data		data;
@@ -265,6 +255,7 @@ int	main(void)
 	int			img_width;
 	int			img_heigh;
 
+	parser(argc, argv);
 	vars.data = &data;
 	vars.data_map = data_map;
 	vars.player = player;
@@ -274,13 +265,13 @@ int	main(void)
 	char	map[10][10] = {
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
 		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
+		'1', '0', '2', '2', '0', '0', '0', '0', '0', '1',
+		'1', '0', '0', '0', '0', '0', '0', '0', '2', '1',
+		'1', '2', '0', '1', '1', '1', '1', '1', '2', '1',
+		'1', '2', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '0', '1', '1', '1', '1', '1', '0', '1',
-		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
-		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
+		'1', '0', '2', '2', '0', '2', '2', '0', '0', '1',
+		'1', '1', '0', '0', '2', '0', '0', '2', '1', '1',
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'
 	};
 

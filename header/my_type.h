@@ -13,6 +13,7 @@
 #ifndef MY_TYPE_H
 # define MY_TYPE_H
 #include <math.h>
+#include <fcntl.h>
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
 
@@ -189,7 +190,7 @@ typedef struct	s_draw_sprite
 }				t_draw_sprite;
 
 
-typedef struct  s_vars
+typedef struct	s_vars
 {
 	void		*mlx;
 	void		*win;
@@ -200,6 +201,13 @@ typedef struct  s_vars
 	t_data		**data_array;
 
 }				t_vars;
+
+typedef struct	s_data_input
+{
+	char				*str;
+	struct s_data_input	*next;
+
+}				t_data_input;
 
 
 t_collis		find_collision(double phi, t_player player, char (*map)[10]);
@@ -218,5 +226,7 @@ unsigned int	get_color_sprite(t_data data, int y, int x);
 void			get_sprite_ray(t_player *player, t_data_angle *angle, t_sprite *sprite, t_data **data_array);
 void			get_calc(t_sprite *sprite, t_sprite_calculation *calc, t_player *player, t_data **data_array);
 void			draw_sprite(t_sprite_calculation *calc, t_data **data_array, t_data_angle *angle);
+int				get_next_line(int fd, char **line);
+int				parser(int argc, char **argv);
 
 #endif
