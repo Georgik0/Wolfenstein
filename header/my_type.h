@@ -241,5 +241,10 @@ int				parser(int argc, char **argv, t_vars *vars);
 int				get_param(t_vars *vars, t_data_input *input_lst);
 int				get_screen_param(char *line, t_vars *vars);
 int				get_north_texture(char *line, t_vars *vars);
+int				get_south_texture(char *line, t_vars *vars);
+int				get_west_texture(char *line, t_vars *vars);
+int				get_east_texture(char *line, t_vars *vars);
+int				get_sprite_texture(char *line, t_vars *vars);
+int				get_S(char *line, t_vars *vars);
 
 #endif

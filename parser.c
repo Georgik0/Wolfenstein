@@ -87,6 +87,11 @@ int	make_malloc_vars(t_vars *vars)
 			return (-1);
 		}
 	}
+	vars->dir_wall_down = NULL;
+	vars->dir_wall_left = NULL;
+	vars->dir_wall_right = NULL;
+	vars->dir_wall_up = NULL;
+	vars->dir_sprite = NULL;
 	return (1);
 }
 
@@ -103,6 +108,11 @@ void	make_free_vars(t_vars *vars)
 		i++;
 	}
 	free(vars->data_array);
+	free(vars->dir_sprite);
+	free(vars->dir_wall_down);
+	free(vars->dir_wall_left);
+	free(vars->dir_wall_right);
+	free(vars->dir_wall_up);
 }
 
 int	parser(int argc, char **argv, t_vars *vars)

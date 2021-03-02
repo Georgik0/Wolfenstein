@@ -311,11 +311,11 @@ int	main(int argc, char **argv)
 	vars.data_array[4] = &data_wall_down;
 	vars.data_array[5] = &data_sprite;
 
-	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_left, &img_width, &img_heigh);
-	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_right, &img_width, &img_heigh);
-	data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_up, &img_width, &img_heigh);
-	data_wall_down.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_down, &img_width, &img_heigh);
-	data_sprite.img = mlx_xpm_file_to_image(vars.mlx, dir_sprite, &data_sprite.width, &data_sprite.height);
+	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_left, &img_width, &img_heigh);
+	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_right, &img_width, &img_heigh);
+	data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_up, &img_width, &img_heigh);
+	data_wall_down.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_down, &img_width, &img_heigh);
+	data_sprite.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_sprite, &data_sprite.width, &data_sprite.height);
 
 	data_wall_left.addr = mlx_get_data_addr(data_wall_left.img, &(data_wall_left.bits_per_pixel), &(data_wall_left.line_length), &(data_wall_left.endian));
 	data_wall_right.addr = mlx_get_data_addr(data_wall_right.img, &(data_wall_right.bits_per_pixel), &(data_wall_right.line_length), &(data_wall_right.endian));

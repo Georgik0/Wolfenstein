@@ -14,7 +14,7 @@ OBJ = start_game.c draw_ray.c find_block_unique.c find_collision.c \
 find_block_horisontal.c find_block_vertical.c draw_3d.c get_length.c \
 put_pixel_texture.c get_sprite.c draw_sprite.c get_calc.c get_next_line.c \
 get_next_line_utils.c parser.c get_param.c get_screen_param.c \
-get_north_texture.c
+get_texture.c
 
 NAME = cub3D
 

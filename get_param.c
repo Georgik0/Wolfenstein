@@ -12,27 +12,12 @@
 
 #include "header/my_type.h"
 
-int		get_west_texture(char *line, t_vars *vars)
-{
-	return (0);
-}
-
-int		get_east_texture(char *line, t_vars *vars)
-{
-	return (0);
-}
-
 int		get_floor_color(char *line, t_vars *vars)
 {
 	return (0);
 }
 
 int		get_ceilling_color(char *line, t_vars *vars)
-{
-	return (0);
-}
-
-int		get_S(char *line, t_vars *vars)
 {
 	return (0);
 }
