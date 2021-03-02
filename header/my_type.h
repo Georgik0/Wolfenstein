@@ -19,6 +19,11 @@
 
 #include <stdio.h>
 
+#define MIN_WIDTH 320
+#define MIN_HEIGHT 240
+#define MAX_WIDTH 1920
+#define MAX_HEIGHT 1080
+
 typedef struct	s_data
 {
 	void		*img;
@@ -199,6 +204,11 @@ typedef struct	s_vars
 	t_data_map	data_map;
 	t_keyboard	keyboard;
 	t_data		**data_array;
+	char		*dir_wall_left;
+	char		*dir_wall_right;
+	char		*dir_wall_up;
+	char		*dir_wall_down;
+	char		*dir_sprite;
 
 }				t_vars;
 
@@ -227,6 +237,9 @@ void			get_sprite_ray(t_player *player, t_data_angle *angle, t_sprite *sprite, t
 void			get_calc(t_sprite *sprite, t_sprite_calculation *calc, t_player *player, t_data **data_array);
 void			draw_sprite(t_sprite_calculation *calc, t_data **data_array, t_data_angle *angle);
 int				get_next_line(int fd, char **line);
-int				parser(int argc, char **argv);
+int				parser(int argc, char **argv, t_vars *vars);
+int				get_param(t_vars *vars, t_data_input *input_lst);
+int				get_screen_param(char *line, t_vars *vars);
+int				get_north_texture(char *line, t_vars *vars);
 
 #endif

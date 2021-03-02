@@ -64,7 +64,48 @@ int		add_line_in_lst(char *line, t_data_input **input_lst)
 	return (0);
 }
 
-int	parser(int argc, char **argv)
+int	make_malloc_vars(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	if (!(vars->data = (t_data *)malloc(sizeof(t_data))))
+		return (-1);
+	if (!(vars->data_array = (t_data **)malloc(6 * sizeof(t_data *))))
+	{
+		free(vars->data);
+		return (-1);
+	}
+	while (i < 6)
+	{
+		if (!(vars->data_array[i++] = (t_data *)malloc(sizeof(t_data))))
+		{
+			while (i >= 0)
+				free(vars->data_array[i--]);
+			free(vars->data_array);
+			free(vars->data);
+			return (-1);
+		}
+	}
+	return (1);
+}
+
+void	make_free_vars(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	free(vars->data);
+	while (i < 6)
+	{
+		free(vars->data_array[i]);
+		vars->data_array[i] = NULL;
+		i++;
+	}
+	free(vars->data_array);
+}
+
+int	parser(int argc, char **argv, t_vars *vars)
 {
 	int				fd;
 	char			*line;
@@ -88,6 +129,13 @@ int	parser(int argc, char **argv)
 		line = NULL;
 	}
 	close(fd);
+	if (make_malloc_vars(vars) == -1)
+		return (-1);
+	if (get_param(vars, input_lst) == -1)
+	{
+		make_free_vars(vars);
+		return (-1);
+	}
 	// t_data_input	*iter;
 	// iter = input_lst;
 	// while (iter)

@@ -237,7 +237,7 @@ int		draw_game(t_vars *vars)
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
-	t_data		data;
+	// t_data		data;
 	t_player	player;
 	t_data_map	data_map;
 	t_keyboard	keyboard;
@@ -246,7 +246,7 @@ int	main(int argc, char **argv)
 	t_data		data_wall_up;
 	t_data		data_wall_down;
 	t_data		data_sprite;
-	t_data		**data_array;
+	// t_data		**data_array;
 	char		*dir_wall_left = "./texture/WALL32.xpm";
 	char		*dir_wall_right = "./texture/WALL53.xpm";
 	char		*dir_wall_up = "./texture/WALL88.xpm";
@@ -255,8 +255,9 @@ int	main(int argc, char **argv)
 	int			img_width;
 	int			img_heigh;
 
-	parser(argc, argv);
-	vars.data = &data;
+	if (parser(argc, argv, &vars) == -1)
+		exit(0);
+	// vars.data = &data;
 	vars.data_map = data_map;
 	vars.player = player;
 	vars.keyboard = keyboard;
@@ -287,8 +288,8 @@ int	main(int argc, char **argv)
 	vars.keyboard.left = 0;
 	vars.keyboard.right = 0;
 
-	vars.data->width = 1920;
-	vars.data->height = 1080;
+	// vars.data->width = 1920;
+	// vars.data->height = 1080;
 	vars.data->d = vars.data->width / (2 * tan(33 * M_PI / 180));
 
 // Размер куба 64x64x64
@@ -301,14 +302,14 @@ int	main(int argc, char **argv)
 	vars.mlx = mlx_init();
 
 	// Получаем текстуры
-	if (!(data_array = (t_data**)malloc(6 * sizeof(t_data*))))
-		exit(0);
-	data_array[0] = &data;
-	data_array[1] = &data_wall_left;
-	data_array[2] = &data_wall_right;
-	data_array[3] = &data_wall_up;
-	data_array[4] = &data_wall_down;
-	data_array[5] = &data_sprite;
+	// if (!(data_array = (t_data**)malloc(6 * sizeof(t_data*))))
+	// 	exit(0);
+	vars.data_array[0] = vars.data;//&data;
+	vars.data_array[1] = &data_wall_left;
+	vars.data_array[2] = &data_wall_right;
+	vars.data_array[3] = &data_wall_up;
+	vars.data_array[4] = &data_wall_down;
+	vars.data_array[5] = &data_sprite;
 
 	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_left, &img_width, &img_heigh);
 	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, dir_wall_right, &img_width, &img_heigh);
@@ -322,7 +323,7 @@ int	main(int argc, char **argv)
 	data_wall_down.addr = mlx_get_data_addr(data_wall_down.img, &(data_wall_down.bits_per_pixel), &(data_wall_down.line_length), &(data_wall_down.endian));
 	data_sprite.addr = mlx_get_data_addr(data_sprite.img, &(data_sprite.bits_per_pixel), &(data_sprite.line_length), &(data_sprite.endian));
 
-	vars.data_array = data_array; // передали массив со всеми t_data
+	// vars.data_array = data_array; // передали массив со всеми t_data
 
 	vars.win = mlx_new_window(vars.mlx, vars.data->width, vars.data->height, "Hello");
 

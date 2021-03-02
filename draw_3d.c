@@ -72,7 +72,7 @@ void	draw_vertical_line(t_data_draw data_draw, t_data *data, double phi, t_data 
 int		get_data_angle(t_data_angle *angle, int pov, int width)
 {
 	angle->phi = pov + 33;
-	angle->d_phi = 66.0 / 1920.0;
+	angle->d_phi = 66.0 / width;
 	angle->count = 0;
 	if (!(angle->arr_length = (int *)malloc(width * sizeof(int) + 1)))
 	{
@@ -99,7 +99,7 @@ void	draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **d
 	// angle.d_phi = 66.0 / 1920.0;
 	// angle.count = 0;
 	data_draw.x_count = 0;
-	while (data_draw.x_count < 1920)
+	while (data_draw.x_count < data_array[0]->width)
 	{
 		if (angle.phi < 0)
 			angle.new_phi = (angle.phi + 360) * M_PI / 180;
