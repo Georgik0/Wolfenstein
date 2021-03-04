@@ -85,17 +85,29 @@ void	change_coord_W(t_vars *vars)
 	delta_x = (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[vars->player.x / 64] == '1' &&
+	vars->data_map.map[vars->player.y / 64]
+	[(vars->player.x + delta_x) / 64] == '1')
+		return ;
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
+		return ;
 	}
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
+	{
 		vars->player.y += delta_y;
+		return ;
+	}
 	if (vars->data_map.map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
+	{
 		vars->player.x += delta_x;
+		return ;
+	}
 }
 
 void	change_coord_S(t_vars *vars)
@@ -106,17 +118,29 @@ void	change_coord_S(t_vars *vars)
 	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[vars->player.x / 64] == '1' &&
+	vars->data_map.map[vars->player.y / 64]
+	[(vars->player.x + delta_x) / 64] == '1')
+		return ;
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
+		return ;
 	}
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
+	{
 		vars->player.y += delta_y;
+		return ;
+	}
 	if (vars->data_map.map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
+	{
 		vars->player.x += delta_x;
+		return ;
+	}
 }
 
 void	change_coord_A(t_vars *vars)
@@ -127,17 +151,29 @@ void	change_coord_A(t_vars *vars)
 	delta_x = -(int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[vars->player.x / 64] == '1' &&
+	vars->data_map.map[vars->player.y / 64]
+	[(vars->player.x + delta_x) / 64] == '1')
+		return ;
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
+		return ;
 	}
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
+	{
 		vars->player.y += delta_y;
+		return ;
+	}
 	if (vars->data_map.map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
+	{
 		vars->player.x += delta_x;
+		return ;
+	}
 }
 
 void	change_coord_D(t_vars *vars)
@@ -148,17 +184,29 @@ void	change_coord_D(t_vars *vars)
 	delta_x = (int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	[vars->player.x / 64] == '1' &&
+	vars->data_map.map[vars->player.y / 64]
+	[(vars->player.x + delta_x) / 64] == '1')
+		return ;
+	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
+		return ;
 	}
 	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
+	{
 		vars->player.y += delta_y;
+		return ;
+	}
 	if (vars->data_map.map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
+	{
 		vars->player.x += delta_x;
+		return ;
+	}
 }
 
 int		change_coord(t_vars *vars)
@@ -228,7 +276,7 @@ int		draw_game(t_vars *vars)
 	change_coord(vars);
 	// print_map(vars->data_map.map_len_x, vars->data_map.map_len_y, vars->data_map.size_cub, vars->data_map.map, vars->data);
 	// draw_ray(vars->player.pov, vars->player, vars->data_map.map, vars->data);
-	draw_3d(vars->player.pov, vars->player, vars->data_map.map, vars->data, vars->data_array);
+	draw_3d(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data->img, 0, 0);
 	// mlx_do_sync(vars->mlx);
 	return (0);
@@ -267,9 +315,9 @@ int	main(int argc, char **argv)
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
 		'1', '1', '0', '0', '0', '0', '0', '0', '1', '1',
 		'1', '0', '2', '2', '0', '0', '0', '0', '0', '1',
-		'1', '0', '0', '0', '0', '0', '0', '0', '2', '1',
+		'1', '0', '1', '0', '0', '0', '0', '0', '2', '1',
 		'1', '2', '0', '1', '1', '1', '1', '1', '2', '1',
-		'1', '2', '0', '0', '0', '0', '0', '0', '0', '1',
+		'1', '2', '1', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '0', '0', '0', '0', '0', '0', '0', '1',
 		'1', '0', '2', '2', '0', '2', '2', '0', '0', '1',
 		'1', '1', '0', '0', '2', '0', '0', '2', '1', '1',

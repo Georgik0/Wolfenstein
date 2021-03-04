@@ -194,6 +194,30 @@ typedef struct	s_draw_sprite
 
 }				t_draw_sprite;
 
+typedef struct	s_flags
+{
+	int			NO;
+	int			SO;
+	int			WE;
+	int			EA;
+	int			S;
+	int			F;
+	int			C;
+	int			R;
+	int			summ;
+	int			map_start;
+	int			map_end;
+
+}				t_flags;
+
+typedef struct	s_my_map
+{
+	char				*line;
+	int					length;
+	struct s_my_map		*next;
+
+}				t_my_map;
+
 
 typedef struct	s_vars
 {
@@ -204,11 +228,16 @@ typedef struct	s_vars
 	t_data_map	data_map;
 	t_keyboard	keyboard;
 	t_data		**data_array;
+	t_flags		flags;
+	t_my_map	*map_lst;
 	char		*dir_wall_left;
 	char		*dir_wall_right;
 	char		*dir_wall_up;
 	char		*dir_wall_down;
 	char		*dir_sprite;
+	char		**map;
+	int			color_floor;
+	int			color_ceilling;
 
 }				t_vars;
 
@@ -228,7 +257,7 @@ void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
 t_data_draw		get_length(int pov, t_data_angle *angle, t_player player, char (*map)[10], t_sprite **sprite);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			draw_3d(int pov, t_player player, char (*map)[10], t_data *data, t_data **data_array);
+void			draw_3d(t_vars *vars);
 unsigned int	get_color(t_data data, int y, double offset, int h);
 int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
 void			clear_sprite(t_sprite **sprite_start);
@@ -246,5 +275,11 @@ int				get_west_texture(char *line, t_vars *vars);
 int				get_east_texture(char *line, t_vars *vars);
 int				get_sprite_texture(char *line, t_vars *vars);
 int				get_S(char *line, t_vars *vars);
+int				make_malloc_vars(t_vars *vars);
+int				get_floor_color(char *line, t_vars *vars);
+int				get_ceilling_color(char *line, t_vars *vars);
+int				num_screen_param(char **screen);
+void			clear_param(char **screen);
+int				get_map_lst(char *line, t_vars *vars);
 
 #endif

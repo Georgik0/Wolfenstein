@@ -91,7 +91,7 @@ int		get_height(char *str, t_vars *vars)
 	return (1);
 }
 
-void	clear_param(char **screen, t_vars *vars)
+void	clear_param(char **screen)
 {
 	int	i;
 
@@ -112,17 +112,17 @@ int		get_screen_param(char *line, t_vars *vars)
 	screen = ft_split(line, ' ');
 	if (num_screen_param(screen) != 3)
 	{
-		clear_param(screen, vars);
+		clear_param(screen);
 		return (-1);
 	}
 	if ((get_width(screen[1], vars)) == -1)
 	{
-		clear_param(screen, vars);
+		clear_param(screen);
 		return (-1); // некорректная ширина
 	}
 	if (get_height(screen[2], vars) == -1)
 	{
-		clear_param(screen, vars);
+		clear_param(screen);
 		return (-1); // некорректная высота
 	}
 

@@ -12,23 +12,10 @@
 
 #include "header/my_type.h"
 
-int		get_floor_color(char *line, t_vars *vars)
+int		check_letter(char *line, t_vars *vars, int i)
 {
-	return (0);
-}
-
-int		get_ceilling_color(char *line, t_vars *vars)
-{
-	return (0);
-}
-
-int		get_map(char *line, t_vars *vars)
-{
-	return (0);
-}
-
-int		check_letter(char *line, t_vars *vars)
-{
+	if (*line != '1' && vars->flags.map_start == 1)
+		return (-1);
 	if (*line == 'R')
 		return (get_screen_param(line, vars));
 	else if (*line == 'N')
@@ -44,7 +31,7 @@ int		check_letter(char *line, t_vars *vars)
 	else if (*line == 'S')
 		return (get_S(line, vars));
 	else if (*line == '1')
-		return (get_map(line, vars));
+		return (get_map_lst(line - i, vars));
 	else
 		return (-1);
 }
@@ -52,22 +39,29 @@ int		check_letter(char *line, t_vars *vars)
 int	check_line(char *line, t_vars *vars)
 {
 	int	out;
+	int	i;
+
+	i = 0;
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
+	{
+		i++;
 		line++;
+	}
 	if (*line == '\0')
 		return (0);
-	out = check_letter(line, vars);
+	out = check_letter(line, vars, i);
 	return (out);
 }
 
 int	get_param(t_vars *vars, t_data_input *input_lst)
 {
+	t_data_input	*next;
+
 	while (input_lst)
 	{
 		if (check_line(input_lst->str, vars) == -1)
 			return (-1);
-		input_lst = input_lst->next;
 	}
 	return (0);
 }
