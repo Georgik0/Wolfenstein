@@ -25,6 +25,7 @@ void	set_flags(t_vars *vars)
 	vars->flags.summ = 0;
 	vars->flags.map_start = 0;
 	vars->flags.map_end = 0;
+	vars->player.check = 0;
 }
 
 void	set_file_name(t_vars *vars)

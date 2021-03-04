@@ -82,6 +82,8 @@ void	make_free_vars(t_vars *vars)
 	free(vars->dir_wall_left);
 	free(vars->dir_wall_right);
 	free(vars->dir_wall_up);
+	clear_map_lst(vars);
+	free(vars->map);
 }
 
 int	parser(int argc, char **argv, t_vars *vars)

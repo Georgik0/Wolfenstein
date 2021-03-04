@@ -20,6 +20,7 @@ void	clear_map_lst(t_vars *vars)
 	{
 		next = vars->map_lst->next;
 		free(vars->map_lst->line);
+		vars->map_lst->line = NULL;
 		free(vars->map_lst);
 		vars->map_lst = next;
 	}
@@ -28,6 +29,7 @@ void	clear_map_lst(t_vars *vars)
 int		pars_map_lst(char *line, t_vars *vars)
 {
 	t_my_map	*new;
+	t_my_map	*tmp;
 
 	if (vars->map_lst == NULL)
 	{
@@ -40,15 +42,17 @@ int		pars_map_lst(char *line, t_vars *vars)
 	}
 	else
 	{
-		while (vars->map_lst->next)
-			vars->map_lst = vars->map_lst->next;
+		tmp = vars->map_lst;
+		while (tmp->next)
+			tmp = tmp->next;
 	}
 	if (!(new = (t_my_map *)malloc(sizeof(t_my_map))))
 		return (-1);
 	new->next = NULL;
 	new->length = ft_strlen(line);
 	new->line = ft_strdup(line);
-	vars->map_lst->next = new;
+	// printf("%s\n", new->line);
+	tmp->next = new;
 	return (1);
 }
 

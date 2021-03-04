@@ -23,5 +23,6 @@ char	*ft_strdup(const char *s1)
 	if (out == NULL)
 		return (NULL);
 	ft_strlcpy(out, s1, len);
+	out[len - 1] = '\0';
 	return (out);
 }

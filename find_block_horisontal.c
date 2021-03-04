@@ -91,7 +91,7 @@ int			get_around_Ax(double Ax, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_player player, t_sprite **sprite)
+t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double phi, t_vars *vars, t_sprite **sprite)
 {
 	int			y;
 	int			x;
@@ -102,11 +102,11 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	// x = (int)nearbyint(horis.Ax) / 64;
 	// printf("-----------horiz-----------\n");
 	// printf("Ax1 = %f   Ay1 = %d          x = %d  y = %d\n", horis.Ax, horis.Ay, x, y);
-	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
+	while (y >= 0 && x >= 0 && y < vars->length_map_y && x < ft_strlen(vars->map[y]) && vars->map[y][x] != '1')
 	{
-		if (map[y][x] == '2')
+		if (vars->map[y][x] == '2')
 		{
-			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, player) == 0)
+			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, vars->player) == 0)
 			{
 				collis.err = 1;
 				return (collis);
@@ -130,26 +130,26 @@ t_collis	collision_width_horisontal(char (*map)[10], t_coord_horis horis, double
 	return (collis);
 }
 
-t_collis	find_block_horisontal(t_player player, char (*map)[10], double phi, t_sprite **sprite)
+t_collis	find_block_horisontal(t_vars *vars, char (*map)[10], double phi, t_sprite **sprite) //
 {
 	t_coord_horis	horis;
 	t_collis		collis;
 
 	if (phi < M_PI)
 	{
-		horis.Ay = (int)((player.y / 64) * 64) - 1;
+		horis.Ay = (int)((vars->player.y / 64) * 64) - 1;
 		horis.dy = -64;
 	}
 	else // phi > M_PI
 	{
-		horis.Ay = (int)((player.y / 64) * 64) + 64;
+		horis.Ay = (int)((vars->player.y / 64) * 64) + 64;
 		horis.dy = 64;
 	}
-	horis.Ax = player.x + (player.y - horis.Ay) / tan(phi);
+	horis.Ax = vars->player.x + (vars->player.y - horis.Ay) / tan(phi);
 	if (phi > M_PI)
 		horis.dx = -64.0 / tan(phi);
 	else
 		horis.dx = 64.0 / tan(phi);
-	collis = collision_width_horisontal(map, horis, phi, player, sprite);
+	collis = collision_width_horisontal(map, horis, phi, vars, sprite);
 	return (collis);
 }

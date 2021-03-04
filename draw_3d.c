@@ -103,7 +103,7 @@ void	draw_3d(t_vars *vars)
 			angle.new_phi = (angle.phi - 360) * M_PI / 180;
 		else
 			angle.new_phi = angle.phi * M_PI / 180;
-		data_draw = get_length(vars->player.pov, &angle, vars->player, vars->data_map.map, &sprite);
+		data_draw = get_length(vars, &angle, vars->data_map.map, &sprite);
 		data_draw.x_count = angle.count;
 		draw_vertical_line(data_draw, vars);
 		angle.phi -= angle.d_phi;

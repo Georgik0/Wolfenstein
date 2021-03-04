@@ -64,7 +64,7 @@ int		get_Ay(t_player player, double phi)
 	return (Ay);
 }
 
-t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_player player, t_sprite **sprite)
+t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_vars *vars, t_sprite **sprite)
 {
 	int			x;
 	int			y;
@@ -72,11 +72,11 @@ t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_player player, t_spri
 
 	x = coord.Ax / 64;
 	y = coord.Ay / 64;
-	while (map[y][x] != '1')
+	while (vars->map[y][x] != '1')
 	{
-		if (map[y][x] == '2')
+		if (vars->map[y][x] == '2')
 		{
-			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, player) == 0)
+			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, vars->player) == 0)
 			{
 				collis.err = 1;
 				return (collis);
@@ -92,19 +92,19 @@ t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_player player, t_spri
 	return (collis);
 }
 
-t_collis	find_block_unique(double phi, t_player player, char (*map)[10], t_sprite **sprite)
+t_collis	find_block_unique(double phi, t_vars *vars, char (*map)[10], t_sprite **sprite)
 {
 	t_coord_uniq	coord;
 	t_collis		collis;
 
-	coord.Ax = get_Ax(player, phi);
-	coord.Ay = get_Ay(player, phi);
+	coord.Ax = get_Ax(vars->player, phi);
+	coord.Ay = get_Ay(vars->player, phi);
 	coord.dx = get_dx(phi);
 	coord.dy = get_dy(phi);
-	collis = get_collis(coord, map, player, sprite);
+	collis = get_collis(coord, map, vars, sprite);
 	if (phi == 0 || phi == M_PI)
-		collis.offset = player.y % 64 / 64.0;
+		collis.offset = vars->player.y % 64 / 64.0;
 	else
-		collis.offset = player.x % 64 / 64.0;
+		collis.offset = vars->player.x % 64 / 64.0;
 	return (collis);
 }

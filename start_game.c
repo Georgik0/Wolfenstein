@@ -84,25 +84,25 @@ void	change_coord_W(t_vars *vars)
 
 	delta_x = (int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[vars->player.x / 64] == '1' &&
-	vars->data_map.map[vars->player.y / 64]
+	vars->map[vars->player.y / 64]
 	[(vars->player.x + delta_x) / 64] == '1')
 		return ;
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
 	{
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y) / 64]
+	if (vars->map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
@@ -117,25 +117,25 @@ void	change_coord_S(t_vars *vars)
 
 	delta_x = -(int)nearbyint(cos(vars->player.pov * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin(vars->player.pov * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[vars->player.x / 64] == '1' &&
-	vars->data_map.map[vars->player.y / 64]
+	vars->map[vars->player.y / 64]
 	[(vars->player.x + delta_x) / 64] == '1')
 		return ;
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
 	{
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y) / 64]
+	if (vars->map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
@@ -150,25 +150,25 @@ void	change_coord_A(t_vars *vars)
 
 	delta_x = -(int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = (int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[vars->player.x / 64] == '1' &&
-	vars->data_map.map[vars->player.y / 64]
+	vars->map[vars->player.y / 64]
 	[(vars->player.x + delta_x) / 64] == '1')
 		return ;
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
 	{
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y) / 64]
+	if (vars->map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
@@ -183,25 +183,25 @@ void	change_coord_D(t_vars *vars)
 
 	delta_x = (int)nearbyint(cos((vars->player.pov - 90) * M_PI / 180) * 3);
 	delta_y = -(int)nearbyint(sin((vars->player.pov - 90) * M_PI / 180) * 3);
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[vars->player.x / 64] == '1' &&
-	vars->data_map.map[vars->player.y / 64]
+	vars->map[vars->player.y / 64]
 	[(vars->player.x + delta_x) / 64] == '1')
 		return ;
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y + delta_y) / 64]
+	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
 	{
 		vars->player.y += delta_y;
 		return ;
 	}
-	if (vars->data_map.map[(vars->player.y) / 64]
+	if (vars->map[(vars->player.y) / 64]
 	[(vars->player.x + delta_x) / 64] != '1')
 	{
 		vars->player.x += delta_x;
@@ -286,7 +286,7 @@ int	main(int argc, char **argv)
 {
 	t_vars		vars;
 	// t_data		data;
-	t_player	player;
+	// t_player	player;
 	t_data_map	data_map;
 	t_keyboard	keyboard;
 	t_data		data_wall_left;
@@ -305,9 +305,16 @@ int	main(int argc, char **argv)
 
 	if (parser(argc, argv, &vars) == -1)
 		exit(0);
+	// int	i = 0;
+	// while (vars.map[i])
+	// {
+	// 	printf("%s\n", vars.map[i]);
+	// 	i++;
+	// }
+
 	// vars.data = &data;
 	vars.data_map = data_map;
-	vars.player = player;
+	// vars.player = player;
 	vars.keyboard = keyboard;
 	// vars = (t_vars *)malloc(sizeof(t_vars));
 
@@ -343,9 +350,9 @@ int	main(int argc, char **argv)
 // Размер куба 64x64x64
 	int		size_cub = 64;
 // Для теста на двумерной карте, задаем параметры игрока
-	vars.player.x = 1 * size_cub + 32;
-	vars.player.y = 6 * size_cub + 32;
-	vars.player.pov = 90;
+	// vars.player.x = 1 * size_cub + 32;
+	// vars.player.y = 6 * size_cub + 32;
+	// vars.player.pov = 90;
 
 	vars.mlx = mlx_init();
 

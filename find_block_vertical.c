@@ -93,7 +93,7 @@ int			get_around_By(double By, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi, t_player player, t_sprite **sprite)
+t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi, t_vars *vars, t_sprite **sprite)
 {
 	int			y;
 	int			x;
@@ -104,11 +104,13 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	x = (int)nearbyint(vertic.Bx) / 64;
 	// printf("-----------vertic-----------\n");
 	// printf("Bx1 = %d   By1 = %f          x = %d  y = %d\n", vertic.Bx, vertic.By, x, y);
-	while (y >= 0 && x >= 0 && y < 10 && x < 10 && map[y][x] != '1')
+	// printf("length_map_y = %d\n", vars->length_map_y);
+	// printf("player:    x = %d   y = %d\n", vars->player.x, vars->player.y);
+	while (y >= 0 && x >= 0 && y < vars->length_map_y && x < ft_strlen(vars->map[y]) - 1 && vars->map[y][x] != '1')
 	{
-		if (map[y][x] == '2')
+		if (vars->map[y][x] == '2')
 		{
-			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, player) == 0)
+			if (add_sprite(sprite, x * 64 + 32, y * 64 + 32, vars->player) == 0)
 			{
 				collis.err = 1;
 				return (collis);
@@ -138,27 +140,27 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_player player, char (*map)[10], double phi, t_sprite **sprite)
+t_collis	find_block_vertical(t_vars *vars, char (*map)[10], double phi, t_sprite **sprite)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;
 
 	if (phi > 3.0 * M_PI / 2.0 || phi < M_PI / 2.0)
 	{
-		vertic.Bx = (int)((player.x / 64) * 64) + 64;
+		vertic.Bx = (int)((vars->player.x / 64) * 64) + 64;
 		vertic.dx = 64;
 	}
 	else // phi > M_PI / 2 && phi < 3 * M_PI / 2
 	{
-		vertic.Bx = (int)((player.x / 64) * 64) - 1;
+		vertic.Bx = (int)((vars->player.x / 64) * 64) - 1;
 		vertic.dx = -64;
 	}
-	vertic.By = player.y + (player.x - vertic.Bx) * tan(phi);
+	vertic.By = vars->player.y + (vars->player.x - vertic.Bx) * tan(phi);
 	if ((phi > 0.0 && phi < M_PI / 2.0) || phi > 3.0 * M_PI / 2.0)
 	{
 		vertic.dy = -64.0 * tan(phi);
 	}else
 		vertic.dy = 64.0 * tan(phi);
-	collis = collision_width_vertical(map, vertic, phi, player, sprite);
+	collis = collision_width_vertical(map, vertic, phi, vars, sprite);
 	return (collis);
 }
