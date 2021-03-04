@@ -99,13 +99,8 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	int			x;
 	t_collis	collis;
 
-	// y = (int)nearbyint(vertic.By) / 64;
 	y = get_around_By(vertic.By, phi);
 	x = (int)nearbyint(vertic.Bx) / 64;
-	// printf("-----------vertic-----------\n");
-	// printf("Bx1 = %d   By1 = %f          x = %d  y = %d\n", vertic.Bx, vertic.By, x, y);
-	// printf("length_map_y = %d\n", vars->length_map_y);
-	// printf("player:    x = %d   y = %d\n", vars->player.x, vars->player.y);
 	while (y >= 0 && x >= 0 && y < vars->length_map_y && x < ft_strlen(vars->map[y]) - 1 && vars->map[y][x] != '1')
 	{
 		if (vars->map[y][x] == '2')
@@ -118,25 +113,12 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 		}
 		vertic.Bx += vertic.dx;
 		vertic.By += vertic.dy;
-		// printf("Bx = %d   By = %f\n", vertic.Bx, vertic.By);
-		// y = (int)(nearbyint(vertic.By) / 64);
 		y = get_around_By(vertic.By, phi);
 		x = (int)(nearbyint(vertic.Bx) / 64);
 	}
-	// printf("Bx = %d   By = %f\n", vertic.Bx, vertic.By);
-	// collis.x = (int)nearbyint(vertic.Bx);
-	// collis.y = (int)nearbyint(vertic.By);
 	collis.x = vertic.Bx;
 	collis.y = vertic.By;
 	collis.offset = (vertic.By - (int)(vertic.By / 64) * 64) / 64;
-	// collis.y = get_around_By(vertic.By, phi);
-	// if (collis.y < 63 || collis.y > 576)
-	// {
-	// 	printf("-----------vertic-----------\n");
-	// 	printf("y = %d   vertic.By = %f   vertic.Bx = %f\n", collis.y, vertic.By, vertic.Bx);
-	// 	printf("-----------vertic-----------\n");
-	// }
-	// printf("-----------vertic-----------\n");
 	return (collis);
 }
 

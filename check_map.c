@@ -66,10 +66,10 @@ int		check_right(char **map, int x, int y)
 
 int		check_valid(t_vars *vars, int x, int y)
 {
-	if (!check_up(vars->map, x, y) ||
-	!check_bottom(vars->map, x, y, vars->length_map_y) ||
-	!check_left(vars->map, x, y) ||
-	!check_right(vars->map, x, y))
+	if (check_up(vars->map, x, y) == -1 ||
+	check_bottom(vars->map, x, y, vars->length_map_y) == -1 ||
+	check_left(vars->map, x, y) == -1 ||
+	check_right(vars->map, x, y) == -1)
 	{
 		return (-1);
 	}
@@ -83,11 +83,17 @@ int		check_player(t_vars *vars, char direction, int x, int y)
 	vars->player.check = 1;
 	vars->player.x = x * 64 + 32;
 	vars->player.y = y * 64 + 32;
-	printf("player:    x = %d   y = %d\n", vars->player.x, vars->player.y);
+	// printf("player:    x = %d   y = %d\n", vars->player.x, vars->player.y);
 	if (direction == 'N')
+	{
+		printf("N\n");
 		vars->player.pov = 90.0;
+	}
 	else if (direction == 'W')
+	{
+		printf("W\n");
 		vars->player.pov = 180.0;
+	}
 	else if (direction == 'S')
 		vars->player.pov = 270.0;
 	else
@@ -114,12 +120,11 @@ static int		check_line(t_vars *vars, char *line, int y)
 		else if (line[x] == 'N' || line[x] == 'W' ||
 		line[x] == 'S' || line[x] == 'E')
 		{
-			printf("test\n");
+			// printf("test\n");
 			if (check_valid(vars, x, y) == -1)
 				return (-1);
 			if (check_player(vars, line[x], x, y) == -1)
 				return (-1);
-			return (1);
 		}
 		else
 			return (-1);

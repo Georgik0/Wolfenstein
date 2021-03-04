@@ -62,7 +62,7 @@ int	get_param(t_vars *vars, t_data_input *input_lst)
 	{
 		if (check_line(input_lst->str, vars) == -1)
 			return (-1);
-		printf("%s\n", input_lst->str);
+		// printf("%s\n", input_lst->str);
 		input_lst = input_lst->next;
 	}
 	get_map(vars);
