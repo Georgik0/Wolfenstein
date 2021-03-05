@@ -103,6 +103,7 @@ void	clear_param(char **screen)
 		i++;
 	}
 	free(screen);
+	// printf("clear\n");
 }
 
 int		get_screen_param(char *line, t_vars *vars)

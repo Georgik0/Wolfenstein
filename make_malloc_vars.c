@@ -36,6 +36,7 @@ void	set_file_name(t_vars *vars)
 	vars->dir_wall_right = NULL;
 	vars->dir_wall_up = NULL;
 	vars->dir_sprite = NULL;
+	vars->map = NULL;
 }
 
 int		make_malloc_vars(t_vars *vars)

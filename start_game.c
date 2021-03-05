@@ -285,16 +285,12 @@ int		draw_game(t_vars *vars)
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
-	// t_data		data;
-	// t_player	player;
-	t_data_map	data_map;
 	t_keyboard	keyboard;
 	t_data		data_wall_left;
 	t_data		data_wall_right;
 	t_data		data_wall_up;
 	t_data		data_wall_down;
 	t_data		data_sprite;
-	// t_data		**data_array;
 	char		*dir_wall_left = "./texture/WALL32.xpm";
 	char		*dir_wall_right = "./texture/WALL53.xpm";
 	char		*dir_wall_up = "./texture/WALL88.xpm";
@@ -304,19 +300,12 @@ int	main(int argc, char **argv)
 	int			img_heigh;
 
 	if (parser(argc, argv, &vars) == -1)
+	{
+		printf("Error\n");
 		exit(0);
-	// int	i = 0;
-	// while (vars.map[i])
-	// {
-	// 	printf("%s\n", vars.map[i]);
-	// 	i++;
-	// }
+	}
 
-	// vars.data = &data;
-	vars.data_map = data_map;
-	// vars.player = player;
 	vars.keyboard = keyboard;
-	// vars = (t_vars *)malloc(sizeof(t_vars));
 
 	char	map[10][10] = {
 		'1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
@@ -359,18 +348,38 @@ int	main(int argc, char **argv)
 	// Получаем текстуры
 	// if (!(data_array = (t_data**)malloc(6 * sizeof(t_data*))))
 	// 	exit(0);
-	vars.data_array[0] = vars.data;//&data;
+	vars.data_array[0] = vars.data;
 	vars.data_array[1] = &data_wall_left;
 	vars.data_array[2] = &data_wall_right;
 	vars.data_array[3] = &data_wall_up;
 	vars.data_array[4] = &data_wall_down;
 	vars.data_array[5] = &data_sprite;
 
-	data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_left, &img_width, &img_heigh);
-	data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_right, &img_width, &img_heigh);
-	data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_up, &img_width, &img_heigh);
-	data_wall_down.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_down, &img_width, &img_heigh);
-	data_sprite.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_sprite, &data_sprite.width, &data_sprite.height);
+	if (!(data_wall_left.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_left, &img_width, &img_heigh)))
+	{
+		printf("Error\n");
+		exit(0);
+	}
+	if (!(data_wall_right.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_right, &img_width, &img_heigh)))
+	{
+		printf("Error\n");
+		exit(0);
+	}
+	if (!(data_wall_up.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_up, &img_width, &img_heigh)))
+	{
+		printf("Error\n");
+		exit(0);
+	}
+	if (!(data_wall_down.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_wall_down, &img_width, &img_heigh)))
+	{
+		printf("Error\n");
+		exit(0);
+	}
+	if (!(data_sprite.img = mlx_xpm_file_to_image(vars.mlx, vars.dir_sprite, &data_sprite.width, &data_sprite.height)))
+	{
+		printf("Error\n");
+		exit(0);
+	}
 
 	data_wall_left.addr = mlx_get_data_addr(data_wall_left.img, &(data_wall_left.bits_per_pixel), &(data_wall_left.line_length), &(data_wall_left.endian));
 	data_wall_right.addr = mlx_get_data_addr(data_wall_right.img, &(data_wall_right.bits_per_pixel), &(data_wall_right.line_length), &(data_wall_right.endian));

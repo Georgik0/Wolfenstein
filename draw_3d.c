@@ -93,7 +93,7 @@ void	draw_3d(t_vars *vars)
 	// if (get_data_angle(&angle, pov, data_array[0]->width) == -1)
 	// 	return ; // вернуть ошибку
 	if (get_data_angle(&angle, vars->player.pov, vars->data_array[0]->width) == -1)
-		printf("error\n");
+		return ; //  вернуть ошибку
 	data_draw.x_count = 0;
 	while (data_draw.x_count < vars->data_array[0]->width)
 	{
@@ -103,16 +103,14 @@ void	draw_3d(t_vars *vars)
 			angle.new_phi = (angle.phi - 360) * M_PI / 180;
 		else
 			angle.new_phi = angle.phi * M_PI / 180;
-		data_draw = get_length(vars, &angle, vars->data_map.map, &sprite);
+		data_draw = get_length(vars, &angle, &sprite);
 		data_draw.x_count = angle.count;
 		draw_vertical_line(data_draw, vars);
 		angle.phi -= angle.d_phi;
 		(angle.count)++;
 	}
 	if (sprite != NULL)
-	{
 		get_sprite_ray(&(vars->player), &angle, sprite, vars->data_array);
-	}
 	free(angle.arr_length);
 	clear_sprite(&sprite);
 }

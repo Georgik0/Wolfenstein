@@ -22,10 +22,12 @@ void	lst_clear(t_data_input **input_lst)
 	{
 		next_list = begin->next;
 		free(begin->str);
+		begin->str = NULL;
 		free(begin);
 		begin = next_list;
 	}
 	*input_lst = NULL;
+	// printf("clear\n");
 }
 
 int		add_line_in_lst(char *line, t_data_input **input_lst)
@@ -93,7 +95,16 @@ int	parser(int argc, char **argv, t_vars *vars)
 	t_data_input	*input_lst;
 
 	if (argc != 2)
-		return (-1);
+	{
+		if (argc != 3)
+			return (-1);
+		else
+		{
+			if (make_screenshot(vars, argv) == -1)
+				return (-1);
+			exit (0);
+		}
+	}
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (-1);
 	line = NULL;
@@ -119,6 +130,7 @@ int	parser(int argc, char **argv, t_vars *vars)
 	{
 		lst_clear(&input_lst);
 		make_free_vars(vars);
+		// printf("clear\n");
 		return (-1);
 	}
 	lst_clear(&input_lst);

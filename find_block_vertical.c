@@ -93,7 +93,7 @@ int			get_around_By(double By, double phi)
 // 	return (collis);
 // }
 
-t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double phi, t_vars *vars, t_sprite **sprite)
+t_collis	collision_width_vertical(t_coord_vertic vertic, double phi, t_vars *vars, t_sprite **sprite)
 {
 	int			y;
 	int			x;
@@ -122,7 +122,7 @@ t_collis	collision_width_vertical(char (*map)[10], t_coord_vertic vertic, double
 	return (collis);
 }
 
-t_collis	find_block_vertical(t_vars *vars, char (*map)[10], double phi, t_sprite **sprite)
+t_collis	find_block_vertical(t_vars *vars, double phi, t_sprite **sprite)
 {
 	t_coord_vertic	vertic;
 	t_collis		collis;
@@ -143,6 +143,6 @@ t_collis	find_block_vertical(t_vars *vars, char (*map)[10], double phi, t_sprite
 		vertic.dy = -64.0 * tan(phi);
 	}else
 		vertic.dy = 64.0 * tan(phi);
-	collis = collision_width_vertical(map, vertic, phi, vars, sprite);
+	collis = collision_width_vertical(vertic, phi, vars, sprite);
 	return (collis);
 }

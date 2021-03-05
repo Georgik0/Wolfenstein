@@ -12,6 +12,24 @@
 
 #include "header/my_type.h"
 
+static int		check_digit(char *param)
+{
+	int		i;
+
+	i = 0;
+	if (param == NULL)
+		return (-1);
+	if (*param == '\0')
+		return (-1);
+	while (param[i])
+	{
+		if (ft_isdigit(param[i]) == 0)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 int		pars_color(char **param, t_vars *vars)
 {
 	int	R;
@@ -19,6 +37,9 @@ int		pars_color(char **param, t_vars *vars)
 	int	B;
 	int	color;
 
+	// printf("floor\n");
+	if (check_digit(param[0]) == -1 || check_digit(param[1]) == -1 || check_digit(param[2]) == -1)
+		return (-1);
 	if (ft_strlen(param[0]) > 3 || ft_strlen(param[1]) > 3 || ft_strlen(param[2]) > 3)
 		return (-1);
 	if ((R = ft_atoi(param[0])) > 255)
@@ -27,6 +48,7 @@ int		pars_color(char **param, t_vars *vars)
 		return (-1);
 	if ((B = ft_atoi(param[2])) > 255)
 		return (-1);
+	// printf("param[2] = |%s|     B = |%d|\n", param[2], B);
 	color = 256 * 256 * R + 256 * G + B;
 	return (color);
 }
@@ -49,6 +71,7 @@ int		get_floor_color(char *line, t_vars *vars)
 	}
 	if ((vars->color_floor = pars_color(param, vars)) == -1)
 	{
+		// printf("clear\n");
 		clear_param(param);
 		return (-1);
 	}
@@ -61,6 +84,7 @@ int		get_ceilling_color(char *line, t_vars *vars)
 {
 	char	**param;
 
+	// printf("ceilling\n");
 	if (vars->flags.C == 1)
 		return (-2); //параметр ужже задан
 	line++;

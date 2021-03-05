@@ -251,13 +251,13 @@ typedef struct	s_data_input
 }				t_data_input;
 
 
-t_collis		find_collision(double phi, t_vars *vars, char (*map)[10]);
-t_collis		find_block_unique(double phi, t_vars *vars, char (*map)[10], t_sprite **sprite);
-t_collis		find_block_horisontal(t_vars *vars, char (*map)[10], double phi, t_sprite **sprite);
-t_collis		find_block_vertical(t_vars *vars, char (*map)[10], double phi, t_sprite **sprite);
+t_collis		find_collision(double phi, t_vars *vars);
+t_collis		find_block_unique(double phi, t_vars *vars, t_sprite **sprite);
+t_collis		find_block_horisontal(t_vars *vars, double phi, t_sprite **sprite);
+t_collis		find_block_vertical(t_vars *vars, double phi, t_sprite **sprite);
 void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
-t_data_draw		get_length(t_vars *vars, t_data_angle *angle, char (*map)[10], t_sprite **sprite);
+t_data_draw		get_length(t_vars *vars, t_data_angle *angle, t_sprite **sprite);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_3d(t_vars *vars);
 unsigned int	get_color(t_data data, int y, double offset, int h);
@@ -286,5 +286,6 @@ int				get_map_lst(char *line, t_vars *vars);
 void			clear_map_lst(t_vars *vars);
 int				get_map(t_vars *vars);
 int				check_map(t_vars *vars);
+int				make_screenshot(t_vars *vars, char **argv);
 
 #endif

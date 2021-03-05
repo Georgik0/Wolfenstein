@@ -64,7 +64,7 @@ int		get_Ay(t_player player, double phi)
 	return (Ay);
 }
 
-t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_vars *vars, t_sprite **sprite)
+t_collis	get_collis(t_coord_uniq coord, t_vars *vars, t_sprite **sprite)
 {
 	int			x;
 	int			y;
@@ -92,7 +92,7 @@ t_collis	get_collis(t_coord_uniq coord, char (*map)[10], t_vars *vars, t_sprite 
 	return (collis);
 }
 
-t_collis	find_block_unique(double phi, t_vars *vars, char (*map)[10], t_sprite **sprite)
+t_collis	find_block_unique(double phi, t_vars *vars, t_sprite **sprite)
 {
 	t_coord_uniq	coord;
 	t_collis		collis;
@@ -101,7 +101,7 @@ t_collis	find_block_unique(double phi, t_vars *vars, char (*map)[10], t_sprite *
 	coord.Ay = get_Ay(vars->player, phi);
 	coord.dx = get_dx(phi);
 	coord.dy = get_dy(phi);
-	collis = get_collis(coord, map, vars, sprite);
+	collis = get_collis(coord, vars, sprite);
 	if (phi == 0 || phi == M_PI)
 		collis.offset = vars->player.y % 64 / 64.0;
 	else

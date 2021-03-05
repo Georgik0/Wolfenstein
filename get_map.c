@@ -51,7 +51,7 @@ int				get_map(t_vars *vars)
 	int		number_x;
 
 	vars->length_map_y = get_length_x(vars->map_lst);
-	printf("get_map     length_map_y = %d\n", vars->length_map_y);
+	// printf("get_map     length_map_y = %d\n", vars->length_map_y);
 	if (make_malloc_map(vars) == -1)
 		return (-1);
 	return (1);

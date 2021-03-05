@@ -86,12 +86,12 @@ int		check_player(t_vars *vars, char direction, int x, int y)
 	// printf("player:    x = %d   y = %d\n", vars->player.x, vars->player.y);
 	if (direction == 'N')
 	{
-		printf("N\n");
+		// printf("N\n");
 		vars->player.pov = 90.0;
 	}
 	else if (direction == 'W')
 	{
-		printf("W\n");
+		// printf("W\n");
 		vars->player.pov = 180.0;
 	}
 	else if (direction == 'S')
@@ -139,7 +139,7 @@ int		check_map(t_vars *vars)
 	y = 0;
 	while (vars->map[y])
 	{
-		printf("$%s\n", vars->map[y]);
+		// printf("$%s\n", vars->map[y]);
 		if (check_line(vars, vars->map[y], y) == -1)
 			return (-1);
 		y++;

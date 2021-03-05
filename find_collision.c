@@ -22,18 +22,6 @@ static double		get_distance(t_player player, double x1, double y1, double phi)
 	return (distance);
 }
 
-// int			get_abs_distace(t_collis horisont, t_collis vertical, t_player player, double phi)
-// {
-// 	double	distance_h;
-// 	double	distance_v;
-
-// 	distance_h = get_distance(player.x, horisont.x, phi);
-// 	distance_v = get_distance(player.x, vertical.x, phi);
-// 	if (fabs(distance_v) > fabs(distance_h))
-// 		return (horisont);
-// 	return (vertical);
-// }
-
 t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player, double phi)
 {
 	double	distance_h;
@@ -41,13 +29,12 @@ t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player
 
 	distance_h = get_distance(player, horisont.x, horisont.y, phi);
 	distance_v = get_distance(player, vertical.x, vertical.y, phi);
-	// printf("distance_h = %f    distance_v = %f    phi = %f\n", distance_h, distance_v, phi);
 	if (distance_v > distance_h)
 		return (horisont);
 	return (vertical);
 }
 
-t_collis	find_collision(double phi, t_vars *vars, char (*map)[10])
+t_collis	find_collision(double phi, t_vars *vars)
 {
 	t_collis		collis;
 	t_collis		horisont;
@@ -55,18 +42,12 @@ t_collis	find_collision(double phi, t_vars *vars, char (*map)[10])
 	t_sprite		*sprite;
 
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
-	{
-		collis = find_block_unique(phi, vars, map, NULL);
-	}
+		collis = find_block_unique(phi, vars, NULL);
 	else
 	{
-		horisont = find_block_horisontal(vars, map, phi, NULL);
-		vertical = find_block_vertical(vars, map, phi, NULL);
+		horisont = find_block_horisontal(vars, phi, NULL);
+		vertical = find_block_vertical(vars, phi, NULL);
 		collis = compare_collision(horisont, vertical, vars->player, phi);
-		if (collis.x > 640 || collis.x < 0 || collis.y > 640 || collis.y < 0)
-		{
-			printf("x = %f  y = %f  phi = %f\n", collis.x, collis.y, phi);
-		}
 	}
 	return (collis);
 }
