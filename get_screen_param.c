@@ -43,19 +43,19 @@ int		get_width(char *str, t_vars *vars)
 		str++;
 	if (*str == '\0')
 	{
-		vars->data->width = MIN_WIDTH;
+		vars->data_array[0]->width = MIN_WIDTH;
 		return (1);
 	}
 	if (check_digit(str))
 	{
 		if (ft_strlen(str) > 5)
-			vars->data->width = MAX_WIDTH;
+			vars->data_array[0]->width = MAX_WIDTH;
 		else if ((width = ft_atoi(str)) >= MAX_WIDTH)
-			vars->data->width = MAX_WIDTH;
+			vars->data_array[0]->width = MAX_WIDTH;
 		else if (width <= MIN_WIDTH)
-			vars->data->width = MIN_WIDTH;
+			vars->data_array[0]->width = MIN_WIDTH;
 		else
-			vars->data->width = width;
+			vars->data_array[0]->width = width;
 		return (1);
 	}
 	else
@@ -71,19 +71,19 @@ int		get_height(char *str, t_vars *vars)
 		str++;
 	if (*str == '\0')
 	{
-		vars->data->height = MIN_HEIGHT;
+		vars->data_array[0]->height = MIN_HEIGHT;
 		return (1);
 	}
 	if (check_digit(str))
 	{
 		if (ft_strlen(str) > 5)
-			vars->data->height = MAX_HEIGHT;
+			vars->data_array[0]->height = MAX_HEIGHT;
 		else if ((height = ft_atoi(str)) >= MAX_HEIGHT)
-			vars->data->height = MAX_HEIGHT;
+			vars->data_array[0]->height = MAX_HEIGHT;
 		else if (height <= MIN_HEIGHT)
-			vars->data->height = MIN_HEIGHT;
+			vars->data_array[0]->height = MIN_HEIGHT;
 		else
-			vars->data->height = height;
+			vars->data_array[0]->height = height;
 		return (1);
 	}
 	else

@@ -71,7 +71,6 @@ void	make_free_vars(t_vars *vars)
 	int	i;
 
 	i = 0;
-	free(vars->data);
 	while (i < 6)
 	{
 		free(vars->data_array[i]);
@@ -94,17 +93,8 @@ int	parser(int argc, char **argv, t_vars *vars)
 	char			*line;
 	t_data_input	*input_lst;
 
-	if (argc != 2)
-	{
-		if (argc != 3)
-			return (-1);
-		else
-		{
-			if (make_screenshot(vars, argv) == -1)
-				return (-1);
-			exit (0);
-		}
-	}
+	if (argc != 2 && argc != 3)
+		return (-1);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (-1);
 	line = NULL;
@@ -134,12 +124,12 @@ int	parser(int argc, char **argv, t_vars *vars)
 		return (-1);
 	}
 	lst_clear(&input_lst);
-	// t_data_input	*iter;
-	// iter = input_lst;
-	// while (iter)
-	// {
-	// 	printf("%s\n", iter->str);
-	// 	iter = iter->next;
-	// }
+	get_img(vars);
+	if (argc == 3)
+	{
+		if (make_screenshot(vars, argv) == -1)
+			return (-1);
+		exit (0);
+	}
 	return (0);
 }

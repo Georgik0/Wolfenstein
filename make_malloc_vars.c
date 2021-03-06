@@ -26,6 +26,12 @@ void	set_flags(t_vars *vars)
 	vars->flags.map_start = 0;
 	vars->flags.map_end = 0;
 	vars->player.check = 0;
+	vars->keyboard.A = 0;
+	vars->keyboard.D = 0;
+	vars->keyboard.S = 0;
+	vars->keyboard.W = 0;
+	vars->keyboard.left = 0;
+	vars->keyboard.right = 0;
 }
 
 void	set_file_name(t_vars *vars)
@@ -44,21 +50,19 @@ int		make_malloc_vars(t_vars *vars)
 	int	i;
 
 	i = 0;
-	if (!(vars->data = (t_data *)malloc(sizeof(t_data))))
-		return (-1);
+	// if (!(vars->data = (t_data *)malloc(sizeof(t_data))))
+	// 	return (-1);
 	if (!(vars->data_array = (t_data **)malloc(6 * sizeof(t_data *))))
 	{
-		free(vars->data);
 		return (-1);
 	}
 	while (i < 6)
 	{
 		if (!(vars->data_array[i++] = (t_data *)malloc(sizeof(t_data))))
 		{
-			while (i >= 0)
-				free(vars->data_array[i--]);
+			while (--i >= 0)
+				free(vars->data_array[i]);
 			free(vars->data_array);
-			free(vars->data);
 			return (-1);
 		}
 	}

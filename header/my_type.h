@@ -225,7 +225,6 @@ typedef struct	s_vars
 	void		*mlx;
 	void		*win;
 	t_player	player;
-	t_data		*data;
 	t_data_map	data_map;
 	t_keyboard	keyboard;
 	t_data		**data_array;
@@ -287,5 +286,6 @@ void			clear_map_lst(t_vars *vars);
 int				get_map(t_vars *vars);
 int				check_map(t_vars *vars);
 int				make_screenshot(t_vars *vars, char **argv);
+int				get_img(t_vars *vars);
 
 #endif

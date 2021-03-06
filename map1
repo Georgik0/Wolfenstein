@@ -1,6 +1,6 @@
 F 255,255,255
 C 255,255,255
-R 1000 600
+R 1000 1080
 NO ./texture/WALL32.xpm
 SO ./texture/WALL53.xpm
 WE ./texture/WALL88.xpm
