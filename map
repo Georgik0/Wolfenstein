@@ -5,7 +5,7 @@ WE ./texture/WALL88.xpm
 EA ./texture/WALL89.xpm
 
 S ./texture/BAR1M0.xpm
-F 65,70,71
+F 200,1,11
 C 148,235,255
 
         1111111111111111111111111

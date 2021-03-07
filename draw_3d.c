@@ -19,6 +19,13 @@ void	draw_sky(int *y, t_data_draw data_draw, t_vars *vars)
 		my_mlx_pixel_put(vars->data_array[0], data_draw.x_count, *y, vars->color_ceilling);
 		(*y)++;
 	}
+	if (*y-1 == (int)Y && data_draw.x_count == (int)X)
+	{
+		printf("addres = %p\n", vars->data_array[0]->addr);
+		printf("addr_p = %p\n", vars->data_array[0]->addr + ((*y-1) * vars->data_array[0]->line_length + data_draw.x_count * (vars->data_array[0]->bits_per_pixel / 8)));
+		printf("line_length = %d    vars->data_array[0]->bits_per_pixel / 8 = %d\n", vars->data_array[0]->line_length, vars->data_array[0]->bits_per_pixel / 8);
+		printf("x = %d  y = %d    color = %x\n", data_draw.x_count, *y-1, vars->color_ceilling);
+	}
 }
 
 void	draw_wall(int *y, t_data_draw data_draw, t_data **data_array)
@@ -40,6 +47,13 @@ void	draw_wall(int *y, t_data_draw data_draw, t_data **data_array)
 		else
 			data_draw.color = get_color(*data_array[4], y_xmp, data_draw.offset, data_draw.h);
 		my_mlx_pixel_put(data_array[0], data_draw.x_count, *y, data_draw.color);
+		if (*y == (int)Y && data_draw.x_count == (int)X)
+		{
+			printf("addres = %p\n", data_array[0]->addr);
+			printf("addr_p = %p\n", data_array[0]->addr + (*y * data_array[0]->line_length + data_draw.x_count * (data_array[0]->bits_per_pixel / 8)));
+			printf("line_length = %d    vars->data_array[0]->bits_per_pixel / 8 = %d\n", data_array[0]->line_length, data_array[0]->bits_per_pixel / 8);
+			printf("x = %d  y = %d    color = %x\n", data_draw.x_count, *y, data_draw.color);
+		}
 		(*y)++;
 		y_xmp++;
 	}
@@ -52,6 +66,14 @@ void	draw_ground(int *y, t_data_draw data_draw, t_vars *vars)
 		my_mlx_pixel_put(vars->data_array[0], data_draw.x_count, *y, vars->color_floor);
 		(*y)++;
 	}
+	if (*y-1 == (int)Y && data_draw.x_count == (int)X)
+	{
+		printf("addres = %p\n", vars->data_array[0]->addr);
+		printf("addr_p = %p\n", vars->data_array[0]->addr + ((*y-1) * vars->data_array[0]->line_length + data_draw.x_count * (vars->data_array[0]->bits_per_pixel / 8)));
+		printf("line_length = %d    vars->data_array[0]->bits_per_pixel / 8 = %d\n", vars->data_array[0]->line_length, vars->data_array[0]->bits_per_pixel / 8);
+		printf("x = %d  y = %d    color = %x\n", data_draw.x_count, *y-1, vars->color_floor);
+	}
+
 }
 
 void	draw_vertical_line(t_data_draw data_draw, t_vars *vars)

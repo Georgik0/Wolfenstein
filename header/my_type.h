@@ -23,6 +23,8 @@
 #define MIN_HEIGHT 240
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
+#define X 1200
+#define Y 800
 
 typedef struct	s_data
 {
