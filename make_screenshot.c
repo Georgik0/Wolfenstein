@@ -87,18 +87,14 @@ int		make_screenshot(t_vars *vars, char **argv)
 	int			offset;
 
 	draw_3d(vars);
-	// pause();
 	offset = (4 - (vars->data_array[0]->width * 3) % 4) % 4;
-	printf("offset = %d\n", offset);
 	summary_size = 14 + 40 +
 	vars->data_array[0]->width * vars->data_array[0]->height * 3 +
 	offset * vars->data_array[0]->height;
-	printf("sum_size = %d\n", summary_size);
-
 	if (ft_strncmp("--save", argv[2], 6) != 0)
-		return (-1);
+		return (-2);
 	if ((fd = open("screen.bmp", O_CREAT | O_TRUNC | O_WRONLY, 0666)) == -1)
-		return (-1);
+		return (-3);
 	fill_header(fd, summary_size);
 	fill_information(fd, vars);
 	fill_images(fd, vars);

@@ -114,7 +114,7 @@ int		get_screen_param(char *line, t_vars *vars)
 	if (num_screen_param(screen) != 3)
 	{
 		clear_param(screen);
-		return (-1);
+		return (-8);
 	}
 	if ((get_width(screen[1], vars)) == -1)
 	{

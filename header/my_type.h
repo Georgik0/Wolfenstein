@@ -23,8 +23,6 @@
 #define MIN_HEIGHT 240
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
-#define X 1200
-#define Y 800
 
 typedef struct	s_data
 {
@@ -221,6 +219,26 @@ typedef struct	s_my_map
 
 }				t_my_map;
 
+typedef struct	s_draw_line
+{
+	int			delta_x;
+	int			delta_y;
+	int			er;
+	int			er2;
+	int			dy;
+	int			dx;
+
+}				t_draw_line;
+
+typedef struct	s_coord_line
+{
+	int			y1;
+	int			x1;
+	int			y0;
+	int			x0;
+
+}				t_coord_line;
+
 
 typedef struct	s_vars
 {
@@ -289,5 +307,23 @@ int				get_map(t_vars *vars);
 int				check_map(t_vars *vars);
 int				make_screenshot(t_vars *vars, char **argv);
 int				get_img(t_vars *vars);
+int				change_coord(t_vars *vars);
+void			change_coord_D(t_vars *vars);
+void			change_coord_A(t_vars *vars);
+void			change_coord_W(t_vars *vars);
+void			change_coord_S(t_vars *vars);
+int				press_keyboard(int keycode, t_vars *vars);
+int				dismiss_keyboard(int keycode, t_vars *vars);
+void			draw_vertical_line(t_data_draw data_draw, t_vars *vars);
+void			draw_ground(int *y, t_data_draw data_draw, t_vars *vars);
+void			draw_wall(int *y, t_data_draw data_draw, t_data **data_array);
+void			draw_sky(int *y, t_data_draw data_draw, t_vars *vars);
+int				get_dx(double phi);
+int				get_dy(double phi);
+int				get_Ax(t_player player, double phi);
+int				get_Ay(t_player player, double phi);
+int				reading_file(char **argv, t_data_input **input_lst);
+int				add_line_in_lst(char *line, t_data_input **input_lst);
+void			lst_clear(t_data_input **input_lst);
 
 #endif

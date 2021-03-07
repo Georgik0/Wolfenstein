@@ -13,22 +13,14 @@
 #include "header/my_type.h"
 #include "mlx/mlx.h"
 
-static double		get_distance(t_player player, double x1, double y1, double phi, double pov) //(double x0, double x1, double phi)
+static double		get_distance(t_player player, double x1, double y1, double phi, double pov)
 {
 	double	distance;
 
 	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1)) * fabs(cos(phi - pov));
-	// distance = fabs((x1 - player.x) * cos(phi)) * fabs(cos(phi - pov));
-	// printf("distance = %f\n", distance);
 	if (isnan(distance))
 		return(INFINITY);
 	return (distance);
-	// double	distance;
-
-	// distance = (x0 - x1) / cos(phi);
-	// if (distance <= 0)
-	// 	return (-distance);
-	// return (distance);
 }
 
 static t_data_draw		get_distance_unique(t_collis collis, t_player player, double phi)
@@ -38,15 +30,14 @@ static t_data_draw		get_distance_unique(t_collis collis, t_player player, double
 	data_draw.length = ft_abs(collis.x - player.x) + ft_abs(collis.y - player.y);
 	data_draw.offset = collis.offset;
 	if (phi == 0)
-		data_draw.side = 'r';//0xFF8C00;
+		data_draw.side = 'r';
 	else if (phi == M_PI / 2)
-		data_draw.side = 'u';//0xEE82EE;
+		data_draw.side = 'u';
 	else if (phi == M_PI)
-		data_draw.side = 'l';//0x9ACD32;
+		data_draw.side = 'l';
 	else
-		data_draw.side = 'd';//0xFFEFD5;
+		data_draw.side = 'd';
 	return (data_draw);
-	// return (data_draw.length);
 }
 
 static t_data_draw		compare_distance(t_collis horisont, t_collis vertical, t_player player, double phi, double pov)
@@ -60,18 +51,17 @@ static t_data_draw		compare_distance(t_collis horisont, t_collis vertical, t_pla
 	if (distance_v > distance_h)
 	{
 		if (phi < M_PI)
-			data_draw.side = 'u';//0xEE82EE;
+			data_draw.side = 'u';
 		else
-			data_draw.side = 'd';//0xFFEFD5;
+			data_draw.side = 'd';
 		data_draw.length = distance_h;
 		data_draw.offset = horisont.offset;
 		return (data_draw);
-		// return (distance_h);
 	}
 	if (phi < M_PI / 2 || phi > 3 * M_PI / 2)
-		data_draw.side = 'r';//0xFF8C00;
+		data_draw.side = 'r';
 	else
-		data_draw.side = 'l';//0x9ACD32;
+		data_draw.side = 'l';
 	data_draw.length = distance_v;
 	data_draw.offset = vertical.offset;
 	return (data_draw);

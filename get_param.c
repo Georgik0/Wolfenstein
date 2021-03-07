@@ -15,7 +15,7 @@
 int		check_letter(char *line, t_vars *vars, int i)
 {
 	if (*line == '1' && vars->flags.map_end == 1)
-		return (-1);
+		return (-7);
 	if (*line == 'R')
 		return (get_screen_param(line, vars));
 	else if (*line == 'N')
@@ -61,12 +61,14 @@ int	check_line(char *line, t_vars *vars)
 int	get_param(t_vars *vars, t_data_input *input_lst)
 {
 	t_data_input	*next;
+	int				out;
 
 	while (input_lst)
 	{
-		if (check_line(input_lst->str, vars) == -1)
+		if ((out = check_line(input_lst->str, vars)) == -1)
 		{
 			// printf("clear\n");
+			printf("test\n");
 			return (-1);
 		}
 		// printf("%s\n", input_lst->str);
@@ -75,5 +77,5 @@ int	get_param(t_vars *vars, t_data_input *input_lst)
 	get_map(vars);
 	if (check_map(vars) == -1)
 		return (-1);
-	return (0);
+	return (1);
 }

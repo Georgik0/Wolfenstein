@@ -15,7 +15,9 @@ find_block_horisontal.c find_block_vertical.c draw_3d.c get_length.c \
 put_pixel_texture.c get_sprite.c draw_sprite.c get_calc.c get_next_line.c \
 get_next_line_utils.c parser.c get_param.c get_screen_param.c \
 get_texture.c get_texture_1.c make_malloc_vars.c get_floor_and_celling.c \
-get_map_lst.c get_map.c check_map.c make_screenshot.c get_img.c
+get_map_lst.c get_map.c check_map.c make_screenshot.c get_img.c change_A_D.c \
+change_coord.c change_keyboard.c draw_world.c get_dx_dy_Ax_Ay.c \
+reading_file.c
 
 NAME = cub3D
 

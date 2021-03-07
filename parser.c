@@ -27,7 +27,6 @@ void	lst_clear(t_data_input **input_lst)
 		begin = next_list;
 	}
 	*input_lst = NULL;
-	// printf("clear\n");
 }
 
 int		add_line_in_lst(char *line, t_data_input **input_lst)
@@ -87,49 +86,43 @@ void	make_free_vars(t_vars *vars)
 	free(vars->map);
 }
 
+int	parser1(t_vars *vars, t_data_input **input_lst)
+{
+	int		out;
+	if ((out = make_malloc_vars(vars)) != 1)
+	{
+		lst_clear(input_lst);
+		return (out);
+	}
+	if ((out = get_param(vars, *input_lst)) != 1) // добавить обработку кода ошибки
+	{
+		lst_clear(input_lst);
+		make_free_vars(vars);
+		return (out);
+	}
+	lst_clear(input_lst);
+	return (1);
+}
+
 int	parser(int argc, char **argv, t_vars *vars)
 {
-	int				fd;
-	char			*line;
+	int				out;
 	t_data_input	*input_lst;
 
 	if (argc != 2 && argc != 3)
-		return (-1);
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		return (-1);
-	line = NULL;
-	input_lst = NULL;
-	while (get_next_line(fd, &line) == 1)
-	{
-		if (add_line_in_lst(line, &input_lst) == -1)
-		{
-			lst_clear(&input_lst);
-			close(fd);
-			return (-1);
-		}
-		free(line);
-		line = NULL;
-	}
-	close(fd);
-	if (make_malloc_vars(vars) == -1)
-	{
-		lst_clear(&input_lst);
-		return (-1);
-	}
-	if (get_param(vars, input_lst) == -1) // добавить обработку кода ошибки
-	{
-		lst_clear(&input_lst);
-		make_free_vars(vars);
-		// printf("clear\n");
-		return (-1);
-	}
-	lst_clear(&input_lst);
-	get_img(vars);
+		return (-2);
+	if ((out = reading_file(argv, &input_lst)) != 1)
+		return (out);
+	if ((out = parser1(vars, &input_lst)) != 1)
+		return (out);
+	if ((out = get_img(vars)) != 1)
+		return (out);
 	if (argc == 3)
 	{
-		if (make_screenshot(vars, argv) == -1)
-			return (-1);
+		if ((out = make_screenshot(vars, argv)) != 1)
+			return (out);
+		make_free_vars(vars);
 		exit (0);
 	}
-	return (0);
+	return (1);
 }

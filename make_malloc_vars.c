@@ -50,11 +50,9 @@ int		make_malloc_vars(t_vars *vars)
 	int	i;
 
 	i = 0;
-	// if (!(vars->data = (t_data *)malloc(sizeof(t_data))))
-	// 	return (-1);
 	if (!(vars->data_array = (t_data **)malloc(6 * sizeof(t_data *))))
 	{
-		return (-1);
+		return (-5);
 	}
 	while (i < 6)
 	{
@@ -63,7 +61,7 @@ int		make_malloc_vars(t_vars *vars)
 			while (--i >= 0)
 				free(vars->data_array[i]);
 			free(vars->data_array);
-			return (-1);
+			return (-5);
 		}
 	}
 	set_file_name(vars);
