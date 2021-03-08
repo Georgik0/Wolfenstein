@@ -278,7 +278,7 @@ void			print_line(int x0, int y0, int x1, int y1, t_data *img);
 void			draw_ray(double pov, t_player player, char (*map)[10], t_data *img);
 t_data_draw		get_length(t_vars *vars, t_data_angle *angle, t_sprite **sprite);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			draw_3d(t_vars *vars);
+int				draw_3d(t_vars *vars);
 unsigned int	get_color(t_data data, int y, double offset, int h);
 int				add_sprite(t_sprite **sprite_start, double x, double y, t_player player);
 void			clear_sprite(t_sprite **sprite_start);
@@ -325,5 +325,11 @@ int				get_Ay(t_player player, double phi);
 int				reading_file(char **argv, t_data_input **input_lst);
 int				add_line_in_lst(char *line, t_data_input **input_lst);
 void			lst_clear(t_data_input **input_lst);
+void			error_processing(int error_code);
+void			make_free_vars(t_vars *vars);
+int				check_up(char **map, int x, int y);
+int				check_bottom(char **map, int x, int y, int length_map_y);
+int				check_left(char **map, int x, int y);
+int				check_right(char **map, int x, int y);
 
 #endif

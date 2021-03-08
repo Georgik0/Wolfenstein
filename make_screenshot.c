@@ -91,7 +91,7 @@ int		make_screenshot(t_vars *vars, char **argv)
 	summary_size = 14 + 40 +
 	vars->data_array[0]->width * vars->data_array[0]->height * 3 +
 	offset * vars->data_array[0]->height;
-	if (ft_strncmp("--save", argv[2], 6) != 0)
+	if (ft_strncmp("--save", argv[2], 7) != 0)
 		return (-2);
 	if ((fd = open("screen.bmp", O_CREAT | O_TRUNC | O_WRONLY, 0666)) == -1)
 		return (-3);

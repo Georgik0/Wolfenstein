@@ -25,7 +25,17 @@ int		get_data_angle(t_data_angle *angle, int pov, int width)
 	return (0);
 }
 
-void	draw_3d(t_vars *vars)
+void	correct_angle(t_data_angle *angle)
+{
+	if (angle->phi < 0)
+		angle->new_phi = (angle->phi + 360) * M_PI / 180;
+	else if (angle->phi > 360)
+		angle->new_phi = (angle->phi - 360) * M_PI / 180;
+	else
+		angle->new_phi = angle->phi * M_PI / 180;
+}
+
+int		draw_3d(t_vars *vars)
 {
 	t_data_draw		data_draw;
 	t_data_angle	angle;
@@ -34,16 +44,11 @@ void	draw_3d(t_vars *vars)
 
 	sprite = NULL;
 	if (get_data_angle(&angle, vars->player.pov, vars->data_array[0]->width) == -1)
-		return ; //  вернуть ошибку
+		return (-1);
 	data_draw.x_count = 0;
 	while (data_draw.x_count < vars->data_array[0]->width)
 	{
-		if (angle.phi < 0)
-			angle.new_phi = (angle.phi + 360) * M_PI / 180;
-		else if (angle.phi > 360)
-			angle.new_phi = (angle.phi - 360) * M_PI / 180;
-		else
-			angle.new_phi = angle.phi * M_PI / 180;
+		correct_angle(&angle);
 		data_draw = get_length(vars, &angle, &sprite);
 		data_draw.x_count = angle.count;
 		draw_vertical_line(data_draw, vars);
@@ -54,4 +59,5 @@ void	draw_3d(t_vars *vars)
 		get_sprite_ray(&(vars->player), &angle, sprite, vars->data_array);
 	free(angle.arr_length);
 	clear_sprite(&sprite);
+	return (1);
 }

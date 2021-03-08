@@ -51,7 +51,6 @@ int		pars_map_lst(char *line, t_vars *vars)
 	new->next = NULL;
 	new->length = ft_strlen(line);
 	new->line = ft_strdup(line);
-	// printf("%s\n", new->line);
 	tmp->next = new;
 	return (1);
 }
@@ -59,10 +58,10 @@ int		pars_map_lst(char *line, t_vars *vars)
 int		get_map_lst(char *line, t_vars *vars)
 {
 	vars->flags.map_start = 1;
-	if (pars_map_lst(line, vars) == -1)
+	if (pars_map_lst(line, vars) != 1)
 	{
 		clear_map_lst(vars);
-		return (-1);
+		return (-16);
 	}
 	return (1);
 }

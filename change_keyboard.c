@@ -26,6 +26,11 @@ int		press_keyboard(int keycode, t_vars *vars)
 		vars->keyboard.left = 1;
 	if (keycode == 124)
 		vars->keyboard.right = 1;
+	if (keycode == 53)
+	{
+		make_free_vars(vars);
+		exit(0);
+	}
 	return (0);
 }
 

@@ -16,7 +16,8 @@ void	draw_sky(int *y, t_data_draw data_draw, t_vars *vars)
 {
 	while (*y < vars->data_array[0]->height / 2 - data_draw.h / 2)
 	{
-		my_mlx_pixel_put(vars->data_array[0], data_draw.x_count, *y, vars->color_ceilling);
+		my_mlx_pixel_put(vars->data_array[0],
+		data_draw.x_count, *y, vars->color_ceilling);
 		(*y)++;
 	}
 }
@@ -29,16 +30,21 @@ void	draw_wall(int *y, t_data_draw data_draw, t_data **data_array)
 		y_xmp = (data_draw.h - data_array[0]->height) / 2;
 	else
 		y_xmp = 0;
-	while (*y < data_array[0]->height / 2 + data_draw.h / 2 && *y < data_array[0]->height)
+	while (*y < data_array[0]->height / 2 + data_draw.h / 2 &&
+	*y < data_array[0]->height)
 	{
 		if (data_draw.side == 'l')
-			data_draw.color = get_color(*data_array[1], y_xmp, data_draw.offset, data_draw.h);
+			data_draw.color = get_color(*data_array[1], y_xmp,
+			data_draw.offset, data_draw.h);
 		else if (data_draw.side == 'u')
-			data_draw.color = get_color(*data_array[2], y_xmp, data_draw.offset, data_draw.h);
+			data_draw.color = get_color(*data_array[2], y_xmp,
+			data_draw.offset, data_draw.h);
 		else if (data_draw.side == 'd')
-			data_draw.color = get_color(*data_array[3], y_xmp, data_draw.offset, data_draw.h);
+			data_draw.color = get_color(*data_array[3], y_xmp,
+			data_draw.offset, data_draw.h);
 		else
-			data_draw.color = get_color(*data_array[4], y_xmp, data_draw.offset, data_draw.h);
+			data_draw.color = get_color(*data_array[4], y_xmp,
+			data_draw.offset, data_draw.h);
 		my_mlx_pixel_put(data_array[0], data_draw.x_count, *y, data_draw.color);
 		(*y)++;
 		y_xmp++;
@@ -49,7 +55,8 @@ void	draw_ground(int *y, t_data_draw data_draw, t_vars *vars)
 {
 	while (*y < vars->data_array[0]->height)
 	{
-		my_mlx_pixel_put(vars->data_array[0], data_draw.x_count, *y, vars->color_floor);
+		my_mlx_pixel_put(vars->data_array[0], data_draw.x_count,
+		*y, vars->color_floor);
 		(*y)++;
 	}
 }

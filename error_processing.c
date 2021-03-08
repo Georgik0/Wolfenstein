@@ -12,6 +12,28 @@
 
 #include "header/my_type.h"
 
+void	error_processing_1(int error_code)
+{
+	if (error_code == -9)
+		write(2, "invalid north texture\n", 22);
+	else if (error_code == -10)
+		write(2, "invalid west texture\n", 21);
+	else if (error_code == -11)
+		write(2, "invalid south texture\n", 22);
+	else if (error_code == -12)
+		write(2, "duplicate param\n", 16);
+	else if (error_code == -13)
+		write(2, "invalid floor color\n", 20);
+	else if (error_code == -14)
+		write(2, "invalid ceilling color\n", 23);
+	else if (error_code == -15)
+		write(2, "invalid sprite texture\n", 20);
+	else if (error_code == -16)
+		write(2, "invalid map\n", 12);
+	else
+		return ;
+}
+
 void	error_processing(int error_code)
 {
 	if (error_code == -2)
@@ -28,6 +50,6 @@ void	error_processing(int error_code)
 		write(2, "invalid map\n", 12);
 	else if (error_code == -8)
 		write(2, "invalid screen param\n", 21);
-	else if (error_code == -9)
-		write(2, "errrrrrrrrrrr\n", 20);
+	else
+		error_processing_1(error_code);
 }

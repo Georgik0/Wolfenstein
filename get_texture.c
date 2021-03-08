@@ -20,12 +20,12 @@ int		get_north_texture(char *line, t_vars *vars)
 	if (*(line++) != 'O')
 		return (-1);
 	if (vars->flags.NO == 1)
-		return (-2); // параметр уже задан
+		return (-12); // параметр уже задан
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	if (!(vars->dir_wall_left = ft_strdup(line)))
-		return (-1);
+		return (-9);
 	vars->flags.NO = 1;
 	vars->flags.summ += 1;
 	return (1);
@@ -36,13 +36,13 @@ int		get_south_texture(char *line, t_vars *vars)
 	int		fd;
 
 	if (vars->flags.SO == 1)
-		return (-2); // параметр уже задан
+		return (-12); // параметр уже задан
 	line++;
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	if (!(vars->dir_wall_right = ft_strdup(line)))
-		return (-1);
+		return (-11);
 	vars->flags.SO = 1;
 	vars->flags.summ += 1;
 	return (1);
@@ -56,12 +56,12 @@ int		get_west_texture(char *line, t_vars *vars)
 	if (*(line++) != 'E')
 		return (-1);
 	if (vars->flags.WE == 1)
-		return (-2); // параметр уже задан
+		return (-12); // параметр уже задан
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	if (!(vars->dir_wall_up = ft_strdup(line)))
-		return (-1);
+		return (-10);
 	vars->flags.WE = 1;
 	vars->flags.summ += 1;
 	return (1);
@@ -75,7 +75,7 @@ int		get_east_texture(char *line, t_vars *vars)
 	if (*(line++) != 'A')
 		return (-1);
 	if (vars->flags.EA == 1)
-		return (-2); // параметр уже задан
+		return (-12); // параметр уже задан
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
@@ -91,12 +91,12 @@ int		get_sprite_texture(char *line, t_vars *vars)
 	int		fd;
 
 	if (vars->flags.S == 1)
-		return (-2); // параметр уже задан
+		return (-12); // параметр уже задан
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	if (!(vars->dir_sprite = ft_strdup(line)))
-		return (-1);
+		return (-15);
 	vars->flags.S = 1;
 	vars->flags.summ += 1;
 	return (1);

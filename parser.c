@@ -12,59 +12,6 @@
 
 #include "header/my_type.h"
 
-void	lst_clear(t_data_input **input_lst)
-{
-	t_data_input *begin;
-	t_data_input *next_list;
-
-	begin = *input_lst;
-	while (begin)
-	{
-		next_list = begin->next;
-		free(begin->str);
-		begin->str = NULL;
-		free(begin);
-		begin = next_list;
-	}
-	*input_lst = NULL;
-}
-
-int		add_line_in_lst(char *line, t_data_input **input_lst)
-{
-	t_data_input	*new_lst;
-	t_data_input	*tmp;
-
-	if (*input_lst == NULL)
-	{
-		if (!(*input_lst = (t_data_input *)malloc(sizeof(t_data_input))))
-			return (-1);
-		(*input_lst)->next = NULL;
-		if (!((*input_lst)->str = ft_strdup(line)))
-		{
-			free(input_lst);
-			return (-1);
-		}
-	}
-	else
-	{
-		if (!(new_lst = (t_data_input *)malloc(sizeof(t_data_input))))
-			return (-1);
-		new_lst->next = NULL;
-		if (!(new_lst->str = ft_strdup(line)))
-		{
-			free(new_lst);
-			return (-1);
-		}
-		tmp = *input_lst;
-		while (tmp->next)
-		{
-			tmp = tmp->next;
-		}
-		tmp->next = new_lst;
-	}
-	return (0);
-}
-
 void	make_free_vars(t_vars *vars)
 {
 	int	i;
@@ -94,7 +41,7 @@ int	parser1(t_vars *vars, t_data_input **input_lst)
 		lst_clear(input_lst);
 		return (out);
 	}
-	if ((out = get_param(vars, *input_lst)) != 1) // добавить обработку кода ошибки
+	if ((out = get_param(vars, *input_lst)) != 1)
 	{
 		lst_clear(input_lst);
 		make_free_vars(vars);
@@ -109,6 +56,7 @@ int	parser(int argc, char **argv, t_vars *vars)
 	int				out;
 	t_data_input	*input_lst;
 
+	input_lst = NULL;
 	if (argc != 2 && argc != 3)
 		return (-2);
 	if ((out = reading_file(argv, &input_lst)) != 1)

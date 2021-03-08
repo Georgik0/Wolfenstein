@@ -22,6 +22,6 @@ int		get_S(char *line, t_vars *vars)
 	|| *line == '\v' || *line == '\r')
 		out =get_sprite_texture(line, vars);
 	else
-		return (-1);
+		return (-2);
 	return (out);
 }
