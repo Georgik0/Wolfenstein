@@ -52,6 +52,8 @@ ${NAME}:	${OBJ} ${HEADERS}
 
 all: ${NAME}
 
+bonus: ${NAME}
+
 clean:
 	${MAKE} ${LIBFTDIR} clean
 	${RM} -f ${OBJ}
@@ -62,4 +64,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
