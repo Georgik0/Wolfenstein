@@ -42,7 +42,6 @@ t_collis			find_collision(double phi, t_vars *vars)
 	t_collis		collis;
 	t_collis		horisont;
 	t_collis		vertical;
-	t_sprite		*sprite;
 
 	if (phi == 0 || phi == M_PI / 2 || phi == M_PI || phi == 3 * M_PI / 2)
 		collis = find_block_unique(phi, vars, NULL);

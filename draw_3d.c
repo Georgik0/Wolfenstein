@@ -40,7 +40,6 @@ int		draw_3d(t_vars *vars)
 	t_data_draw		data_draw;
 	t_data_angle	angle;
 	t_sprite		*sprite;
-	int				count;
 
 	sprite = NULL;
 	if (get_data_angle(&angle, vars->player.pov,

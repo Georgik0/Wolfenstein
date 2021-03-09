@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_block_vertical.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   by: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 17:30:03 by skitsch           #+#    #+#             */
-/*   Updated: 2021/02/01 17:30:05 by skitsch          ###   ########.fr       */
+/*   Created: 2021/03/09 21:11:38 by skitsch           #+#    #+#             */
+/*   Updated: 2021/03/09 21:11:39 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_vars *vars, t_sprite **sp)
 	xy.y = get_around_b_y(vertic.by, phi);
 	xy.x = (int)nearbyint(vertic.bx) / 64;
 	while (xy.y >= 0 && xy.x >= 0 && xy.y < vars->length_map_y && xy.x <
-	ft_strlen(vars->map[xy.y]) - 1 && vars->map[xy.y][xy.x] != '1')
+	(int)ft_strlen(vars->map[xy.y]) - 1 && vars->map[xy.y][xy.x] != '1')
 	{
 		if (vars->map[xy.y][xy.x] == '2')
 		{

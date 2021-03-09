@@ -15,13 +15,13 @@
 int		press_keyboard(int keycode, t_vars *vars)
 {
 	if (keycode == 13)
-		vars->keyboard.W = 1;
+		vars->keyboard.w = 1;
 	if (keycode == 1)
-		vars->keyboard.S = 1;
+		vars->keyboard.s = 1;
 	if (keycode == 0)
-		vars->keyboard.A = 1;
+		vars->keyboard.a = 1;
 	if (keycode == 2)
-		vars->keyboard.D = 1;
+		vars->keyboard.d = 1;
 	if (keycode == 123)
 		vars->keyboard.left = 1;
 	if (keycode == 124)
@@ -37,13 +37,13 @@ int		press_keyboard(int keycode, t_vars *vars)
 int		dismiss_keyboard(int keycode, t_vars *vars)
 {
 	if (keycode == 13)
-		vars->keyboard.W = 0;
+		vars->keyboard.w = 0;
 	if (keycode == 1)
-		vars->keyboard.S = 0;
+		vars->keyboard.s = 0;
 	if (keycode == 0)
-		vars->keyboard.A = 0;
+		vars->keyboard.a = 0;
 	if (keycode == 2)
-		vars->keyboard.D = 0;
+		vars->keyboard.d = 0;
 	if (keycode == 123)
 		vars->keyboard.left = 0;
 	if (keycode == 124)

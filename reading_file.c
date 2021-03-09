@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-int		reading_file1(char **argv, t_data_input **input_lst,
+int		reading_file1(t_data_input **input_lst,
 char *line, int fd)
 {
 	if (add_line_in_lst(line, input_lst) == -1)
@@ -46,7 +46,7 @@ int		reading_file(char **argv, t_data_input **input_lst)
 		free(line);
 		line = NULL;
 	}
-	if (reading_file1(argv, input_lst, line, fd) == -4)
+	if (reading_file1(input_lst, line, fd) == -4)
 		return (-4);
 	return (1);
 }

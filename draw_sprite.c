@@ -22,8 +22,7 @@ t_sprite_calculation *calc)
 		dr_sp->y = 0;
 }
 
-void	put_pixel_sprite(t_data **data_array, t_sprite_calculation *calc,
-t_draw_sprite *dr_sp)
+void	put_pixel_sprite(t_data **data_array, t_draw_sprite *dr_sp)
 {
 	if (dr_sp->x_xmp < data_array[5]->width)
 	{
@@ -51,7 +50,7 @@ t_data_angle *angle)
 				break ;
 			if (angle->arr_length[dr_sp.x] < calc->length)
 				break ;
-			put_pixel_sprite(data_array, calc, &dr_sp);
+			put_pixel_sprite(data_array, &dr_sp);
 			dr_sp.y_xmp += calc->step_y;
 			dr_sp.y++;
 		}
@@ -77,7 +76,7 @@ t_sprite_calculation *calc, t_data_angle *angle)
 				break ;
 			if (angle->arr_length[dr_sp.x] < calc->length)
 				break ;
-			put_pixel_sprite(data_array, calc, &dr_sp);
+			put_pixel_sprite(data_array, &dr_sp);
 			dr_sp.y_xmp += calc->step_y;
 			dr_sp.y++;
 		}

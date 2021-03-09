@@ -60,7 +60,6 @@ int		check_line(char *line, t_vars *vars)
 
 int		get_param(t_vars *vars, t_data_input *input_lst)
 {
-	t_data_input	*next;
 	int				out;
 
 	while (input_lst)

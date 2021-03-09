@@ -68,10 +68,11 @@ int			add_sprite(t_sprite **sprite_start, double x,
 double y, t_player player)
 {
 	t_data_sprite	data_sp;
-	int				out;
 
 	data_sp.length = sqrt((player.x - x) * (player.x - x) +
 	(player.y - y) * (player.y - y));
+	if (data_sp.length > 3000)
+		return (1);
 	if (*sprite_start == NULL)
 	{
 		if (!(*sprite_start = (t_sprite *)malloc(sizeof(t_sprite))))
@@ -112,7 +113,6 @@ void		get_sprite_ray(t_player *player, t_data_angle *angle,
 t_sprite *sprite, t_data **data_array)
 {
 	t_sprite_calculation	calc;
-	double					d_gamma;
 
 	calc.d_phi = angle->d_phi;
 	calc.sp_width = 16;

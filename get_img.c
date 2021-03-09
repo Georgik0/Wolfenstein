@@ -61,8 +61,6 @@ int		get_img_2(t_vars *vars)
 
 int		get_img(t_vars *vars)
 {
-	int		img_width;
-	int		img_heigh;
 	int		out;
 
 	vars->mlx = mlx_init();

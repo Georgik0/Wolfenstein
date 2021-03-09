@@ -34,6 +34,8 @@ void	error_processing_1(int error_code)
 		write(2, "no player\n", 10);
 	else if (error_code == -18)
 		write(2, "duplicate player\n", 17);
+	else if (error_code == -19)
+		write(2, "invalid format\n", 15);
 	else
 		return ;
 }

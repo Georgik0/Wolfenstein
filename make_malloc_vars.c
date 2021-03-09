@@ -26,10 +26,10 @@ void	set_flags(t_vars *vars)
 	vars->flags.map_start = 0;
 	vars->flags.map_end = 0;
 	vars->player.check = 0;
-	vars->keyboard.A = 0;
-	vars->keyboard.D = 0;
-	vars->keyboard.S = 0;
-	vars->keyboard.W = 0;
+	vars->keyboard.a = 0;
+	vars->keyboard.d = 0;
+	vars->keyboard.s = 0;
+	vars->keyboard.w = 0;
 	vars->keyboard.left = 0;
 	vars->keyboard.right = 0;
 }
@@ -66,5 +66,6 @@ int		make_malloc_vars(t_vars *vars)
 	}
 	set_file_name(vars);
 	set_flags(vars);
+	get_width_height(vars);
 	return (1);
 }

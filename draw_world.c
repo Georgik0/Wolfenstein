@@ -64,7 +64,6 @@ void	draw_ground(int *y, t_data_draw data_draw, t_vars *vars)
 void	draw_vertical_line(t_data_draw data_draw, t_vars *vars)
 {
 	int			y;
-	int			y_xmp;
 
 	data_draw.h = (int)floor(vars->data_array[0]->d * 64 / data_draw.length);
 	y = 0;

@@ -46,7 +46,7 @@ t_vars *vars, t_sprite **sp)
 	xy.y = (int)nearbyint(horis.ay) / 64;
 	xy.x = get_around_ax(horis.ax, phi);
 	while (xy.y >= 0 && xy.x >= 0 && xy.y < vars->length_map_y && xy.x <
-	ft_strlen(vars->map[xy.y]) && vars->map[xy.y][xy.x] != '1')
+	(int)ft_strlen(vars->map[xy.y]) && vars->map[xy.y][xy.x] != '1')
 	{
 		if (vars->map[xy.y][xy.x] == '2')
 		{

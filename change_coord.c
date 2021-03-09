@@ -98,13 +98,13 @@ int		change_coord(t_vars *vars)
 		vars->player.pov -= 360;
 	if (vars->player.pov < 0)
 		vars->player.pov += 360;
-	if (vars->keyboard.W)
+	if (vars->keyboard.w)
 		change_coord_w(vars);
-	if (vars->keyboard.S)
+	if (vars->keyboard.s)
 		change_coord_s(vars);
-	if (vars->keyboard.A)
+	if (vars->keyboard.a)
 		change_coord_a(vars);
-	if (vars->keyboard.D)
+	if (vars->keyboard.d)
 		change_coord_d(vars);
 	return (0);
 }

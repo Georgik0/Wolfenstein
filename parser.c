@@ -52,6 +52,24 @@ int		parser1(t_vars *vars, t_data_input **input_lst)
 	return (1);
 }
 
+int		check_name_map(char *name)
+{
+	int	i;
+
+	i = 0;
+	while (name[i] != '\0')
+		i++;
+	if (name[--i] != 'b')
+		return (-19);
+	if (name[--i] != 'u')
+		return (-19);
+	if (name[--i] != 'c')
+		return (-19);
+	if (name[--i] != '.')
+		return (-19);
+	return (1);
+}
+
 int		parser(int argc, char **argv, t_vars *vars)
 {
 	int				out;
@@ -60,6 +78,8 @@ int		parser(int argc, char **argv, t_vars *vars)
 	input_lst = NULL;
 	if (argc != 2 && argc != 3)
 		return (-2);
+	if ((out = check_name_map(argv[1])) != 1)
+		return (out);
 	if ((out = reading_file(argv, &input_lst)) != 1)
 		return (out);
 	if ((out = parser1(vars, &input_lst)) != 1)

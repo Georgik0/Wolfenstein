@@ -47,8 +47,6 @@ static int		make_malloc_map(t_vars *vars)
 
 int				get_map(t_vars *vars)
 {
-	int		number_x;
-
 	vars->length_map_y = get_length_x(vars->map_lst);
 	if (make_malloc_map(vars) == -1)
 		return (-1);

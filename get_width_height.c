@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_param.c                                      :+:      :+:    :+:   */
+/*   get_width_height.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 18:10:10 by skitsch           #+#    #+#             */
-/*   Updated: 2021/03/09 18:10:13 by skitsch          ###   ########.fr       */
+/*   Created: 2021/03/09 18:19:44 by skitsch           #+#    #+#             */
+/*   Updated: 2021/03/09 18:19:46 by skitsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/my_type.h"
 
-void	clear_param(char **screen)
+void	get_width_height(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
-	while (screen[i])
-	{
-		free(screen[i]);
-		screen[i] = NULL;
-		i++;
-	}
-	free(screen);
+	mlx_get_screen_size(&(vars->max_width), &(vars->max_height));
 }

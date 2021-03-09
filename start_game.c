@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "header/my_type.h"
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -45,8 +44,6 @@ int			make_exit(t_vars *vars)
 int			main(int argc, char **argv)
 {
 	t_vars		vars;
-	int			img_width;
-	int			img_heigh;
 	int			out;
 
 	if ((out = parser(argc, argv, &vars)) != 1)

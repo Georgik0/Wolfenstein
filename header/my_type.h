@@ -166,13 +166,12 @@ typedef struct				s_data_angle
 
 }							t_data_angle;
 
-
 typedef struct				s_keyboard
 {
-	int						A;
-	int						D;
-	int						W;
-	int						S;
+	int						a;
+	int						d;
+	int						w;
+	int						s;
 	int						left;
 	int						right;
 
@@ -182,7 +181,7 @@ typedef struct				s_draw_sprite
 {
 	int						x;
 	int						y;
-	int						color;
+	unsigned int			color;
 	double					y_xmp;
 	double					x_xmp;
 
@@ -266,6 +265,8 @@ typedef struct				s_vars
 	int						length_map_y;
 	int						color_floor;
 	int						color_ceilling;
+	int						max_width;
+	int						max_height;
 
 }							t_vars;
 
@@ -276,7 +277,6 @@ typedef struct				s_data_input
 
 }							t_data_input;
 
-
 t_collis					find_collision(double phi, t_vars *vars);
 t_collis					find_block_unique(double phi, t_vars *vars,
 							t_sprite **sprite);
@@ -286,23 +286,27 @@ t_collis					find_block_vertical(t_vars *vars, double phi,
 							t_sprite **sprite);
 void						print_line(int x0, int y0, int x1, int y1,
 							t_data *img);
-void						draw_ray(double pov, t_player player, char (*map)[10],
-							t_data *img);
+void						draw_ray(double pov, t_player player,
+							char (*map)[10], t_data *img);
 t_data_draw					get_length(t_vars *vars, t_data_angle *angle,
 							t_sprite **sprite);
-void						my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void						my_mlx_pixel_put(t_data *data, int x,
+							int y, int color);
 int							draw_3d(t_vars *vars);
-unsigned int				get_color(t_data data, int y, double offset, int h);
-int							add_sprite(t_sprite **sprite_start, double x, double y,
-							t_player player);
+unsigned int				get_color(t_data data, int y,
+							double offset, int h);
+int							add_sprite(t_sprite **sprite_start,
+							double x, double y, t_player player);
 void						clear_sprite(t_sprite **sprite_start);
 unsigned int				get_color_sprite(t_data data, int y, int x);
-void						get_sprite_ray(t_player *player, t_data_angle *angle,
+void						get_sprite_ray(t_player *player,
+							t_data_angle *angle,
 							t_sprite *sprite, t_data **data_array);
-void						get_calc(t_sprite *sprite, t_sprite_calculation *calc,
+void						get_calc(t_sprite *sprite,
+							t_sprite_calculation *calc,
 							t_player *player, t_data **data_array);
-void						draw_sprite(t_sprite_calculation *calc, t_data **data_array,
-							t_data_angle *angle);
+void						draw_sprite(t_sprite_calculation *calc,
+							t_data **data_array, t_data_angle *angle);
 int							get_next_line(int fd, char **line);
 int							parser(int argc, char **argv, t_vars *vars);
 int							get_param(t_vars *vars, t_data_input *input_lst);
@@ -331,23 +335,31 @@ void						change_coord_w(t_vars *vars);
 void						change_coord_s(t_vars *vars);
 int							press_keyboard(int keycode, t_vars *vars);
 int							dismiss_keyboard(int keycode, t_vars *vars);
-void						draw_vertical_line(t_data_draw data_draw, t_vars *vars);
-void						draw_ground(int *y, t_data_draw data_draw, t_vars *vars);
-void						draw_wall(int *y, t_data_draw data_draw, t_data **data_array);
-void						draw_sky(int *y, t_data_draw data_draw, t_vars *vars);
+void						draw_vertical_line(t_data_draw data_draw,
+							t_vars *vars);
+void						draw_ground(int *y, t_data_draw data_draw,
+							t_vars *vars);
+void						draw_wall(int *y, t_data_draw data_draw,
+							t_data **data_array);
+void						draw_sky(int *y, t_data_draw data_draw,
+							t_vars *vars);
 int							get_dx(double phi);
 int							get_dy(double phi);
 int							get_ax(t_player player, double phi);
 int							get_ay(t_player player, double phi);
-int							reading_file(char **argv, t_data_input **input_lst);
-int							add_line_in_lst(char *line, t_data_input **input_lst);
+int							reading_file(char **argv,
+							t_data_input **input_lst);
+int							add_line_in_lst(char *line,
+							t_data_input **input_lst);
 void						lst_clear(t_data_input **input_lst);
 void						error_processing(int error_code);
 void						make_free_vars(t_vars *vars);
 int							check_up(char **map, int x, int y);
-int							check_bottom(char **map, int x, int y, int length_map_y);
+int							check_bottom(char **map, int x, int y,
+							int length_map_y);
 int							check_left(char **map, int x, int y);
 int							check_right(char **map, int x, int y);
 void						clear_param(char **screen);
+void						get_width_height(t_vars *vars);
 
 #endif

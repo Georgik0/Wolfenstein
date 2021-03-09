@@ -37,7 +37,7 @@ void	get_calc2_1(t_sprite_calculation *calc, t_data **data_array)
 	calc->middle_sprite = calc->ray_pov + calc->delta_rays;
 }
 
-void	get_calc2(t_sprite *sprite, t_sprite_calculation *calc,
+void	get_calc2(t_sprite_calculation *calc,
 t_player *player, t_data **data_array)
 {
 	double	d_gamma;
@@ -70,5 +70,5 @@ void	get_calc(t_sprite *sprite, t_sprite_calculation *calc,
 t_player *player, t_data **data_array)
 {
 	get_calc1(sprite, calc, player, data_array);
-	get_calc2(sprite, calc, player, data_array);
+	get_calc2(calc, player, data_array);
 }

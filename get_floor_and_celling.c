@@ -15,22 +15,33 @@
 static int		check_digit(char *param)
 {
 	int		i;
+	int		count;
 
 	i = 0;
+	count = 0;
 	if (param == NULL)
 		return (-1);
 	if (*param == '\0')
 		return (-1);
+	while (param[i] == ' ' || param[i] == '\t' || param[i] == '\f'
+	|| param[i] == '\v' || param[i] == '\r')
+		i++;
 	while (param[i])
 	{
-		if (ft_isdigit(param[i]) == 0)
+		if (ft_isdigit(param[i]) == 0 && !(param[i] == ' ' || param[i] == '\t'
+		|| param[i] == '\f' || param[i] == '\v' || param[i] == '\r'))
 			return (-1);
+		if (!(param[i] == ' ' || param[i] == '\t'
+		|| param[i] == '\f' || param[i] == '\v' || param[i] == '\r'))
+			count++;
 		i++;
 	}
-	return (0);
+	if (count > 3)
+		return (-1);
+	return (1);
 }
 
-int				pars_color(char **param, t_vars *vars)
+int				pars_color(char **param)
 {
 	int	r;
 	int	g;
@@ -40,9 +51,6 @@ int				pars_color(char **param, t_vars *vars)
 	if (check_digit(param[0]) == -1 || check_digit(param[1]) == -1 ||
 	check_digit(param[2]) == -1)
 		return (-1);
-	if (ft_strlen(param[0]) > 3 || ft_strlen(param[1]) > 3 ||
-	ft_strlen(param[2]) > 3)
-		return (-1);
 	if ((r = ft_atoi(param[0])) > 255)
 		return (-1);
 	if ((g = ft_atoi(param[1])) > 255)
@@ -51,6 +59,22 @@ int				pars_color(char **param, t_vars *vars)
 		return (-1);
 	color = 256 * 256 * r + 256 * g + b;
 	return (color);
+}
+
+int				check_comma(char *str)
+{
+	int		count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			count++;
+		if (count > 2)
+			return (-1);
+		str++;
+	}
+	return (1);
 }
 
 int				get_floor_color(char *line, t_vars *vars)
@@ -64,12 +88,12 @@ int				get_floor_color(char *line, t_vars *vars)
 	|| *line == '\v' || *line == '\r')
 		line++;
 	param = ft_split(line, ',');
-	if (num_screen_param(param) == -3)
+	if (check_comma(line) == -1 || num_screen_param(param) != 3)
 	{
 		clear_param(param);
 		return (-13);
 	}
-	if ((vars->color_floor = pars_color(param, vars)) == -1)
+	if ((vars->color_floor = pars_color(param)) == -1)
 	{
 		clear_param(param);
 		return (-13);
@@ -91,12 +115,12 @@ int				get_ceilling_color(char *line, t_vars *vars)
 	|| *line == '\v' || *line == '\r')
 		line++;
 	param = ft_split(line, ',');
-	if (num_screen_param(param) == -3)
+	if (check_comma(line) == -1 || num_screen_param(param) != 3)
 	{
 		clear_param(param);
 		return (-14);
 	}
-	if ((vars->color_ceilling = pars_color(param, vars)) == -1)
+	if ((vars->color_ceilling = pars_color(param)) == -1)
 	{
 		clear_param(param);
 		return (-14);

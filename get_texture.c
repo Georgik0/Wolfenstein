@@ -14,8 +14,6 @@
 
 int		get_north_texture(char *line, t_vars *vars)
 {
-	int		fd;
-
 	line++;
 	if (*(line++) != 'O')
 		return (-1);
@@ -33,8 +31,6 @@ int		get_north_texture(char *line, t_vars *vars)
 
 int		get_south_texture(char *line, t_vars *vars)
 {
-	int		fd;
-
 	if (vars->flags.so == 1)
 		return (-12);
 	line++;
@@ -50,8 +46,6 @@ int		get_south_texture(char *line, t_vars *vars)
 
 int		get_west_texture(char *line, t_vars *vars)
 {
-	int		fd;
-
 	line++;
 	if (*(line++) != 'E')
 		return (-1);
@@ -69,8 +63,6 @@ int		get_west_texture(char *line, t_vars *vars)
 
 int		get_east_texture(char *line, t_vars *vars)
 {
-	int		fd;
-
 	line++;
 	if (*(line++) != 'A')
 		return (-1);
@@ -88,8 +80,6 @@ int		get_east_texture(char *line, t_vars *vars)
 
 int		get_sprite_texture(char *line, t_vars *vars)
 {
-	int		fd;
-
 	if (vars->flags.s == 1)
 		return (-12);
 	while (*line == ' ' || *line == '\t' || *line == '\f'
