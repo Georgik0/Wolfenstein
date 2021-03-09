@@ -14,14 +14,14 @@
 
 void	set_flags(t_vars *vars)
 {
-	vars->flags.C = 0;
-	vars->flags.EA = 0;
-	vars->flags.F = 0;
-	vars->flags.NO = 0;
-	vars->flags.R = 0;
-	vars->flags.S = 0;
-	vars->flags.SO = 0;
-	vars->flags.WE = 0;
+	vars->flags.c = 0;
+	vars->flags.ea = 0;
+	vars->flags.f = 0;
+	vars->flags.no = 0;
+	vars->flags.r = 0;
+	vars->flags.s = 0;
+	vars->flags.so = 0;
+	vars->flags.we = 0;
 	vars->flags.summ = 0;
 	vars->flags.map_start = 0;
 	vars->flags.map_end = 0;

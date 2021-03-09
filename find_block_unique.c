@@ -18,8 +18,8 @@ t_collis	get_collis(t_coord_uniq coord, t_vars *vars, t_sprite **sprite)
 	int			y;
 	t_collis	collis;
 
-	x = coord.Ax / 64;
-	y = coord.Ay / 64;
+	x = coord.ax / 64;
+	y = coord.ay / 64;
 	while (vars->map[y][x] != '1')
 	{
 		if (vars->map[y][x] == '2')
@@ -30,13 +30,13 @@ t_collis	get_collis(t_coord_uniq coord, t_vars *vars, t_sprite **sprite)
 				return (collis);
 			}
 		}
-		coord.Ax += coord.dx;
-		coord.Ay += coord.dy;
-		x = coord.Ax / 64;
-		y = coord.Ay / 64;
+		coord.ax += coord.dx;
+		coord.ay += coord.dy;
+		x = coord.ax / 64;
+		y = coord.ay / 64;
 	}
-	collis.x = coord.Ax;
-	collis.y = coord.Ay;
+	collis.x = coord.ax;
+	collis.y = coord.ay;
 	return (collis);
 }
 
@@ -45,8 +45,8 @@ t_collis	find_block_unique(double phi, t_vars *vars, t_sprite **sprite)
 	t_coord_uniq	coord;
 	t_collis		collis;
 
-	coord.Ax = get_Ax(vars->player, phi);
-	coord.Ay = get_Ay(vars->player, phi);
+	coord.ax = get_ax(vars->player, phi);
+	coord.ay = get_ay(vars->player, phi);
 	coord.dx = get_dx(phi);
 	coord.dy = get_dy(phi);
 	collis = get_collis(coord, vars, sprite);

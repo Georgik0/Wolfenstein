@@ -29,14 +29,14 @@ int		check_letter(char *line, t_vars *vars, int i)
 	else if (*line == 'C')
 		return (get_ceilling_color(line, vars));
 	else if (*line == 'S')
-		return (get_S(line, vars));
+		return (get_s(line, vars));
 	else if (*line == '1')
 		return (get_map_lst(line - i, vars));
 	else
 		return (-2);
 }
 
-int	check_line(char *line, t_vars *vars)
+int		check_line(char *line, t_vars *vars)
 {
 	int	out;
 	int	i;
@@ -58,7 +58,7 @@ int	check_line(char *line, t_vars *vars)
 	return (out);
 }
 
-int	get_param(t_vars *vars, t_data_input *input_lst)
+int		get_param(t_vars *vars, t_data_input *input_lst)
 {
 	t_data_input	*next;
 	int				out;
@@ -72,7 +72,7 @@ int	get_param(t_vars *vars, t_data_input *input_lst)
 		input_lst = input_lst->next;
 	}
 	get_map(vars);
-	if (check_map(vars) == -1)
-		return (-16);
+	if ((out = check_map(vars)) != 1)
+		return (out);
 	return (1);
 }

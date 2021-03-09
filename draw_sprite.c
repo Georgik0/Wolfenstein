@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-void	get_dr_sp(t_draw_sprite	*dr_sp, t_data **data_array,
+void	get_dr_sp(t_draw_sprite *dr_sp, t_data **data_array,
 t_sprite_calculation *calc)
 {
 	dr_sp->y_xmp = 0;

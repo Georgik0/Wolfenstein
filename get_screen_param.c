@@ -38,21 +38,19 @@ int		check_digit(char *str)
 int		get_width(char *str, t_vars *vars)
 {
 	int	width;
-	int	i;
 
-	i = 0;
-	while (*(str + i) == '0')
-		i++;
-	if (*(str + i) == '\0')
+	while (*str == '0')
+		str++;
+	if (*str == '\0')
 	{
 		vars->data_array[0]->width = MIN_WIDTH;
 		return (1);
 	}
-	if (check_digit(str + i))
+	if (check_digit(str))
 	{
-		if (ft_strlen(str + i) > 5)
+		if (ft_strlen(str) > 5)
 			vars->data_array[0]->width = MAX_WIDTH;
-		else if ((width = ft_atoi(str + i)) >= MAX_WIDTH)
+		else if ((width = ft_atoi(str)) >= MAX_WIDTH)
 			vars->data_array[0]->width = MAX_WIDTH;
 		else if (width <= MIN_WIDTH)
 			vars->data_array[0]->width = MIN_WIDTH;
@@ -91,20 +89,6 @@ int		get_height(char *str, t_vars *vars)
 	else
 		return (-1);
 	return (1);
-}
-
-void	clear_param(char **screen)
-{
-	int	i;
-
-	i = 0;
-	while (screen[i])
-	{
-		free(screen[i]);
-		screen[i] = NULL;
-		i++;
-	}
-	free(screen);
 }
 
 int		get_screen_param(char *line, t_vars *vars)

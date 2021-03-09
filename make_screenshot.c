@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-void	fill_header(int fd, int summary_size)
+void		fill_header(int fd, int summary_size)
 {
 	unsigned char	header_bmp[14];
 
@@ -33,10 +33,10 @@ void	fill_header(int fd, int summary_size)
 	write(fd, header_bmp, 14);
 }
 
-void	fill_information(int fd, t_vars *vars)
+void		fill_information(int fd, t_vars *vars)
 {
-	unsigned char		info_header_bmp[40];
-	int		i;
+	unsigned char	info_header_bmp[40];
+	int				i;
 
 	info_header_bmp[0] = 40;
 	info_header_bmp[1] = 0;
@@ -59,7 +59,7 @@ void	fill_information(int fd, t_vars *vars)
 	write(fd, info_header_bmp, 40);
 }
 
-void	fill_images(int fd, t_vars *vars)
+void		fill_images(int fd, t_vars *vars)
 {
 	int					y_xpm;
 	int					x_xpm;
@@ -71,16 +71,17 @@ void	fill_images(int fd, t_vars *vars)
 		x_xpm = 0;
 		while (x_xpm < vars->data_array[0]->width)
 		{
-			color = *(int*)(vars->data_array[0]->addr + (y_xpm * vars->data_array[0]->line_length + x_xpm * (vars->data_array[0]->bits_per_pixel / 8)));
+			color = *(int*)(vars->data_array[0]->addr +
+			(y_xpm * vars->data_array[0]->line_length +
+			x_xpm * (vars->data_array[0]->bits_per_pixel / 8)));
 			write(fd, &color, 3);
 			x_xpm += 1;
 		}
 		y_xpm--;
 	}
-
 }
 
-int		make_screenshot(t_vars *vars, char **argv)
+int			make_screenshot(t_vars *vars, char **argv)
 {
 	int			fd;
 	int			summary_size;

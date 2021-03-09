@@ -10,6 +10,9 @@
 		"string": "c",
 		"string_view": "c",
 		"my_type.h": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"complex": "c",
+		"new": "c",
+		"fcntl.h": "c"
 	}
 }

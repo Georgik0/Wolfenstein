@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-void	change_coord_W_1(t_vars *vars, int delta_x, int delta_y)
+void	change_coord_w_1(t_vars *vars, int delta_x, int delta_y)
 {
 	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
@@ -28,7 +28,7 @@ void	change_coord_W_1(t_vars *vars, int delta_x, int delta_y)
 	}
 }
 
-void	change_coord_W(t_vars *vars)
+void	change_coord_w(t_vars *vars)
 {
 	int	delta_x;
 	int	delta_y;
@@ -47,10 +47,10 @@ void	change_coord_W(t_vars *vars)
 		vars->player.y += delta_y;
 		return ;
 	}
-	change_coord_W_1(vars, delta_x, delta_y);
+	change_coord_w_1(vars, delta_x, delta_y);
 }
 
-void	change_coord_S_1(t_vars *vars, int delta_x, int delta_y)
+void	change_coord_s_1(t_vars *vars, int delta_x, int delta_y)
 {
 	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
@@ -66,7 +66,7 @@ void	change_coord_S_1(t_vars *vars, int delta_x, int delta_y)
 	}
 }
 
-void	change_coord_S(t_vars *vars)
+void	change_coord_s(t_vars *vars)
 {
 	int	delta_x;
 	int	delta_y;
@@ -85,7 +85,7 @@ void	change_coord_S(t_vars *vars)
 		vars->player.y += delta_y;
 		return ;
 	}
-	change_coord_S_1(vars, delta_x, delta_y);
+	change_coord_s_1(vars, delta_x, delta_y);
 }
 
 int		change_coord(t_vars *vars)
@@ -99,12 +99,12 @@ int		change_coord(t_vars *vars)
 	if (vars->player.pov < 0)
 		vars->player.pov += 360;
 	if (vars->keyboard.W)
-		change_coord_W(vars);
+		change_coord_w(vars);
 	if (vars->keyboard.S)
-		change_coord_S(vars);
+		change_coord_s(vars);
 	if (vars->keyboard.A)
-		change_coord_A(vars);
+		change_coord_a(vars);
 	if (vars->keyboard.D)
-		change_coord_D(vars);
+		change_coord_d(vars);
 	return (0);
 }

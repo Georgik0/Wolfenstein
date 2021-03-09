@@ -12,15 +12,16 @@
 
 #include "header/my_type.h"
 
-int		get_S(char *line, t_vars *vars)
+int		get_s(char *line, t_vars *vars)
 {
 	int	out;
+
 	line++;
 	if (*line == 'O')
 		out = get_south_texture(line, vars);
 	else if (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
-		out =get_sprite_texture(line, vars);
+		out = get_sprite_texture(line, vars);
 	else
 		return (-2);
 	return (out);

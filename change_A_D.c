@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_A_D.c                                       :+:      :+:    :+:   */
+/*   change_a_d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-void	change_coord_A_1(t_vars *vars, int delta_x, int delta_y)
+void	change_coord_a_1(t_vars *vars, int delta_x, int delta_y)
 {
 	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
@@ -28,7 +28,7 @@ void	change_coord_A_1(t_vars *vars, int delta_x, int delta_y)
 	}
 }
 
-void	change_coord_A(t_vars *vars)
+void	change_coord_a(t_vars *vars)
 {
 	int	delta_x;
 	int	delta_y;
@@ -47,10 +47,10 @@ void	change_coord_A(t_vars *vars)
 		vars->player.y += delta_y;
 		return ;
 	}
-	change_coord_A_1(vars, delta_x, delta_y);
+	change_coord_a_1(vars, delta_x, delta_y);
 }
 
-void	change_coord_D_1(t_vars *vars, int delta_x, int delta_y)
+void	change_coord_d_1(t_vars *vars, int delta_x, int delta_y)
 {
 	if (vars->map[(vars->player.y + delta_y) / 64]
 	[(vars->player.x) / 64] != '1')
@@ -66,7 +66,7 @@ void	change_coord_D_1(t_vars *vars, int delta_x, int delta_y)
 	}
 }
 
-void	change_coord_D(t_vars *vars)
+void	change_coord_d(t_vars *vars)
 {
 	int	delta_x;
 	int	delta_y;
@@ -85,5 +85,5 @@ void	change_coord_D(t_vars *vars)
 		vars->player.y += delta_y;
 		return ;
 	}
-	change_coord_D_1(vars, delta_x, delta_y);
+	change_coord_d_1(vars, delta_x, delta_y);
 }

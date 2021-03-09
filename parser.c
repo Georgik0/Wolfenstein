@@ -33,9 +33,10 @@ void	make_free_vars(t_vars *vars)
 	free(vars->map);
 }
 
-int	parser1(t_vars *vars, t_data_input **input_lst)
+int		parser1(t_vars *vars, t_data_input **input_lst)
 {
 	int		out;
+
 	if ((out = make_malloc_vars(vars)) != 1)
 	{
 		lst_clear(input_lst);
@@ -51,7 +52,7 @@ int	parser1(t_vars *vars, t_data_input **input_lst)
 	return (1);
 }
 
-int	parser(int argc, char **argv, t_vars *vars)
+int		parser(int argc, char **argv, t_vars *vars)
 {
 	int				out;
 	t_data_input	*input_lst;
@@ -70,7 +71,7 @@ int	parser(int argc, char **argv, t_vars *vars)
 		if ((out = make_screenshot(vars, argv)) != 1)
 			return (out);
 		make_free_vars(vars);
-		exit (0);
+		exit(0);
 	}
 	return (1);
 }

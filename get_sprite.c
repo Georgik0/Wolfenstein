@@ -12,70 +12,13 @@
 
 #include "header/my_type.h"
 
-// int			add_sprite2(t_sprite **sprite_start, double length, double x, double y)
-// {
-// 	t_sprite	*new;
-
-// 	while (!((*sprite_start)->x == x && (*sprite_start)->y == y) && (*sprite_start)->next != NULL)
-// 	{
-
-// 	}
-// 	if ((*sprite_start)->x == x && (*sprite_start)->y == y)
-// 		return (1);
-// 	if (!(new = (t_sprite *)malloc(sizeof(t_sprite))))
-// 		return (0);
-// 	new->length = length;
-// 	new->x = x;
-// 	new->y = y;
-// 	if ((*sprite_start)->length < length)
-// 	{
-// 		new->next = *sprite_start;
-// 		*sprite_start = new;
-// 		return (1);
-// 	}
-// 	else if ((*sprite_start)->next == NULL)
-// 		new->next = NULL;
-// 	else if ((*sprite_start)->next->length > length)
-// 		new->next = (*sprite_start)->next;
-// 	(*sprite_start)->next = new;
-// 	return (1);
-// }
-
-int			add_sprite1(t_sprite **sprite_start, double length, double x, double y)
+int			add_sprite2(t_sprite **sprite_start, t_data_sprite *data_sp,
+t_sprite *new, t_sprite *iter)
 {
-	t_sprite	*new;
-	t_sprite	*iter;
-
-	// if (x == 96 && y == 160)
-	// 	printf("test1\n");
-	// if (x == 160 && y == 96)
-	// 	printf("test\n");
-	// if (x == 160 && y == 160)
-	// 	printf("test\n");
-	// if (x == 224 && y == 160)
-	// 	printf("test\n");
-	// if (x == 224 && y == 96)
-	// 	printf("test\n");
-	iter = *sprite_start;
-	if ((iter)->x == x && (iter)->y == y)
-		return (1);
-	if ((*sprite_start)->length > length)
-	{
-		while (iter->next != NULL && (iter)->next->length > length)
-		{
-			if ((iter)->x == x && (iter)->y == y)
-				return (1);
-			iter = (iter)->next;
-		}
-	}
-	if ((iter)->x == x && (iter)->y == y)
-		return (1);
-	if (!(new = (t_sprite *)malloc(sizeof(t_sprite))))
-		return (0);
-	new->length = length;
-	new->x = x;
-	new->y = y;
-	if ((*sprite_start)->length <= length)
+	new->length = data_sp->length;
+	new->x = data_sp->x;
+	new->y = data_sp->y;
+	if ((*sprite_start)->length <= data_sp->length)
 	{
 		new->next = *sprite_start;
 		*sprite_start = new;
@@ -83,9 +26,9 @@ int			add_sprite1(t_sprite **sprite_start, double length, double x, double y)
 	}
 	else if ((iter)->next == NULL)
 		new->next = NULL;
-	else if ((iter)->next->length <= length)
+	else if ((iter)->next->length <= data_sp->length)
 	{
-		if ((iter)->next->x == x && (iter)->next->y == y)
+		if ((iter)->next->x == data_sp->x && (iter)->next->y == data_sp->y)
 		{
 			free(new);
 			return (1);
@@ -96,24 +39,53 @@ int			add_sprite1(t_sprite **sprite_start, double length, double x, double y)
 	return (1);
 }
 
-int			add_sprite(t_sprite **sprite_start, double x, double y, t_player player)
+int			add_sprite1(t_sprite **sprite_start, t_data_sprite *data_sp)
 {
-	double		length;
-	int			out;
+	t_sprite	*new;
+	t_sprite	*iter;
 
-	length = sqrt((player.x - x) * (player.x - x) + (player.y - y) * (player.y - y));
+	iter = *sprite_start;
+	if ((iter)->x == data_sp->x && (iter)->y == data_sp->y)
+		return (1);
+	if ((*sprite_start)->length > data_sp->length)
+	{
+		while (iter->next != NULL && (iter)->next->length > data_sp->length)
+		{
+			if ((iter)->x == data_sp->x && (iter)->y == data_sp->y)
+				return (1);
+			iter = (iter)->next;
+		}
+	}
+	if ((iter)->x == data_sp->x && (iter)->y == data_sp->y)
+		return (1);
+	if (!(new = (t_sprite *)malloc(sizeof(t_sprite))))
+		return (0);
+	add_sprite2(sprite_start, data_sp, new, iter);
+	return (1);
+}
+
+int			add_sprite(t_sprite **sprite_start, double x,
+double y, t_player player)
+{
+	t_data_sprite	data_sp;
+	int				out;
+
+	data_sp.length = sqrt((player.x - x) * (player.x - x) +
+	(player.y - y) * (player.y - y));
 	if (*sprite_start == NULL)
 	{
 		if (!(*sprite_start = (t_sprite *)malloc(sizeof(t_sprite))))
-			return(0);
+			return (0);
 		(*sprite_start)->next = NULL;
-		(*sprite_start)->length = length;
+		(*sprite_start)->length = data_sp.length;
 		(*sprite_start)->x = x;
 		(*sprite_start)->y = y;
 	}
 	else
 	{
-		if (add_sprite1(sprite_start, length, x, y) == 0)
+		data_sp.x = x;
+		data_sp.y = y;
+		if (add_sprite1(sprite_start, &data_sp) == 0)
 			return (0);
 	}
 	return (1);
@@ -136,7 +108,8 @@ void		clear_sprite(t_sprite **sprite_start)
 	*sprite_start = NULL;
 }
 
-void		get_sprite_ray(t_player *player, t_data_angle *angle, t_sprite *sprite, t_data **data_array)
+void		get_sprite_ray(t_player *player, t_data_angle *angle,
+t_sprite *sprite, t_data **data_array)
 {
 	t_sprite_calculation	calc;
 	double					d_gamma;

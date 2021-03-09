@@ -12,7 +12,8 @@
 
 #include "header/my_type.h"
 
-int		reading_file1(char **argv, t_data_input **input_lst, char *line, int fd)
+int		reading_file1(char **argv, t_data_input **input_lst,
+char *line, int fd)
 {
 	if (add_line_in_lst(line, input_lst) == -1)
 	{

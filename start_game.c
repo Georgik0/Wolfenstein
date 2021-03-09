@@ -13,7 +13,7 @@
 #include "mlx/mlx.h"
 #include "header/my_type.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int		draw_game(t_vars *vars)
+int			draw_game(t_vars *vars)
 {
 	mlx_clear_window(vars->mlx, vars->win);
 	change_coord(vars);
@@ -30,18 +30,19 @@ int		draw_game(t_vars *vars)
 		make_free_vars(vars);
 		exit(0);
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->data_array[0]->img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win,
+	vars->data_array[0]->img, 0, 0);
 	return (0);
 }
 
-int		make_exit(t_vars *vars)
+int			make_exit(t_vars *vars)
 {
 	make_free_vars(vars);
 	exit(0);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_vars		vars;
 	int			img_width;

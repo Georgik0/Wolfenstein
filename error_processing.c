@@ -30,6 +30,10 @@ void	error_processing_1(int error_code)
 		write(2, "invalid sprite texture\n", 20);
 	else if (error_code == -16)
 		write(2, "invalid map\n", 12);
+	else if (error_code == -17)
+		write(2, "no player\n", 10);
+	else if (error_code == -18)
+		write(2, "duplicate player\n", 17);
 	else
 		return ;
 }

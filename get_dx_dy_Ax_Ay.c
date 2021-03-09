@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_dx_dy_Ax_Ay.c                                  :+:      :+:    :+:   */
+/*   get_dx_dy_ax_ay.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skitsch <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -38,28 +38,28 @@ int		get_dy(double phi)
 	return (dy);
 }
 
-int		get_Ax(t_player player, double phi)
+int		get_ax(t_player player, double phi)
 {
-	int Ax;
+	int ax;
 
 	if (phi == M_PI / 2 || phi == 3 * M_PI / 2)
-		Ax = player.x;
+		ax = player.x;
 	else if (phi == 0)
-		Ax = (player.x / 64) * 64 + 64;
+		ax = (player.x / 64) * 64 + 64;
 	else
-		Ax = (player.x / 64) * 64 - 1;
-	return (Ax);
+		ax = (player.x / 64) * 64 - 1;
+	return (ax);
 }
 
-int		get_Ay(t_player player, double phi)
+int		get_ay(t_player player, double phi)
 {
-	int	Ay;
+	int	ay;
 
 	if (phi == 0 || phi == M_PI)
-		Ay = player.y;
+		ay = player.y;
 	else if (phi == M_PI / 2)
-		Ay = (player.y / 64) * 64 - 1;
+		ay = (player.y / 64) * 64 - 1;
 	else
-		Ay = (player.y / 64) * 64 + 64;
-	return (Ay);
+		ay = (player.y / 64) * 64 + 64;
+	return (ay);
 }

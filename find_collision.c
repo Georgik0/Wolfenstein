@@ -12,17 +12,20 @@
 
 #include "header/my_type.h"
 
-static double		get_distance(t_player player, double x1, double y1, double phi)
+static double		get_distance(t_player player, double x1,
+double y1, double phi)
 {
 	double	distance;
 
-	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) * (player.y - y1)) * fabs(cos(phi));
+	distance = sqrt((player.x - x1) * (player.x - x1) + (player.y - y1) *
+	(player.y - y1)) * fabs(cos(phi));
 	if (isnan(distance))
 		distance = INFINITY;
 	return (distance);
 }
 
-t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player, double phi)
+t_collis			compare_collision(t_collis horisont, t_collis vertical,
+t_player player, double phi)
 {
 	double	distance_h;
 	double	distance_v;
@@ -34,7 +37,7 @@ t_collis	compare_collision(t_collis horisont, t_collis vertical, t_player player
 	return (vertical);
 }
 
-t_collis	find_collision(double phi, t_vars *vars)
+t_collis			find_collision(double phi, t_vars *vars)
 {
 	t_collis		collis;
 	t_collis		horisont;

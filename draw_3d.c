@@ -17,7 +17,7 @@ int		get_data_angle(t_data_angle *angle, int pov, int width)
 	angle->phi = pov + 33;
 	angle->d_phi = 66.0 / width;
 	angle->count = 0;
-	if (!(angle->arr_length = (int *)malloc((width+ 1) * sizeof(int))))
+	if (!(angle->arr_length = (int *)malloc((width + 1) * sizeof(int))))
 	{
 		angle->arr_length = NULL;
 		return (-1);
@@ -43,7 +43,8 @@ int		draw_3d(t_vars *vars)
 	int				count;
 
 	sprite = NULL;
-	if (get_data_angle(&angle, vars->player.pov, vars->data_array[0]->width) == -1)
+	if (get_data_angle(&angle, vars->player.pov,
+	vars->data_array[0]->width) == -1)
 		return (-1);
 	data_draw.x_count = 0;
 	while (data_draw.x_count < vars->data_array[0]->width)

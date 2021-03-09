@@ -23,7 +23,8 @@ unsigned int		get_color(t_data data, int y, double offset, int h)
 	scale_y = 64.0 / h;
 	y_xmp = (int)floor(y * scale_y);
 	x_xmp = (int)floor(64.0 * offset);
-	dst = data.addr + (y_xmp * data.line_length + x_xmp * (data.bits_per_pixel / 8));
+	dst = data.addr + (y_xmp * data.line_length + x_xmp *
+	(data.bits_per_pixel / 8));
 	color = *(unsigned int*)dst;
 	return (color);
 }
