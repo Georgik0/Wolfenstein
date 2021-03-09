@@ -52,7 +52,7 @@ void		fill_information(int fd, t_vars *vars)
 	info_header_bmp[11] = vars->data_array[0]->height >> 24;
 	info_header_bmp[12] = 1;
 	info_header_bmp[13] = 0;
-	info_header_bmp[14] = 24;
+	info_header_bmp[14] = 32;
 	i = 15;
 	while (i < 40)
 		info_header_bmp[i++] = 0;
@@ -74,7 +74,7 @@ void		fill_images(int fd, t_vars *vars)
 			color = *(int*)(vars->data_array[0]->addr +
 			(y_xpm * vars->data_array[0]->line_length +
 			x_xpm * (vars->data_array[0]->bits_per_pixel / 8)));
-			write(fd, &color, 3);
+			write(fd, &color, 4);
 			x_xpm += 1;
 		}
 		y_xpm--;

@@ -1,4 +1,4 @@
-R 1000 600
+R 10010 60100
 
 NO ./texture/WALL32.xpm
 SO ./texture/WALL53.xpm
