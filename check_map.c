@@ -62,9 +62,9 @@ static int		check_line(t_vars *vars, char *line, int y)
 	int		x;
 	int		out;
 
-	x = 0;
+	x = -1;
 	out = 1;
-	while (line[x++])
+	while (line[++x])
 	{
 		if (line[x] == '1' || line[x] == ' ' || line[x] == '\0')
 			continue ;
@@ -80,7 +80,7 @@ static int		check_line(t_vars *vars, char *line, int y)
 				return (out);
 		}
 		else
-			return (-1);
+			return (-16);
 	}
 	return (1);
 }
@@ -91,6 +91,8 @@ int				check_map(t_vars *vars)
 	int		out;
 
 	y = 0;
+	if (vars->flags.summ != 8)
+		return (-2);
 	while (vars->map[y])
 	{
 		if ((out = check_line(vars, vars->map[y], y)) != 1)

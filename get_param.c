@@ -12,7 +12,7 @@
 
 #include "header/my_type.h"
 
-int		check_letter(char *line, t_vars *vars, int i)
+int		check_letter(char *line, t_vars *vars)
 {
 	if (*line == '1' && vars->flags.map_end == 1)
 		return (-7);
@@ -30,8 +30,6 @@ int		check_letter(char *line, t_vars *vars, int i)
 		return (get_ceilling_color(line, vars));
 	else if (*line == 'S')
 		return (get_s(line, vars));
-	else if (*line == '1')
-		return (get_map_lst(line - i, vars));
 	else
 		return (-2);
 }
@@ -42,20 +40,27 @@ int		check_line(char *line, t_vars *vars)
 	int	i;
 
 	i = 0;
+	if (*line == '1' || *line == ' ')
+	{
+		while (line[i] == ' ')
+			i++;
+		if (line[i] == '1')
+		{
+			vars->flags.map_start = 1;
+			out = get_map_lst(line, vars);
+			return (out);
+		}
+	}
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
-	{
-		i++;
 		line++;
-	}
 	if (*line == '\0')
 	{
 		if (vars->flags.map_start == 1)
 			vars->flags.map_end = 1;
 		return (1);
 	}
-	out = check_letter(line, vars, i);
-	return (out);
+	return (check_letter(line, vars));
 }
 
 int		get_param(t_vars *vars, t_data_input *input_lst)

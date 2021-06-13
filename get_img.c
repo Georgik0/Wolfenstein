@@ -24,7 +24,7 @@ int		get_img_1(t_vars *vars)
 	&(vars->data_array[1]->bits_per_pixel),
 	&(vars->data_array[1]->line_length), &(vars->data_array[1]->endian));
 	if (!(vars->data_array[2]->img = mlx_xpm_file_to_image(vars->mlx,
-	vars->dir_wall_right, &img_width, &img_heigh)))
+	vars->dir_wall_up, &img_width, &img_heigh)))
 		return (-6);
 	vars->data_array[2]->addr = mlx_get_data_addr(vars->data_array[2]->img,
 	&(vars->data_array[2]->bits_per_pixel),
@@ -38,13 +38,13 @@ int		get_img_2(t_vars *vars)
 	int		img_heigh;
 
 	if (!(vars->data_array[3]->img = mlx_xpm_file_to_image(vars->mlx,
-	vars->dir_wall_up, &img_width, &img_heigh)))
+	vars->dir_wall_down, &img_width, &img_heigh)))
 		return (-6);
 	vars->data_array[3]->addr = mlx_get_data_addr(vars->data_array[3]->img,
 	&(vars->data_array[3]->bits_per_pixel),
 	&(vars->data_array[3]->line_length), &(vars->data_array[3]->endian));
 	if (!(vars->data_array[4]->img = mlx_xpm_file_to_image(vars->mlx,
-	vars->dir_wall_down, &img_width, &img_heigh)))
+	vars->dir_wall_right, &img_width, &img_heigh)))
 		return (-6);
 	vars->data_array[4]->addr = mlx_get_data_addr(vars->data_array[4]->img,
 	&(vars->data_array[4]->bits_per_pixel),

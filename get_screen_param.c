@@ -112,5 +112,6 @@ int		get_screen_param(char *line, t_vars *vars)
 		return (-8);
 	}
 	clear_param(screen);
+	vars->flags.summ += 1;
 	return (1);
 }

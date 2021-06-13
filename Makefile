@@ -42,15 +42,15 @@ CC = gcc
 
 RM = rm
 
-%.o: %.c
+all: ${NAME}
+
+%.o: %.c ${HEADERS}
 	${CC} ${CFLAGS} -Imlx -c $< -o $@
 
 ${NAME}:	${OBJ} ${HEADERS}
 			make -C ${LIBFTDIR}
 			make -C ${MLXDIR}
 			${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit ${OBJ} ./mlx/libmlx.a ./libft/libft.a -o ${NAME}
-
-all: ${NAME}
 
 bonus: ${NAME}
 

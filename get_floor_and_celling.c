@@ -26,16 +26,13 @@ static int		check_digit(char *param)
 	while (param[i] == ' ' || param[i] == '\t' || param[i] == '\f'
 	|| param[i] == '\v' || param[i] == '\r')
 		i++;
-	while (param[i])
-	{
-		if (ft_isdigit(param[i]) == 0 && !(param[i] == ' ' || param[i] == '\t'
-		|| param[i] == '\f' || param[i] == '\v' || param[i] == '\r'))
-			return (-1);
-		if (!(param[i] == ' ' || param[i] == '\t'
-		|| param[i] == '\f' || param[i] == '\v' || param[i] == '\r'))
-			count++;
+	while (ft_isdigit(param[i++]) != 0)
+		count++;
+	while (param[i] == ' ' || param[i] == '\t'
+	|| param[i] == '\f' || param[i] == '\v' || param[i] == '\r')
 		i++;
-	}
+	if (param[i] != '\0')
+		return (-1);
 	if (count > 3)
 		return (-1);
 	return (1);
@@ -84,16 +81,15 @@ int				get_floor_color(char *line, t_vars *vars)
 	if (vars->flags.f == 1)
 		return (-12);
 	line++;
+	if (!(*line == ' ' || *line == '\t' || *line == '\f'
+	|| *line == '\v' || *line == '\r'))
+		return (-13);
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	param = ft_split(line, ',');
-	if (check_comma(line) == -1 || num_screen_param(param) != 3)
-	{
-		clear_param(param);
-		return (-13);
-	}
-	if ((vars->color_floor = pars_color(param)) == -1)
+	if (check_comma(line) == -1 || num_screen_param(param) != 3 ||
+	(vars->color_floor = pars_color(param)) == -1)
 	{
 		clear_param(param);
 		return (-13);
@@ -111,16 +107,15 @@ int				get_ceilling_color(char *line, t_vars *vars)
 	if (vars->flags.c == 1)
 		return (-12);
 	line++;
+	if (!(*line == ' ' || *line == '\t' || *line == '\f'
+	|| *line == '\v' || *line == '\r'))
+		return (-14);
 	while (*line == ' ' || *line == '\t' || *line == '\f'
 	|| *line == '\v' || *line == '\r')
 		line++;
 	param = ft_split(line, ',');
-	if (check_comma(line) == -1 || num_screen_param(param) != 3)
-	{
-		clear_param(param);
-		return (-14);
-	}
-	if ((vars->color_ceilling = pars_color(param)) == -1)
+	if (check_comma(line) == -1 || num_screen_param(param) != 3 ||
+	(vars->color_ceilling = pars_color(param)) == -1)
 	{
 		clear_param(param);
 		return (-14);

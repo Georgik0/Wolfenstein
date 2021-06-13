@@ -42,6 +42,7 @@ void	error_processing_1(int error_code)
 
 void	error_processing(int error_code)
 {
+	write(2, "Error\n", 6);
 	if (error_code == -2)
 		write(2, "incorrect input parameters\n", 27);
 	else if (error_code == -3)
@@ -56,6 +57,8 @@ void	error_processing(int error_code)
 		write(2, "invalid map\n", 12);
 	else if (error_code == -8)
 		write(2, "invalid screen param\n", 21);
+	else if (error_code == -20)
+		write(2, "invalid east texture\n", 21);
 	else
 		error_processing_1(error_code);
 }

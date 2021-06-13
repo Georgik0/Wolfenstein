@@ -16,7 +16,7 @@ int		check_up(char **map, int x, int y)
 {
 	if (y == 0)
 		return (-1);
-	while (y-- > 0)
+	while (y >= 0)
 	{
 		if (x > (int)ft_strlen(map[y]) - 1)
 			return (-1);
@@ -24,6 +24,7 @@ int		check_up(char **map, int x, int y)
 			return (-1);
 		if (map[y][x] == '1')
 			return (1);
+		y--;
 	}
 	return (-1);
 }
@@ -32,7 +33,7 @@ int		check_bottom(char **map, int x, int y, int length_map_y)
 {
 	if (y == length_map_y - 1)
 		return (-1);
-	while (y++ < length_map_y - 1)
+	while (y <= length_map_y - 1)
 	{
 		if (x > (int)ft_strlen(map[y]) - 1)
 			return (-1);
@@ -40,6 +41,7 @@ int		check_bottom(char **map, int x, int y, int length_map_y)
 			return (-1);
 		if (map[y][x] == '1')
 			return (1);
+		y++;
 	}
 	return (-1);
 }
@@ -48,26 +50,31 @@ int		check_left(char **map, int x, int y)
 {
 	if (x == 0)
 		return (-1);
-	while (x-- > 0)
+	while (x >= 0)
 	{
 		if (map[y][x] == ' ')
 			return (-1);
 		if (map[y][x] == '1')
 			return (1);
+		x--;
 	}
 	return (-1);
 }
 
 int		check_right(char **map, int x, int y)
 {
-	if (x == (int)ft_strlen(map[y]) - 1)
+	int		len_map_y;
+
+	len_map_y = (int)ft_strlen(map[y]) - 1;
+	if (x == len_map_y)
 		return (-1);
-	while (x-- > 0)
+	while (x <= len_map_y)
 	{
 		if (map[y][x] == ' ')
 			return (-1);
 		if (map[y][x] == '1')
 			return (1);
+		x++;
 	}
 	return (-1);
 }

@@ -57,6 +57,8 @@ int		pars_map_lst(char *line, t_vars *vars)
 
 int		get_map_lst(char *line, t_vars *vars)
 {
+	if (vars->flags.map_end == 1)
+		return (-16);
 	vars->flags.map_start = 1;
 	if (pars_map_lst(line, vars) != 1)
 	{
