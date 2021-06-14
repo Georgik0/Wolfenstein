@@ -15,9 +15,9 @@ __Путь к текстурам для соответствующих стор�
 - WE ./texture/WALL32.xpm
 - NO ./texture/WALL53.xpm
 - SO ./texture/WALL88.xpm
-- EA ./texture/WALL89.xpm
+- EA ./texture/WALL89.xpm \
 __Путь к спрайту__
-- S ./texture/BAR1M0.xpm
+- S ./texture/BAR1M0.xpm \
 __Цвет пола и потолка__
 - F 255,255,255
 - C 148,235,255
