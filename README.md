@@ -1,5 +1,7 @@
 # Wolfenstein
 
+<img src="https://github.com/Georgik0/Wolfenstein/blob/master/cubic1.gif"/>
+
 Проект запустится только на MacOS, т.к. используется специальная библиотека mlx.
 
 `make` собирает проект
